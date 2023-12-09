@@ -5,17 +5,24 @@ using UnityEngine;
 [CreateAssetMenu(fileName = nameof(DropObjectSO), menuName = "Scriptable/DropObjectSO")]
 public class DropObjectSO : ScriptableObject
 {
-    [SerializeField] private List<DropObject> _dropsObjects;
+    [SerializeField] private List<DropData> _dropsData;
 
-    public DropObject FindObject(int rank)
+    public int TotalNumber() => _dropsData.Count;
+
+    public DropData FindObjectData(int rank)
     {
-        DropObject result = null;
-        result = _dropsObjects.Find(x => x.Rank == rank);
-        if (result == null)
+        var data = _dropsData.Find(x => x.DropObject.Rank == rank);
+        if (data == null)
             Debug.LogError($"{name} : object with rank {rank} was not found");
 
-        return result;
+        return data;
     }
 
-    public int TotalNumber() => _dropsObjects.Count;
+    [System.Serializable]
+    public class DropData
+    {
+        public Sprite DropSprite;
+        public int MergeRewardPoint;
+        public DropObject DropObject;
+    }
 }

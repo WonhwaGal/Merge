@@ -54,7 +54,7 @@ namespace Code.Views
                 {
                     IsMerging = OnMerge.Invoke(this, drop);
                     drop.IsMerging = IsMerging;
-                } 
+                }
             }
         }
 

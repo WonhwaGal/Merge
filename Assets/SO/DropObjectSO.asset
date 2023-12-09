@@ -12,15 +12,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51670f33fc7c9c4aa16e25cf1a4e94f, type: 3}
   m_Name: DropObjectSO
   m_EditorClassIdentifier: 
-  _dropsObjects:
-  - {fileID: 5176437636580882060, guid: a4d2938348c249f45a3e5a91dcde6c2d, type: 3}
-  - {fileID: 3080224102637382785, guid: 7b1cadfbcb8eee44393bddb9f242b257, type: 3}
-  - {fileID: 2629403636834026178, guid: 22d776bee58fa3f47b1a1704675925c9, type: 3}
-  - {fileID: 4801527766034790273, guid: 78936801b1f08e342aac322a83511873, type: 3}
-  - {fileID: 1887948161071162747, guid: 992a38eb518196d408a61254c7ed1b54, type: 3}
-  - {fileID: 5171114704205849365, guid: 339b15dd243734c47985899b2d4bd819, type: 3}
-  - {fileID: 3716510559151304257, guid: 893bf533189a2fe48a8daec2385da1b6, type: 3}
-  - {fileID: 6572983006432399955, guid: de7c824082b5b1849840d2834423f949, type: 3}
-  - {fileID: 4100642139102843889, guid: 12f94b20db80e864589c602ff251a37a, type: 3}
-  - {fileID: 5248949344037534338, guid: db91a1facfb86724fb5ff8e8159da04a, type: 3}
-  - {fileID: 7581819376428280942, guid: a83f5bda561a79946a9a0b5f8ef86d88, type: 3}
+  _dropsData:
+  - DropSprite: {fileID: 21300000, guid: 6ec84ec76e034fe43976faa96794b2f5, type: 3}
+    MergeRewardPoint: 1
+    DropObject: {fileID: 5176437636580882060, guid: a4d2938348c249f45a3e5a91dcde6c2d, type: 3}
+  - DropSprite: {fileID: 21300000, guid: a3ec4ace609b7ec40bcaa8af40e7d05b, type: 3}
+    MergeRewardPoint: 2
+    DropObject: {fileID: 3080224102637382785, guid: 7b1cadfbcb8eee44393bddb9f242b257, type: 3}
+  - DropSprite: {fileID: 21300000, guid: bf01ee5627c22b240b92e443520614f9, type: 3}
+    MergeRewardPoint: 4
+    DropObject: {fileID: 2629403636834026178, guid: 22d776bee58fa3f47b1a1704675925c9, type: 3}
+  - DropSprite: {fileID: 21300000, guid: 4972c49a3efd00541bba072144d04918, type: 3}
+    MergeRewardPoint: 6
+    DropObject: {fileID: 4801527766034790273, guid: 78936801b1f08e342aac322a83511873, type: 3}
+  - DropSprite: {fileID: 21300000, guid: da9180229da4d2f45950aa5840c14d30, type: 3}
+    MergeRewardPoint: 8
+    DropObject: {fileID: 1887948161071162747, guid: 992a38eb518196d408a61254c7ed1b54, type: 3}
+  - DropSprite: {fileID: 21300000, guid: 07afe816a82ed7544a27a8d085cdcc92, type: 3}
+    MergeRewardPoint: 10
+    DropObject: {fileID: 5171114704205849365, guid: 339b15dd243734c47985899b2d4bd819, type: 3}
+  - DropSprite: {fileID: 21300000, guid: b7e7648e04d57d54a90db7711fc047f2, type: 3}
+    MergeRewardPoint: 14
+    DropObject: {fileID: 3716510559151304257, guid: 893bf533189a2fe48a8daec2385da1b6, type: 3}
+  - DropSprite: {fileID: 21300000, guid: 26c8a5f02e0edf24f893ad31de17f925, type: 3}
+    MergeRewardPoint: 18
+    DropObject: {fileID: 6572983006432399955, guid: de7c824082b5b1849840d2834423f949, type: 3}
+  - DropSprite: {fileID: 21300000, guid: bb4f65df6b53a7042b492d085c013b1d, type: 3}
+    MergeRewardPoint: 25
+    DropObject: {fileID: 4100642139102843889, guid: 12f94b20db80e864589c602ff251a37a, type: 3}
+  - DropSprite: {fileID: 21300000, guid: 2e0ff7d82bcd6ee48a232fb95e6e3e8c, type: 3}
+    MergeRewardPoint: 35
+    DropObject: {fileID: 5248949344037534338, guid: db91a1facfb86724fb5ff8e8159da04a, type: 3}
+  - DropSprite: {fileID: 21300000, guid: f4425c74a4eb49a4cb15717aeb0d7acb, type: 3}
+    MergeRewardPoint: 50
+    DropObject: {fileID: 7581819376428280942, guid: a83f5bda561a79946a9a0b5f8ef86d88, type: 3}

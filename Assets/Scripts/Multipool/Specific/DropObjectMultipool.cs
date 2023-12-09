@@ -9,7 +9,7 @@ namespace Code.Pools
 
         public DropObjectMultipool(DropObjectSO list) => _dropObjectList = list;
 
-        protected override DropObject GetPrefab(int rank) => _dropObjectList.FindObject(rank);
+        protected override DropObject GetPrefab(int rank) => _dropObjectList.FindObjectData(rank).DropObject;
 
         public override void OnSpawned(DropObject result, Transform targetPlace)
         {

@@ -1,3 +1,4 @@
+using System;
 using Code.Pools;
 using Code.Views;
 using UnityEngine;
@@ -14,9 +15,12 @@ public sealed class DropService
         DropQueueHandler.AssignValues(_dropSO.TotalNumber(), 6);
     }
 
+    public event Action<bool, int> OnCreateDropObject;
+
     public DropObject CreateDropObject(Transform transform)
     {
         var result = _pool.Spawn(DropQueueHandler.ChooseRank());
+        Debug.Log(transform.position);
         return SetUpDropObject(result, transform, true);
     }
 
@@ -37,13 +41,16 @@ public sealed class DropService
         ReturnToPool(two);
     }
 
-    private DropObject SetUpDropObject(DropObject result, Transform transform, bool setParent)
+    private DropObject SetUpDropObject(DropObject result, Transform transform, bool queueMoved)
     {
+        if (transform.position == Vector3.zero)
+            Debug.Break();
         _pool.OnSpawned(result, transform);
-        if (setParent)
+        if (queueMoved)
             result.transform.SetParent(transform);
         result.OnMerge += CheckForMerge;
         result.OnDrop += ReleaseObject;
+        OnCreateDropObject?.Invoke(queueMoved, result.Rank);
         return result;
     }
 
