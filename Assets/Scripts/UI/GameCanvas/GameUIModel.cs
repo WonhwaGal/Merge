@@ -1,7 +1,7 @@
 ﻿using Code.MVC;
 using UnityEngine;
 
-public class CanvasModel : IModel
+public class GameUIModel : IModel
 {
     private DropObjectSO _dropData;
 

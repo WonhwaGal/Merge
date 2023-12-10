@@ -2,59 +2,72 @@ using System;
 using UnityEngine;
 using Code.Pools;
 
-namespace Code.Views
+namespace Code.DropLogic
 {
     [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
     public class DropObject : MonoBehaviour, ISpawnable
     {
         [SerializeField] private int _rank;
-        [SerializeField] private bool _isFinalRank;
         private Collider2D _collider;
-        private bool _isMerging;
+        private bool _isFinalRank;
+        private bool _collisionsIgnored;
 
         public int Rank => _rank;
         public Rigidbody2D RB { get; private set; }
-        public bool IsMerging
+        public bool CollisionsIgnored
         {
-            get => _isMerging;
+            get => _collisionsIgnored;
             set
             {
-                _isMerging = value;
-                if(value)
+                _collisionsIgnored = value;
+                if (value)
                     _collider.isTrigger = true;
             }
 
         }
 
-
-        public event Action<DropObject> OnDrop;
+        public event Action<DropObject, bool> OnEndGame;
         public event Func<DropObject, DropObject, bool> OnMerge;
 
         private void Awake()
         {
-            _collider = GetComponent<Collider2D>();
             RB = GetComponent<Rigidbody2D>();
+            _collider = GetComponent<Collider2D>();
+            _isFinalRank = _rank == Constants.TotalRanks;
         }
 
         private void OnEnable()
         {
             RB.gravityScale = 0;
+            CollisionsIgnored = false;
             _collider.isTrigger = true;
-            IsMerging = false;
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (_isFinalRank || RB.gravityScale == 0 || IsMerging)
+            if (transform.position.y > Constants.LoseThreshold)
+                Register(false);
+
+            if (_isFinalRank || RB.gravityScale == 0 || CollisionsIgnored)
                 return;
 
+            _collisionsIgnored = true;
+            CheckRankCollisions(collision);
+        }
+
+        private void CheckRankCollisions(Collision2D collision)
+        {
             if (collision.gameObject.TryGetComponent(out DropObject drop) && drop.Rank == _rank)
             {
-                if (collision.transform.position.y < transform.position.y)
+                if (drop.transform.position.y <= transform.position.y)
                 {
-                    IsMerging = OnMerge.Invoke(this, drop);
-                    drop.IsMerging = IsMerging;
+                    CollisionsIgnored = OnMerge.Invoke(this, drop);
+                    drop.CollisionsIgnored = CollisionsIgnored;
                 }
+            }
+            else
+            {
+                _collisionsIgnored = false;
             }
         }
 
@@ -62,7 +75,14 @@ namespace Code.Views
         {
             RB.gravityScale = 1;
             _collider.isTrigger = false;
-            OnDrop?.Invoke(this);
         }
+
+        public void Register(bool withRetry)
+        {
+            if (RB.gravityScale != 0)
+                OnEndGame?.Invoke(this, withRetry);
+        }
+
+        private void OnDestroy() => OnEndGame = null;
     }
 }

@@ -12,15 +12,18 @@
 
         public abstract void UpdateView();
 
-        void IController.AddView<T>(T view)
+        void IController.AddView<T>(T view, bool defaultShow)
         {
             if (View != null)
                 return;
             View = view as V;
-            Show();
+            if (defaultShow)
+                Show();
+            else
+                Hide();
         }
 
-        protected abstract void Show(); // = start
-        protected abstract void Hide(); // = ondestroy
+        protected abstract void Show();
+        protected abstract void Hide();
     }
 }

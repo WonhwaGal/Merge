@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Code.Views;
+﻿using Code.DropLogic;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = nameof(DropObjectSO), menuName = "Scriptable/DropObjectSO")]
@@ -19,7 +19,7 @@ public class DropObjectSO : ScriptableObject
     }
 
     [System.Serializable]
-    public class DropData
+    public sealed class DropData
     {
         public Sprite DropSprite;
         public int MergeRewardPoint;

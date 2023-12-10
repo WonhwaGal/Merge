@@ -2,7 +2,7 @@
 {
     public interface IController
     {
-        void AddView<T>(T view) where T : class, IView;
+        void AddView<T>(T view, bool defaultShow) where T : class, IView;
     }
 
     public interface IController<V, M> : IController
