@@ -1,7 +1,6 @@
 ﻿using Code.MVC;
-using UnityEngine;
 
-public class GameUIController : Controller<GameUIView, GameUIModel>
+public sealed class GameUIController : Controller<GameUIView, GameUIModel>
 {
     private bool _queueWasMoved;
 
@@ -29,6 +28,7 @@ public class GameUIController : Controller<GameUIView, GameUIModel>
             View.Score += Model.GetAddPoints();
     }
 
+    public void SetScore(int score) => View.Score = score;
     protected override void Hide() => View.gameObject.SetActive(false);
     protected override void Show() => View.gameObject.SetActive(true);
 }

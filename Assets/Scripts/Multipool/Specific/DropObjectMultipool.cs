@@ -11,9 +11,9 @@ namespace Code.Pools
 
         protected override DropObject GetPrefab(int rank) => _dropObjectList.FindObjectData(rank).DropObject;
 
-        public override void OnSpawned(DropObject result, Transform targetPlace)
+        public override void OnSpawned(DropObject result, Vector3 targetPos)
         {
-            result.transform.position = targetPlace.position;
+            result.transform.position = targetPos;
         }
     }
 }

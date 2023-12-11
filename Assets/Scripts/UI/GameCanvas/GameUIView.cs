@@ -8,12 +8,12 @@ public class GameUIView : MonoBehaviour, IView
     [SerializeField] private Image _nextImage;
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private PauseImage _pauseImage;
-    [SerializeField] private PauseView _loseView;
+    [SerializeField] private MenuView _loseView;
 
     private int _scoreValue;
 
     public Sprite NextSprite { get => _nextImage.sprite; set => _nextImage.sprite = value; }
-    public PauseView LoseView => _loseView;
+    public MenuView LoseView => _loseView;
     public PauseImage PauseImage => _pauseImage;
     public int Score
     {

@@ -1,11 +1,10 @@
 using System;
 using Code.MVC;
 
-public class UIService : IService, IDisposable
+public sealed class UIService : IService, IDisposable
 {
     private readonly GameUIController _gameUIController;
     private readonly MenuController _menuController;
-    private readonly SaveService _saveService;
 
     public UIService(DropObjectSO data, GameUIView canvasView)
     {
@@ -14,16 +13,17 @@ public class UIService : IService, IDisposable
         _menuController = new MenuController();
         ((IController)_menuController).AddView(canvasView.LoseView, false);
         SetConnections();
-        _saveService = ServiceLocator.Container.RegisterAndAssign(new SaveService());
     }
 
-    public PauseView PauseView => _menuController.View;
+    public MenuView PauseView => _menuController.View;
+    public bool GameLost => _menuController.GameIsLost;
 
     private void SetConnections()
     {
         _menuController.OnRequestScore += GetScore;
-        _gameUIController.View.PauseImage.OnPressPause += _menuController.ShowPauseView;
         _menuController.View.OnEndGameWithRetry += ReactToRetry;
+        _gameUIController.View.PauseImage.OnPressPause += _menuController.ShowPauseView;
+        _menuController.AssignView();
     }
 
     public void ChangeNextDropIcon(bool queueMoved, int mergeResult)
@@ -44,11 +44,12 @@ public class UIService : IService, IDisposable
             _gameUIController.ReactToRetry();
     }
 
+    public void SetCurrentScore(int savedScore) => _gameUIController.SetScore(savedScore);
     private int GetScore() => _gameUIController.View.Score;
     public void Dispose()
     {
         _menuController.OnRequestScore -= GetScore;
-        _gameUIController.View.PauseImage.OnPressPause -= _menuController.ShowPauseView;
         _menuController.View.OnEndGameWithRetry -= ReactToRetry;
+        _gameUIController.View.PauseImage.OnPressPause -= _menuController.ShowPauseView;
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class PauseImage : MonoBehaviour, IPointerClickHandler
+public sealed class PauseImage : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private Image _playImage;
     private bool _isPaused;

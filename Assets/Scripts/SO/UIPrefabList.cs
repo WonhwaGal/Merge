@@ -6,5 +6,5 @@ using UnityEngine;
 public class UIPrefabList : ScriptableObject
 {
     public DropContainer DropContainer;
-    public PauseView LoseView;
+    public MenuView LoseView;
 }

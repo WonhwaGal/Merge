@@ -1,10 +1,11 @@
 using System;
 using Code.Pools;
+using Code.SaveLoad;
 using UnityEngine;
 
 namespace Code.DropLogic
 {
-    public sealed class DropService
+    public sealed class DropService : IService
     {
         private readonly DropObjectSO _dropSO;
         private readonly DropObjectMultipool _pool;
@@ -19,11 +20,23 @@ namespace Code.DropLogic
         }
 
         public event Action<bool, int> OnCreateDropObject;
+        public event Action<DropObject> OnRegisterDropObject;
+
+        public void RecreateProgress(ProgressData data)
+        {
+            for (int i = 0; i < data.SavedDropList.Count; i++)
+            {
+                var result = _pool.Spawn(data.SavedDropList[i].Rank);
+                SetUpDropObject(result, data.SavedDropList[i].Position, true);
+                result.Drop();
+            }
+            _uiService.SetCurrentScore(data.SavedScore);
+        }
 
         public DropObject CreateDropObject(Transform transform)
         {
             var result = _pool.Spawn(DropQueueHandler.ChooseRank());
-            return SetUpDropObject(result, transform, true);
+            return SetUpDropObject(result, transform.position, true);
         }
 
         public bool CheckForMerge(DropObject one, DropObject two)
@@ -37,16 +50,15 @@ namespace Code.DropLogic
         public void MergeObjects(DropObject one, DropObject two)
         {
             var result = _pool.Spawn(one.Rank + 1);
-            SetUpDropObject(result, two.transform, false);
-            Debug.Log($"merging rank {one.Rank} into {result.Rank}");
+            SetUpDropObject(result, two.transform.position, false);
             result.Drop();
             ReturnToPool(one);
             ReturnToPool(two);
         }
 
-        private DropObject SetUpDropObject(DropObject result, Transform transform, bool queueMoved)
+        private DropObject SetUpDropObject(DropObject result, Vector3 position, bool queueMoved)
         {
-            _pool.OnSpawned(result, transform);
+            _pool.OnSpawned(result, position);
             result.OnMerge += CheckForMerge;
             result.OnEndGame += EndSession;
             _uiService.PauseView.OnEndGameWithRetry += result.Register;
@@ -57,9 +69,14 @@ namespace Code.DropLogic
         private void EndSession(DropObject obj, bool withRetry)
         {
             if (withRetry)
+            {
                 ReturnToPool(obj);
-            else
-                _uiService.UpdateCanvas();
+                return;
+            }
+
+            _uiService.UpdateCanvas();
+            if (!_uiService.GameLost)
+                OnRegisterDropObject?.Invoke(obj);
         }
 
         private void ReturnToPool(DropObject obj)
@@ -67,6 +84,7 @@ namespace Code.DropLogic
             _pool.Despawn(obj.Rank, obj);
             obj.OnMerge -= CheckForMerge;
             obj.OnEndGame -= EndSession;
+            _uiService.PauseView.OnEndGameWithRetry -= obj.Register;
         }
     }
 }

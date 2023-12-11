@@ -642,10 +642,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4969315507930643746}
     m_Modifications:
-    - target: {fileID: 7778951267998246129, guid: 4f36618e524b7de4cb3b17e7263bcfbd, type: 3}
-      propertyPath: m_Name
-      value: RetryButton
-      objectReference: {fileID: 0}
     - target: {fileID: 7778951268334145786, guid: 4f36618e524b7de4cb3b17e7263bcfbd, type: 3}
       propertyPath: m_Name
       value: LosePanel
@@ -734,21 +730,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7778951268334145790, guid: 4f36618e524b7de4cb3b17e7263bcfbd, type: 3}
-      propertyPath: _results
-      value: 
-      objectReference: {fileID: 542832159614002357}
-    - target: {fileID: 7778951268406897382, guid: 4f36618e524b7de4cb3b17e7263bcfbd, type: 3}
-      propertyPath: m_text
-      value: Retry
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f36618e524b7de4cb3b17e7263bcfbd, type: 3}
---- !u!1 &542832159614002357 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7778951267813930278, guid: 4f36618e524b7de4cb3b17e7263bcfbd, type: 3}
-  m_PrefabInstance: {fileID: 7817373809462006163}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &542832161238892904 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7778951268334145787, guid: 4f36618e524b7de4cb3b17e7263bcfbd, type: 3}

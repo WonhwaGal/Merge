@@ -21,10 +21,12 @@ namespace Code.DropLogic
             {
                 _collisionsIgnored = value;
                 if (value)
-                    _collider.isTrigger = true;
+                    Collider.isTrigger = true;
             }
 
         }
+
+        public Collider2D Collider { get => _collider; set => _collider = value; }
 
         public event Action<DropObject, bool> OnEndGame;
         public event Func<DropObject, DropObject, bool> OnMerge;
@@ -32,7 +34,7 @@ namespace Code.DropLogic
         private void Awake()
         {
             RB = GetComponent<Rigidbody2D>();
-            _collider = GetComponent<Collider2D>();
+            Collider = GetComponent<Collider2D>();
             _isFinalRank = _rank == Constants.TotalRanks;
         }
 
@@ -40,7 +42,7 @@ namespace Code.DropLogic
         {
             RB.gravityScale = 0;
             CollisionsIgnored = false;
-            _collider.isTrigger = true;
+            Collider.isTrigger = true;
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -74,7 +76,7 @@ namespace Code.DropLogic
         public void Drop()
         {
             RB.gravityScale = 1;
-            _collider.isTrigger = false;
+            Collider.isTrigger = false;
         }
 
         public void Register(bool withRetry)

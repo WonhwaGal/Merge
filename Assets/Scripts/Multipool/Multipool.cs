@@ -34,7 +34,7 @@ namespace Code.Pools
         }
 
         protected abstract T GetPrefab(K type);
-        public virtual void OnSpawned(T result, Transform targetPlace) { }
+        public virtual void OnSpawned(T result, Vector3 targetPos) { }
 
         private sealed class SinglePool : BaseSinglePool<T>
         {
