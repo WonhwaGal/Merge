@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4579771346130310694}
   - component: {fileID: 717870783807187346}
   - component: {fileID: 6044720552665746550}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Ball_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,8 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rank: 1
-  _isFinalRank: 0
-  _probability: 37
+  _knockbackRadius: 1.2
 --- !u!212 &4579771346130310694
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -118,7 +117,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: bd7f5bc11e866bb428101d941e670d3b, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0

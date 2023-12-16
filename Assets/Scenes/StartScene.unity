@@ -153,7 +153,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startCanvas: {fileID: 6962589493815588457}
-  _so: {fileID: 11400000, guid: dd1ff55138b91cf47af426f29e137cc9, type: 2}
 --- !u!4 &52468231
 Transform:
   m_ObjectHideFlags: 0
@@ -331,6 +330,26 @@ PrefabInstance:
     - target: {fileID: 7308710297246941592, guid: b01195c46aaea8a4c9d0a838356aa4d8, type: 3}
       propertyPath: m_Name
       value: StartCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308710297246941594, guid: b01195c46aaea8a4c9d0a838356aa4d8, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308710297246941594, guid: b01195c46aaea8a4c9d0a838356aa4d8, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308710297246941594, guid: b01195c46aaea8a4c9d0a838356aa4d8, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308710297246941594, guid: b01195c46aaea8a4c9d0a838356aa4d8, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308710297246941594, guid: b01195c46aaea8a4c9d0a838356aa4d8, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1920
       objectReference: {fileID: 0}
     - target: {fileID: 7308710297246941596, guid: b01195c46aaea8a4c9d0a838356aa4d8, type: 3}
       propertyPath: m_Pivot.x

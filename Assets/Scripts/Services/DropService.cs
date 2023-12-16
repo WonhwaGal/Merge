@@ -47,13 +47,14 @@ namespace Code.DropLogic
             return result;
         }
 
-        public void MergeObjects(DropObject one, DropObject two)
+        public void MergeObjects(DropObject upperOne, DropObject lowerOne)
         {
-            var result = _pool.Spawn(one.Rank + 1);
-            SetUpDropObject(result, two.transform.position, false);
+            var result = _pool.Spawn(upperOne.Rank + 1);
+            var middlePos = (upperOne.transform.position + lowerOne.transform.position) / 2;
+            SetUpDropObject(result, middlePos, false);
             result.Drop();
-            ReturnToPool(one);
-            ReturnToPool(two);
+            ReturnToPool(upperOne);
+            ReturnToPool(lowerOne);
         }
 
         private DropObject SetUpDropObject(DropObject result, Vector3 position, bool queueMoved)

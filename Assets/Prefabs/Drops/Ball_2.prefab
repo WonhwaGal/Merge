@@ -99,5 +99,9 @@ PrefabInstance:
       propertyPath: _probability
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 5176437636580882060, guid: a4d2938348c249f45a3e5a91dcde6c2d, type: 3}
+      propertyPath: _knockbackRadius
+      value: 1.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4d2938348c249f45a3e5a91dcde6c2d, type: 3}

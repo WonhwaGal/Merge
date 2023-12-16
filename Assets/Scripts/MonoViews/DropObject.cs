@@ -8,11 +8,16 @@ namespace Code.DropLogic
     public class DropObject : MonoBehaviour, ISpawnable
     {
         [SerializeField] private int _rank;
+        [SerializeField, Range(0, 3)] 
+        private float _knockbackRadius;
+
         private Collider2D _collider;
         private bool _isFinalRank;
         private bool _collisionsIgnored;
 
         public int Rank => _rank;
+        public Collider2D Collider => _collider;
+        public float KnockbackRadius => _knockbackRadius;
         public Rigidbody2D RB { get; private set; }
         public bool CollisionsIgnored
         {
@@ -26,7 +31,6 @@ namespace Code.DropLogic
 
         }
 
-        public Collider2D Collider { get => _collider; set => _collider = value; }
 
         public event Action<DropObject, bool> OnEndGame;
         public event Func<DropObject, DropObject, bool> OnMerge;
@@ -34,7 +38,7 @@ namespace Code.DropLogic
         private void Awake()
         {
             RB = GetComponent<Rigidbody2D>();
-            Collider = GetComponent<Collider2D>();
+            _collider = GetComponent<Collider2D>();
             _isFinalRank = _rank == Constants.TotalRanks;
         }
 
@@ -42,7 +46,7 @@ namespace Code.DropLogic
         {
             RB.gravityScale = 0;
             CollisionsIgnored = false;
-            Collider.isTrigger = true;
+            Collider.enabled = false;
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -61,6 +65,7 @@ namespace Code.DropLogic
         {
             if (collision.gameObject.TryGetComponent(out DropObject drop) && drop.Rank == _rank)
             {
+                //the upper one calls for merge
                 if (drop.transform.position.y <= transform.position.y)
                 {
                     CollisionsIgnored = OnMerge.Invoke(this, drop);
@@ -76,7 +81,9 @@ namespace Code.DropLogic
         public void Drop()
         {
             RB.gravityScale = 1;
+            Collider.enabled = true;
             Collider.isTrigger = false;
+            RB.CauseKnockback(this);
         }
 
         public void Register(bool withRetry)

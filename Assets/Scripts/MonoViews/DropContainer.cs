@@ -21,6 +21,11 @@ namespace Code.DropLogic
             _startPosition = transform.position;
         }
 
+        private void OnApplicationFocus(bool focus)
+        {
+
+        }
+
         private void OnMouseDrag()
         {
             if (Time.timeScale == 0)
