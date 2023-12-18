@@ -8,9 +8,9 @@ namespace Code.DropLogic
     public class DropObject : MonoBehaviour, ISpawnable
     {
         [SerializeField] private int _rank;
-        [SerializeField, Range(0, 3)] 
+        [SerializeField] private ParticleSystem _fx;
+        [SerializeField, Range(0, 3)]
         private float _knockbackRadius;
-
         private Collider2D _collider;
         private bool _isFinalRank;
         private bool _collisionsIgnored;
@@ -77,12 +77,15 @@ namespace Code.DropLogic
             }
         }
 
-        public void Drop()
+        public void Drop(bool withFX)
         {
+            if (withFX)
+                _fx.Play();
             RB.gravityScale = 1;
             Collider.enabled = true;
             Collider.isTrigger = false;
             RB.CauseKnockback(this);
+
         }
 
         private void Register(GameControlEvent @event)
@@ -92,7 +95,11 @@ namespace Code.DropLogic
                 GameEventSystem.Send(new ManageDropEvent(this, @event.RestartWithRetry));
         }
 
-        private void OnDisable() => GameEventSystem.UnSubscribe<GameControlEvent>(Register);
+        private void OnDisable()
+        {
+            _fx.Stop();
+            GameEventSystem.UnSubscribe<GameControlEvent>(Register);
+        }
 
         private void OnDestroy() => OnMerge = null;
     }

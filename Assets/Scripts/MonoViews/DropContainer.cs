@@ -45,7 +45,7 @@ namespace Code.DropLogic
         {
             if (!_isDragging)
                 return;
-            CurrentDrop.Drop();
+            CurrentDrop.Drop(false);
             transform.position = _startPosition;
             StartCoroutine(DelayQueueMove());
         }

@@ -59,7 +59,7 @@ namespace Code.DropLogic
             result.OnMerge += CheckForMerge;
             GameEventSystem.Send(new CreateDropEvent(queueMoved, result.Rank));
             if(shouldDrop)
-                result.Drop();
+                result.Drop(shouldDrop);
             return result;
         }
 
