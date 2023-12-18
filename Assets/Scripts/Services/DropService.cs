@@ -1,7 +1,7 @@
 using System;
+using UnityEngine;
 using Code.Pools;
 using Code.SaveLoad;
-using UnityEngine;
 
 namespace Code.DropLogic
 {
@@ -15,20 +15,17 @@ namespace Code.DropLogic
         {
             _dropSO = dropSO;
             _pool = new DropObjectMultipool(_dropSO);
-            DropQueueHandler.AssignValues(_dropSO.TotalNumber(), 6);
+            DropQueueHandler.AssignValues(_dropSO.TotalNumber(), Constants.DropableRanksNumber);
             _uiService = ServiceLocator.Container.RequestFor<UIService>();
+            GameEventSystem.Subscribe<ManageDropEvent>(EndSession);
         }
-
-        public event Action<bool, int> OnCreateDropObject;
-        public event Action<DropObject> OnRegisterDropObject;
 
         public void RecreateProgress(ProgressData data)
         {
             for (int i = 0; i < data.SavedDropList.Count; i++)
             {
                 var result = _pool.Spawn(data.SavedDropList[i].Rank);
-                SetUpDropObject(result, data.SavedDropList[i].Position, true);
-                result.Drop();
+                SetUpDropObject(result, data.SavedDropList[i].Position, true, true);
             }
             _uiService.SetCurrentScore(data.SavedScore);
         }
@@ -36,7 +33,7 @@ namespace Code.DropLogic
         public DropObject CreateDropObject(Transform transform)
         {
             var result = _pool.Spawn(DropQueueHandler.ChooseRank());
-            return SetUpDropObject(result, transform.position, true);
+            return SetUpDropObject(result, transform.position, true, false);
         }
 
         public bool CheckForMerge(DropObject one, DropObject two)
@@ -51,41 +48,37 @@ namespace Code.DropLogic
         {
             var result = _pool.Spawn(upperOne.Rank + 1);
             var middlePos = (upperOne.transform.position + lowerOne.transform.position) / 2;
-            SetUpDropObject(result, middlePos, false);
-            result.Drop();
+            SetUpDropObject(result, middlePos, false, true);
             ReturnToPool(upperOne);
             ReturnToPool(lowerOne);
         }
 
-        private DropObject SetUpDropObject(DropObject result, Vector3 position, bool queueMoved)
+        private DropObject SetUpDropObject(DropObject result, Vector3 position, bool queueMoved, bool shouldDrop)
         {
             _pool.OnSpawned(result, position);
             result.OnMerge += CheckForMerge;
-            result.OnEndGame += EndSession;
-            _uiService.PauseView.OnEndGameWithRetry += result.Register;
-            OnCreateDropObject?.Invoke(queueMoved, result.Rank);
+            GameEventSystem.Send(new CreateDropEvent(queueMoved, result.Rank));
+            if(shouldDrop)
+                result.Drop();
             return result;
         }
 
-        private void EndSession(DropObject obj, bool withRetry)
+        private void EndSession(ManageDropEvent @event)
         {
-            if (withRetry)
-            {
-                ReturnToPool(obj);
-                return;
-            }
-
-            _uiService.UpdateCanvas();
-            if (!_uiService.GameLost)
-                OnRegisterDropObject?.Invoke(obj);
+            if (@event.ReturnToPool)
+                ReturnToPool(@event.Drop);
         }
 
-        private void ReturnToPool(DropObject obj)
+        private void ReturnToPool(DropObject result)
         {
-            _pool.Despawn(obj.Rank, obj);
-            obj.OnMerge -= CheckForMerge;
-            obj.OnEndGame -= EndSession;
-            _uiService.PauseView.OnEndGameWithRetry -= obj.Register;
+            _pool.Despawn(result.Rank, result);
+            result.OnMerge -= CheckForMerge;
+        }
+
+        public void Dispose()
+        {
+            GameEventSystem.Subscribe<ManageDropEvent>(EndSession);
+            GC.SuppressFinalize(this);
         }
     }
 }

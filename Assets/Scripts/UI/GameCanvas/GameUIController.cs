@@ -5,20 +5,14 @@ public sealed class GameUIController : Controller<GameUIView, GameUIModel>
     private bool _queueWasMoved;
 
     public GameUIController(DropObjectSO data) : base()
-        => Model.AssignDataSource(data);
-
-    public void UpdateUIData(bool queueMoved, int mergeResult)
     {
-        _queueWasMoved = queueMoved;
-        Model.MergedRank = mergeResult;
-        UpdateView();
+        Model.AssignDataSource(data);
+        GameEventSystem.Subscribe<CreateDropEvent>(UpdateUIData);
+        GameEventSystem.Subscribe<GameControlEvent>(ReactToRetry);
     }
 
-    public void ReactToRetry()
-    {
-        View.PauseImage.UpdatePause(true);
-        View.Score = 0;
-    }
+    public int GetScore() => View.Score;
+    public void SetScore(int score) => View.Score = score;
 
     public override void UpdateView()
     {
@@ -28,7 +22,26 @@ public sealed class GameUIController : Controller<GameUIView, GameUIModel>
             View.Score += Model.GetAddPoints();
     }
 
-    public void SetScore(int score) => View.Score = score;
+    private void UpdateUIData(CreateDropEvent @event)
+    {
+        _queueWasMoved = @event.QueueMoved;
+        Model.MergedRank = @event.CurrentRank;
+        UpdateView();
+    }
+
+    private void ReactToRetry(GameControlEvent @event)
+    {
+        if (@event.RestartWithRetry)
+            View.Score = 0;
+    }
+
     protected override void Hide() => View.gameObject.SetActive(false);
     protected override void Show() => View.gameObject.SetActive(true);
+
+    public override void Dispose()
+    {
+        GameEventSystem.UnSubscribe<CreateDropEvent>(UpdateUIData);
+        GameEventSystem.UnSubscribe<GameControlEvent>(ReactToRetry);
+        base.Dispose();
+    }
 }

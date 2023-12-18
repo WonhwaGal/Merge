@@ -1,31 +1,46 @@
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public sealed class PauseImage : MonoBehaviour, IPointerClickHandler
+namespace Code.MVC
 {
-    [SerializeField] private Image _playImage;
-    private bool _isPaused;
-    private bool _isDeactivated;
-
-    public event Action<bool> OnPressPause;
-
-    private void Start() => _playImage.gameObject.SetActive(false);
-
-    public void OnPointerClick(PointerEventData eventData)
+    public sealed class PauseImage : MonoBehaviour, IPointerClickHandler
     {
-        if (!_isDeactivated)
-            UpdatePause(true);
-    }
+        [SerializeField] private Image _playImage;
+        private bool _isPaused;
+        private GameAction _toDoAction;
 
-    public void UpdatePause(bool toNotify)
-    {
-        _isPaused = !_isPaused;
-        Time.timeScale = _isPaused ? 0 : 1;
-        _playImage.gameObject.SetActive(_isPaused);
-        _isDeactivated = !toNotify;
-        if (toNotify)
-            OnPressPause?.Invoke(_isPaused);
+        private void Start()
+        {
+            _playImage.gameObject.SetActive(false);
+            GameEventSystem.Subscribe<GameControlEvent>(UpdatePause);
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (_toDoAction == GameAction.Lose)
+                return;
+
+            _isPaused = !_isPaused;
+            _toDoAction = _isPaused ? GameAction.Pause : GameAction.Play;
+            GameEventSystem.Send(new GameControlEvent(_toDoAction, false));
+            UpdateImage();
+        }
+
+        private void UpdatePause(GameControlEvent @event)
+        {
+            _toDoAction = @event.ActionToDo;
+            if (_toDoAction == GameAction.Pause || _toDoAction == GameAction.Lose)
+                _isPaused =true;
+            else if(_toDoAction == GameAction.Play)
+                _isPaused =false;
+            UpdateImage();
+        }
+        private void UpdateImage() => _playImage.gameObject.SetActive(_isPaused);
+
+        private void OnDestroy()
+        {
+            GameEventSystem.UnSubscribe<GameControlEvent>(UpdatePause);
+        }
     }
 }

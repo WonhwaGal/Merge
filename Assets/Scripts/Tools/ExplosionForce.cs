@@ -7,7 +7,8 @@ namespace Code.DropLogic
         public static void CauseKnockback(this Rigidbody2D rb, DropObject origin)
         {
             Collider2D[] colliders = new Collider2D[10];
-            var number = Physics2D.OverlapCircleNonAlloc(origin.transform.position, origin.KnockbackRadius, colliders);
+            var number = Physics2D.OverlapCircleNonAlloc(
+                origin.transform.position, origin.KnockbackRadius, colliders);
 
             for (int i = 0; i < number; i++)
             {

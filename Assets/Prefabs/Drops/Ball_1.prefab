@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rank: 1
-  _knockbackRadius: 1.2
+  _knockbackRadius: 1.5
 --- !u!212 &4579771346130310694
 SpriteRenderer:
   m_ObjectHideFlags: 0

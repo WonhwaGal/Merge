@@ -31,8 +31,6 @@ namespace Code.DropLogic
 
         }
 
-
-        public event Action<DropObject, bool> OnEndGame;
         public event Func<DropObject, DropObject, bool> OnMerge;
 
         private void Awake()
@@ -47,12 +45,13 @@ namespace Code.DropLogic
             RB.gravityScale = 0;
             CollisionsIgnored = false;
             Collider.enabled = false;
+            GameEventSystem.Subscribe<GameControlEvent>(Register);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (transform.position.y > Constants.LoseThreshold)
-                Register(false);
+                GameEventSystem.Send(new GameControlEvent(GameAction.Lose, false));
 
             if (_isFinalRank || RB.gravityScale == 0 || CollisionsIgnored)
                 return;
@@ -86,12 +85,15 @@ namespace Code.DropLogic
             RB.CauseKnockback(this);
         }
 
-        public void Register(bool withRetry)
+        private void Register(GameControlEvent @event)
         {
-            if (RB.gravityScale != 0)
-                OnEndGame?.Invoke(this, withRetry);
+            bool shouldRegister = @event.ActionToDo != GameAction.Pause && @event.ActionToDo != GameAction.Lose;
+            if (shouldRegister && RB.gravityScale != 0)
+                GameEventSystem.Send(new ManageDropEvent(this, @event.RestartWithRetry));
         }
 
-        private void OnDestroy() => OnEndGame = null;
+        private void OnDisable() => GameEventSystem.UnSubscribe<GameControlEvent>(Register);
+
+        private void OnDestroy() => OnMerge = null;
     }
 }

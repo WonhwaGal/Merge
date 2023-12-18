@@ -1,27 +1,34 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Code.MVC;
 
-public class GameUIView : MonoBehaviour, IView
+namespace Code.MVC
 {
-    [SerializeField] private Image _nextImage;
-    [SerializeField] private TextMeshProUGUI _scoreText;
-    [SerializeField] private PauseImage _pauseImage;
-    [SerializeField] private MenuView _loseView;
-
-    private int _scoreValue;
-
-    public Sprite NextSprite { get => _nextImage.sprite; set => _nextImage.sprite = value; }
-    public MenuView LoseView => _loseView;
-    public PauseImage PauseImage => _pauseImage;
-    public int Score
+    public class GameUIView : MonoBehaviour, IView
     {
-        get => _scoreValue;
-        set
+        [SerializeField] private Image _nextImage;
+        [SerializeField] private TextMeshProUGUI _scoreText;
+        private int _scoreValue;
+
+        public Sprite NextSprite { get => _nextImage.sprite; set => _nextImage.sprite = value; }
+
+        public int Score
         {
-            _scoreValue = value;
-            _scoreText.text = _scoreValue.ToString();
+            get => _scoreValue;
+            set
+            {
+                _scoreValue = value;
+                _scoreText.text = _scoreValue.ToString();
+            }
+        }
+
+        public event Action OnDestroyView;
+
+        private void OnDestroy()
+        {
+            OnDestroyView?.Invoke();
+            OnDestroyView = null;
         }
     }
 }

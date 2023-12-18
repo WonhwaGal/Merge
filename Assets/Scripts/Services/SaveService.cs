@@ -1,47 +1,53 @@
-using System.Collections.Generic;
-using Code.DropLogic;
-using static Code.SaveLoad.ProgressData;
+using System;
+using UnityEngine;
 
 namespace Code.SaveLoad
 {
     public sealed class SaveService : IService
     {
-        private readonly List<DropSave> _drops = new();
-        private ProgressData _progressData;
-        private int _bestScore = 0;
+        private readonly SaveHandler _handler;
 
-        public ProgressData ProgressData => _progressData;
+        public SaveService()
+        {
+            _handler = new();
+            GameEventSystem.Subscribe<ManageDropEvent>(GatherData);
+        }
 
-        public ProgressData LoadProgress() => _progressData = LoadHandler.Load();
+        public ProgressData ProgressData { get; private set; }
 
-        public void GatherData(DropObject drop) 
-            => _drops.Add(new DropSave(drop.Rank, drop.transform.position));
+        public ProgressData LoadProgress() => ProgressData = LoadHandler.Load() ?? new(0, 0, null);
+
+        public void GatherData(ManageDropEvent @event)
+        {
+            if (!@event.ReturnToPool)
+                _handler.FillData(@event.Drop);
+        }
 
         public void SaveData(int currentScore, bool onlyScore)
         {
             ProgressData progressData;
             if (onlyScore)
             {
-                if (ProgressData == null)
-                    _progressData = new(0, 0, null);
-                _progressData.BestScore = GetBestScore(currentScore);
-                progressData = _progressData;
+                ProgressData.BestScore = GetBestScore(currentScore);
+                progressData = ProgressData;
             }
-            else 
+            else
             {
-                progressData = new ProgressData(GetBestScore(currentScore), currentScore, _drops);
+                progressData = new ProgressData(GetBestScore(currentScore), currentScore, _handler.Drops);
             }
             LoadHandler.Save(progressData);
             //Debug.Log(Application.persistentDataPath + "/DataSaver.json");
-            _drops.Clear();
+            ClearData();
         }
 
+        public void ClearData() => _handler.Clear();
         private int GetBestScore(int current)
+            => (current > ProgressData.BestScore) ? current : ProgressData.BestScore;
+
+        public void Dispose()
         {
-            _bestScore = ProgressData.BestScore;
-            if(current > _bestScore)
-                _bestScore = current;
-            return _bestScore;
+            GameEventSystem.UnSubscribe<ManageDropEvent>(GatherData);
+            GC.SuppressFinalize(this);
         }
     }
 }

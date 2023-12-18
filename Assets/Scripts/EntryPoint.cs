@@ -36,6 +36,6 @@ public class EntryPoint : MonoBehaviour
     private bool HasSavedProgress()
     {
         var savedGame = _saveService.LoadProgress();
-        return savedGame != null && savedGame.SavedDropList.Count > 0;
+        return savedGame.SavedDropList != null && savedGame.SavedDropList.Count > 0;
     }
 }

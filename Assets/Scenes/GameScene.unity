@@ -697,7 +697,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _container: {fileID: 1623767387}
   _so: {fileID: 11400000, guid: dd1ff55138b91cf47af426f29e137cc9, type: 2}
-  _canvasView: {fileID: 1704495035}
+  _canvasView: {fileID: 4969315508526725784}
 --- !u!1 &1127086857
 GameObject:
   m_ObjectHideFlags: 0
@@ -775,17 +775,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e63d55d9da0c05747a7c35821db07ff0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1704495035 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 562071976665563871, guid: 00b59c33c1ef2524ba8a82ac6cc9cfde, type: 3}
-  m_PrefabInstance: {fileID: 4969315508526725783}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 798305ef04cb2fd4da30c247862cfc0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &228040652087591429
@@ -867,6 +856,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 526877246470031300, guid: 817b3148186e4624ebf7fea6b11d2139, type: 3}
+      propertyPath: _scoreText
+      value: 
+      objectReference: {fileID: 4969315508526725785}
     - target: {fileID: 526877246470031302, guid: 817b3148186e4624ebf7fea6b11d2139, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1219,6 +1212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rank: 10
+  _knockbackRadius: 0
 --- !u!1 &2373423327119243080
 GameObject:
   m_ObjectHideFlags: 0
@@ -1495,6 +1489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rank: 3
+  _knockbackRadius: 0
 --- !u!114 &3559899256842296553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1508,6 +1503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rank: 9
+  _knockbackRadius: 0
 --- !u!114 &3695364671133794617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1521,6 +1517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rank: 7
+  _knockbackRadius: 0
 --- !u!50 &3842370553619873201
 Rigidbody2D:
   serializedVersion: 4
@@ -1730,6 +1727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rank: 8
+  _knockbackRadius: 0
 --- !u!1001 &4969315508526725783
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1827,6 +1825,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00b59c33c1ef2524ba8a82ac6cc9cfde, type: 3}
+--- !u!114 &4969315508526725784 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5245139412514620111, guid: 00b59c33c1ef2524ba8a82ac6cc9cfde, type: 3}
+  m_PrefabInstance: {fileID: 4969315508526725783}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ace8feb5089db0842ac551cae183a2dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4969315508526725785 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4969315508861265558, guid: 00b59c33c1ef2524ba8a82ac6cc9cfde, type: 3}
+  m_PrefabInstance: {fileID: 4969315508526725783}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!58 &5257980242381534288
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2186,6 +2206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rank: 4
+  _knockbackRadius: 0
 --- !u!114 &6550247610987992052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2199,6 +2220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rank: 11
+  _knockbackRadius: 0
 --- !u!114 &6687096567982509738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2212,6 +2234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rank: 1
+  _knockbackRadius: 0
 --- !u!58 &7068037456358955738
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2366,6 +2389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rank: 5
+  _knockbackRadius: 0
 --- !u!114 &8512921861629599776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2379,6 +2403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rank: 6
+  _knockbackRadius: 0
 --- !u!4 &8654935219793579927
 Transform:
   m_ObjectHideFlags: 0
@@ -2407,6 +2432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rank: 2
+  _knockbackRadius: 0
 --- !u!50 &9036639368174738983
 Rigidbody2D:
   serializedVersion: 4

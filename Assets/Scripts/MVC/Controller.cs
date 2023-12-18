@@ -1,4 +1,6 @@
-﻿namespace Code.MVC
+﻿using System;
+
+namespace Code.MVC
 {
     public abstract class Controller<V, M> : IController<V, M>
             where V : class, IView
@@ -17,6 +19,7 @@
             if (View != null)
                 return;
             View = view as V;
+            View.OnDestroyView += Dispose;
             if (defaultShow)
                 Show();
             else
@@ -25,5 +28,11 @@
 
         protected abstract void Show();
         protected abstract void Hide();
+
+        public virtual void Dispose()
+        {
+            View.OnDestroyView -= Dispose;
+            GC.SuppressFinalize(this);
+        }
     }
 }

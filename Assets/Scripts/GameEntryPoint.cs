@@ -1,12 +1,13 @@
-using Code.DropLogic;
-using Code.SaveLoad;
 using UnityEngine;
+using Code.MVC;
+using Code.SaveLoad;
+using Code.DropLogic;
 
 public class GameEntryPoint : MonoBehaviour
 {
     [SerializeField] private DropContainer _container;
     [SerializeField] private DropObjectSO _so;
-    [SerializeField] private GameUIView _canvasView;
+    [SerializeField] private CanvasView _canvasView;
 
     private SaveService _saveService;
     private UIService _uiService;
@@ -23,16 +24,13 @@ public class GameEntryPoint : MonoBehaviour
     private void SetUpConnections()
     {
         _container.OnObjectDrop += _dropService.CreateDropObject;
-        _dropService.OnCreateDropObject += _uiService.ChangeNextDropIcon;
-        _dropService.OnRegisterDropObject += _saveService.GatherData;
         _container.CurrentDrop = _dropService.CreateDropObject(_container.transform);
     }
 
     private void OnDestroy()
     {
         _container.OnObjectDrop -= _dropService.CreateDropObject;
-        _dropService.OnCreateDropObject -= _uiService.ChangeNextDropIcon;
-        _dropService.OnRegisterDropObject -= _saveService.GatherData;
         _uiService.Dispose();
+        _saveService.Dispose();
     }
 }

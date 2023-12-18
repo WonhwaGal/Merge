@@ -3,53 +3,33 @@ using Code.MVC;
 
 public sealed class UIService : IService, IDisposable
 {
-    private readonly GameUIController _gameUIController;
-    private readonly MenuController _menuController;
-
-    public UIService(DropObjectSO data, GameUIView canvasView)
+    public UIService(DropObjectSO data, CanvasView canvasView)
     {
-        _gameUIController = new(data);
-        ((IController)_gameUIController).AddView(canvasView, true);
-        _menuController = new MenuController();
-        ((IController)_menuController).AddView(canvasView.LoseView, false);
-        SetConnections();
+        CreateControllers(data, canvasView);
     }
 
-    public MenuView PauseView => _menuController.View;
-    public bool GameLost => _menuController.GameIsLost;
+    public event Action<int> OnContinueSavedGame;
 
-    private void SetConnections()
+    private void CreateControllers(DropObjectSO data, CanvasView canvasView)
     {
-        _menuController.OnRequestScore += GetScore;
-        _menuController.View.OnEndGameWithRetry += ReactToRetry;
-        _gameUIController.View.PauseImage.OnPressPause += _menuController.ShowPauseView;
-        _menuController.AssignView();
+        GameUIController gameUIController = new(data);
+        ((IController)gameUIController).AddView(canvasView.GameUIView, true);
+        MenuController menuController = new();
+        ((IController)menuController).AddView(canvasView.LoseView, false);
+        SetConnections(gameUIController, menuController);
     }
 
-    public void ChangeNextDropIcon(bool queueMoved, int mergeResult)
-        => _gameUIController.UpdateUIData(queueMoved, mergeResult);
-
-    public void UpdateCanvas()
+    private void SetConnections(GameUIController gameUIController, MenuController menuController)
     {
-        if (_menuController.View.gameObject.activeSelf)
-            return;
-
-        _menuController.UpdateView();
-        _gameUIController.View.PauseImage.UpdatePause(false);
+        menuController.OnRequestScore += gameUIController.GetScore;
+        OnContinueSavedGame += gameUIController.SetScore;
     }
 
-    public void ReactToRetry(bool withRetry)
-    {
-        if(withRetry)
-            _gameUIController.ReactToRetry();
-    }
+    public void SetCurrentScore(int savedScore) => OnContinueSavedGame?.Invoke(savedScore);
 
-    public void SetCurrentScore(int savedScore) => _gameUIController.SetScore(savedScore);
-    private int GetScore() => _gameUIController.View.Score;
     public void Dispose()
     {
-        _menuController.OnRequestScore -= GetScore;
-        _menuController.View.OnEndGameWithRetry -= ReactToRetry;
-        _gameUIController.View.PauseImage.OnPressPause -= _menuController.ShowPauseView;
+        OnContinueSavedGame = null;
+        GC.SuppressFinalize(this);
     }
 }

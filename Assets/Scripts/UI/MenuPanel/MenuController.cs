@@ -1,39 +1,58 @@
 using System;
+using UnityEngine;
 
 namespace Code.MVC
 {
     public sealed class MenuController : Controller<MenuView, MenuModel>
     {
-        private bool _isOnPause;
+        private GameAction _gameAction;
 
-        public bool GameIsLost { get; private set; }
+        public MenuController() : base()
+        {
+            GameEventSystem.Subscribe<GameControlEvent>(SetUpPanel);
+        }
 
         public Func<int> OnRequestScore;
 
-        public override void UpdateView()
+
+        private void SetUpPanel(GameControlEvent @event)
         {
-            Show();
-            View.BestScore =  Model.BestScore;
-            View.FinalScore = OnRequestScore.Invoke();
+            _gameAction = @event.ActionToDo;
+            Model.LastAction = _gameAction;
+            UpdateView();
         }
 
-        public void ShowPauseView(bool isPaused)
+        public override void UpdateView()
         {
-            _isOnPause = isPaused;
-            View.FinalScore = OnRequestScore.Invoke();
-            if (_isOnPause)
+            UpdateTimeScale();
+            if (_gameAction == GameAction.Lose || _gameAction == GameAction.Pause)
                 Show();
-            else
+            else if (_gameAction == GameAction.Play)
                 Hide();
         }
 
-        public void AssignView() => View.OnSaveProgress += Model.OnSaveData;
+        private void UpdateTimeScale()
+        {
+            if (_gameAction == GameAction.Save)
+                return;
+
+            Time.timeScale = _gameAction == GameAction.Play ? 1 : 0;
+        }
+
         protected override void Hide() => View.gameObject.SetActive(false);
         protected override void Show()
         {
+            View.BestScore = Model.BestScore;
+            View.FinalScore = OnRequestScore.Invoke();
             View.gameObject.SetActive(true);
-            View.ShowResults(!_isOnPause, Model.BestScore);
-            GameIsLost = !_isOnPause;
+            View.ShowResults(_gameAction == GameAction.Lose, Model.BestScore);
+        }
+
+        public override void Dispose()
+        {
+            OnRequestScore = null;
+            GameEventSystem.UnSubscribe<GameControlEvent>(SetUpPanel);
+            base.Dispose();
         }
     }
 }

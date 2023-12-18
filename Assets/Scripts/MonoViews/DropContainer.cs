@@ -1,12 +1,14 @@
 using System;
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 namespace Code.DropLogic
 {
     public sealed class DropContainer : MonoBehaviour
     {
         [SerializeField, Range(0, 1)] private float _queueMoveDelay;
+        [SerializeField] private TextMeshProUGUI _scoreText; 
         private Camera _cam;
         private Vector3 _startPosition;
         private bool _isDragging;
@@ -23,7 +25,11 @@ namespace Code.DropLogic
 
         private void OnApplicationFocus(bool focus)
         {
+            if (focus)
+                return;
 
+            if(Int32.TryParse(_scoreText.text, out int finalScore))
+                GameEventSystem.Send(new SaveEvent(finalScore, onlyScore: false));
         }
 
         private void OnMouseDrag()
@@ -57,5 +63,7 @@ namespace Code.DropLogic
             CurrentDrop = OnObjectDrop?.Invoke(transform);
             _isDragging = false;
         }
+
+        private void OnDestroy() => OnObjectDrop = null;
     }
 }

@@ -13,7 +13,9 @@ namespace Code.MVC
         [SerializeField] private Button _retryButton;
         [SerializeField] private Button _exitButton;
         private int _finalScore;
+        private bool _showResults;
 
+        public int BestScore { get; set; }
         public int FinalScore
         {
             get => _finalScore;
@@ -21,14 +23,10 @@ namespace Code.MVC
             {
                 _finalScore = value;
                 _scoreText.text = _finalScore.ToString();
-                if (_results.activeInHierarchy)
-                    OnSaveProgress?.Invoke(FinalScore, true);
             }
         }
-        public int BestScore { get; set; }
 
-        public Action<bool> OnEndGameWithRetry { get; set; } // bool = with retry
-        public Action<int, bool> OnSaveProgress { get; set; }
+        public event Action OnDestroyView;
 
         private void Start()
         {
@@ -38,30 +36,31 @@ namespace Code.MVC
 
         public void ShowResults(bool toShow, int bestScore)
         {
+            _showResults = toShow;
             _bestScoreText.text = bestScore.ToString();
-            _scoreText.gameObject.SetActive(toShow);
-            _bestScoreText.gameObject.SetActive(toShow);
-            _results.SetActive(toShow);
+            _scoreText.gameObject.SetActive(_showResults);
+            _bestScoreText.gameObject.SetActive(_showResults);
+            _results.SetActive(_showResults);
+            if(_showResults)
+                GameEventSystem.Send(new SaveEvent(FinalScore, onlyScore: true));
         }
 
-        private void PressRetry() => OnEndGameWithRetry?.Invoke(true);
+        private void PressRetry() 
+            => GameEventSystem.Send(new GameControlEvent(GameAction.Play, restartWithRetry: true));
 
         private void PressQuit()
         {
-            if (_results.activeInHierarchy)
-                return;
-
-            OnEndGameWithRetry?.Invoke(false);
-            OnSaveProgress?.Invoke(FinalScore, false);
+            if(!_showResults)
+                GameEventSystem.Send(new SaveEvent(FinalScore, onlyScore: false));
             Application.Quit();
         }
 
         private void OnDestroy()
         {
-            OnEndGameWithRetry = null;
-            OnSaveProgress = null;
+            OnDestroyView?.Invoke();
             _retryButton.onClick.RemoveAllListeners();
             _exitButton.onClick.RemoveAllListeners();
+            OnDestroyView = null;
         }
     }
 }
