@@ -8,6 +8,7 @@ namespace Code.MVC
     public class GameUIView : MonoBehaviour, IView
     {
         [SerializeField] private Image _nextImage;
+        [SerializeField] private Button _rewardButton;
         [SerializeField] private TextMeshProUGUI _scoreText;
         private int _scoreValue;
 
@@ -29,6 +30,7 @@ namespace Code.MVC
         {
             OnDestroyView?.Invoke();
             OnDestroyView = null;
+            //_rewardButton.onClick.RemoveAllListeners();
         }
     }
 }

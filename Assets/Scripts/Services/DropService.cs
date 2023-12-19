@@ -38,10 +38,12 @@ namespace Code.DropLogic
 
         public bool CheckForMerge(DropObject one, DropObject two)
         {
-            var result = one.Rank < DropQueueHandler.MaxRank;
-            if (result)
+            var finalRank = one.Rank == DropQueueHandler.MaxRank;
+            if (finalRank)
+                ReturnPairToPool(one, two);
+            else
                 MergeObjects(one, two);
-            return result;
+            return finalRank;
         }
 
         public void MergeObjects(DropObject upperOne, DropObject lowerOne)
@@ -49,8 +51,7 @@ namespace Code.DropLogic
             var result = _pool.Spawn(upperOne.Rank + 1);
             var middlePos = (upperOne.transform.position + lowerOne.transform.position) / 2;
             SetUpDropObject(result, middlePos, false, true);
-            ReturnToPool(upperOne);
-            ReturnToPool(lowerOne);
+            ReturnPairToPool(upperOne, lowerOne);
         }
 
         private DropObject SetUpDropObject(DropObject result, Vector3 position, bool queueMoved, bool shouldDrop)
@@ -58,7 +59,7 @@ namespace Code.DropLogic
             _pool.OnSpawned(result, position);
             result.OnMerge += CheckForMerge;
             GameEventSystem.Send(new CreateDropEvent(queueMoved, result.Rank));
-            if(shouldDrop)
+            if (shouldDrop)
                 result.Drop(shouldDrop);
             return result;
         }
@@ -67,6 +68,12 @@ namespace Code.DropLogic
         {
             if (@event.ReturnToPool)
                 ReturnToPool(@event.Drop);
+        }
+
+        private void ReturnPairToPool(DropObject one, DropObject two)
+        {
+            ReturnToPool(one);
+            ReturnToPool(two);
         }
 
         private void ReturnToPool(DropObject result)

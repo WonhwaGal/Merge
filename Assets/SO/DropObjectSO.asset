@@ -18,7 +18,7 @@ MonoBehaviour:
     DropObject: {fileID: 5176437636580882060, guid: a4d2938348c249f45a3e5a91dcde6c2d, type: 3}
   - DropSprite: {fileID: 21300000, guid: a3ec4ace609b7ec40bcaa8af40e7d05b, type: 3}
     MergeRewardPoint: 2
-    DropObject: {fileID: 3080224102637382785, guid: 7b1cadfbcb8eee44393bddb9f242b257, type: 3}
+    DropObject: {fileID: 3080224102637382785, guid: 11c54fbf6f420ef4eb9fc86bbb741028, type: 3}
   - DropSprite: {fileID: 21300000, guid: bf01ee5627c22b240b92e443520614f9, type: 3}
     MergeRewardPoint: 4
     DropObject: {fileID: 2629403636834026178, guid: 22d776bee58fa3f47b1a1704675925c9, type: 3}
