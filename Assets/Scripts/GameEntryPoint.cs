@@ -4,12 +4,14 @@ using Code.MVC;
 using Code.SaveLoad;
 using Code.DropLogic;
 using GamePush;
+using UnityEngine.U2D;
 
 public class GameEntryPoint : MonoBehaviour
 {
     [SerializeField] private DropContainer _container;
     [SerializeField] private DropObjectSO _so;
     [SerializeField] private CanvasView _canvasView;
+    [SerializeField] private SpriteAtlas _atlas;
 
     private SaveService _saveService;
     private UIService _uiService;
@@ -29,10 +31,15 @@ public class GameEntryPoint : MonoBehaviour
         //var value = GP_Player.GetString("save");
         ////vlaue===
         //GP_Player.Set()
+        InitServices();
+        SetUpConnections();
+    }
+
+    private void InitServices()
+    {
         _saveService = ServiceLocator.Container.RequestFor<SaveService>();
         _uiService = ServiceLocator.Container.RegisterAndAssign(new UIService(_so, _canvasView));
         _dropService = ServiceLocator.Container.RegisterAndAssign(new DropService(_so));
-        SetUpConnections();
     }
 
     private void SetUpConnections()

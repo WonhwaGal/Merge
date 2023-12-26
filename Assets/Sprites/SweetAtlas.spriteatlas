@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SweetAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 1024
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 2
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 2
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: cd7c53dde25f6994c8b343b4a3b74815, type: 3}
+    - {fileID: 2800000, guid: 87590517dddbedd4092271392e8edf2f, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 0f810140b7f768c47abc8c130a7f5b33, type: 3}
+  - {fileID: 21300000, guid: 85bec9502a0e8e6499d8040d6e9372bc, type: 3}
+  - {fileID: 21300000, guid: aac2ea50c4a190d4e829d071aced9a3b, type: 3}
+  - {fileID: 21300000, guid: 26735c4133ea2ea42bb412b840ec849b, type: 3}
+  - {fileID: 21300000, guid: f8b84e717c3123a418088339002aac86, type: 3}
+  - {fileID: 21300000, guid: 1460c1a26ab3075429f4b58ca4cfc043, type: 3}
+  - {fileID: 21300000, guid: 0036c7c638a7a8c4a8d1a3477164f29c, type: 3}
+  - {fileID: 21300000, guid: 87590517dddbedd4092271392e8edf2f, type: 3}
+  - {fileID: 21300000, guid: 1a640478d41031440bed7b88b7e8c917, type: 3}
+  - {fileID: 21300000, guid: c8094319902b206439b3b3eade741f5c, type: 3}
+  - {fileID: 21300000, guid: de5f697b8df0b544ebaed5a7e544d8ba, type: 3}
+  - {fileID: 21300000, guid: 0222c46cd3678294780b8945601ce6d4, type: 3}
+  - {fileID: 21300000, guid: 408742ed48fb29944bdcab6b707044bb, type: 3}
+  - {fileID: 21300000, guid: 6257be9eec78e54478f14f9c6bf1ff26, type: 3}
+  - {fileID: 21300000, guid: f31d45ce433bf4f48804a7c52a35bd07, type: 3}
+  - {fileID: 21300000, guid: 2e0dd44f956ff9d49929248de048d3c8, type: 3}
+  - {fileID: 21300000, guid: 9b2c8fef3b1e8924d8cdb90bbec74d5d, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Bezeshka_mimic
+  - GirlyCookie_face
+  - Chitryak
+  - CoolDoughnut_mimic
+  - Bezeshka_face
+  - Doughnut_face
+  - CoolDoughnut
+  - caramel
+  - JapaneseBun
+  - Doughnut_mimic
+  - Bezeshka
+  - GirlyCookie_mimic
+  - JapaneseBun_mimic
+  - CoolDoughnut_face
+  - GirlyCookie
+  - JapaneseBun_face
+  - Doughnut
+  m_RenderDataMap: {}
+  m_Tag: SweetAtlas
+  m_IsVariant: 0
