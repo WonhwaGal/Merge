@@ -1,11 +1,12 @@
 using System;
+using GamePush;
 using UnityEngine;
 
 namespace Code.SaveLoad
 {
     public sealed class SaveService : IService
     {
-        private readonly SaveHandler _handler;
+        private readonly ProgressHandler _handler;
 
         public SaveService()
         {
@@ -15,7 +16,11 @@ namespace Code.SaveLoad
 
         public ProgressData ProgressData { get; private set; }
 
-        public ProgressData LoadProgress() => ProgressData = LoadHandler.Load() ?? new(0, 0, null);
+        public bool LoadProgress()
+        {
+            ProgressData = JsonUtility.FromJson<ProgressData>(GP_Player.GetString("drop_progress")) ?? new(null);
+            return ProgressData.SavedDropList != null && ProgressData.SavedDropList.Count > 0;
+        }
 
         public void GatherData(ManageDropEvent @event)
         {
@@ -23,26 +28,29 @@ namespace Code.SaveLoad
                 _handler.FillData(@event.Drop);
         }
 
-        public void SaveData(int currentScore, bool onlyScore)
+        public void SaveData(float currentScore, bool onlyScore)
         {
-            ProgressData progressData;
-            if (onlyScore)
+            GP_Player.Set("best_score", GetBestScore(currentScore));
+
+            if(!onlyScore)
             {
-                ProgressData.BestScore = GetBestScore(currentScore);
-                progressData = ProgressData;
+                GP_Player.SetScore(currentScore);
+                ProgressData = new ProgressData(_handler.Drops);
+                string json = JsonUtility.ToJson(ProgressData);
+                GP_Player.Set("drop_progress", json);
             }
-            else
-            {
-                progressData = new ProgressData(GetBestScore(currentScore), currentScore, _handler.Drops);
-            }
-            LoadHandler.Save(progressData);
-            //Debug.Log(Application.persistentDataPath + "/DataSaver.json");
+
+            GP_Player.Sync();
             ClearData();
         }
 
         public void ClearData() => _handler.Clear();
-        private int GetBestScore(int current)
-            => (current > ProgressData.BestScore) ? current : ProgressData.BestScore;
+
+        private float GetBestScore(float current)
+        {
+            var bestScore = GP_Player.GetInt("best_score");
+            return (current > bestScore) ? current : bestScore;
+        }
 
         public void Dispose()
         {

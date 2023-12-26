@@ -6,19 +6,10 @@ namespace Code.SaveLoad
     [System.Serializable]
     public class ProgressData
     {
-        public int _bestScore;
-        public int _savedScore;
         public List<DropSave> _savedDropList;
 
-        public ProgressData(int bestScore, int currentScore, List<DropSave> dropList)
-        {
-            _bestScore = bestScore;
-            _savedScore = currentScore;
-            _savedDropList = dropList;
-        }
+        public ProgressData(List<DropSave> dropList) => _savedDropList = dropList;
 
-        public int BestScore { get => _bestScore; set => _bestScore = value; }
-        public int SavedScore => _savedScore;
         public List<DropSave> SavedDropList => _savedDropList;
 
 

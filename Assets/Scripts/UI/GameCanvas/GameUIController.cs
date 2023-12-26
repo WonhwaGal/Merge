@@ -11,8 +11,8 @@ public sealed class GameUIController : Controller<GameUIView, GameUIModel>
         GameEventSystem.Subscribe<GameControlEvent>(ReactToRetry);
     }
 
-    public int GetScore() => View.Score;
-    public void SetScore(int score) => View.Score = score;
+    public float GetScore() => View.Score;
+    public void SetScore() => View.Score = Model.SetScore();
 
     public override void UpdateView()
     {

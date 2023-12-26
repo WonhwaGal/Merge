@@ -10,11 +10,11 @@ namespace Code.MVC
         [SerializeField] private Image _nextImage;
         [SerializeField] private Button _rewardButton;
         [SerializeField] private TextMeshProUGUI _scoreText;
-        private int _scoreValue;
+        private float _scoreValue;
 
         public Sprite NextSprite { get => _nextImage.sprite; set => _nextImage.sprite = value; }
 
-        public int Score
+        public float Score
         {
             get => _scoreValue;
             set

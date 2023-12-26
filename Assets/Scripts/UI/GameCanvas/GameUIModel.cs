@@ -1,6 +1,6 @@
 ﻿using Code.MVC;
-using Code.SaveLoad;
 using UnityEngine;
+using GamePush;
 
 public class GameUIModel : IModel
 {
@@ -15,6 +15,8 @@ public class GameUIModel : IModel
         var nextRank = DropQueueHandler.NextDrop;
         return _dropData.FindObjectData(nextRank).DropSprite;
     }
+
+    public float SetScore() => GP_Player.GetScore();
 
     public int GetAddPoints() => 
         _dropData.FindObjectData(MergedRank - 1).MergeRewardPoint;

@@ -12,11 +12,11 @@ namespace Code.MVC
         [SerializeField] private GameObject _results;
         [SerializeField] private Button _retryButton;
         [SerializeField] private Button _exitButton;
-        private int _finalScore;
+        private float _finalScore;
         private bool _showResults;
 
-        public int BestScore { get; set; }
-        public int FinalScore
+        public float BestScore { get; set; }
+        public float FinalScore
         {
             get => _finalScore;
             set
@@ -34,7 +34,7 @@ namespace Code.MVC
             _exitButton.onClick.AddListener(PressQuit);
         }
 
-        public void ShowResults(bool toShow, int bestScore)
+        public void ShowResults(bool toShow, float bestScore)
         {
             _showResults = toShow;
             _bestScoreText.text = bestScore.ToString();

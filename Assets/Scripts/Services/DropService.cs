@@ -27,7 +27,7 @@ namespace Code.DropLogic
                 var result = _pool.Spawn(data.SavedDropList[i].Rank);
                 SetUpDropObject(result, data.SavedDropList[i].Position, true, true);
             }
-            _uiService.SetCurrentScore(data.SavedScore);
+            _uiService.SetCurrentScore();
         }
 
         public DropObject CreateDropObject(Transform transform)

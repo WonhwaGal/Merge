@@ -33,9 +33,5 @@ public class EntryPoint : MonoBehaviour
         SceneManager.sceneLoaded -= OnLoadWithProgress;
     }
 
-    private bool HasSavedProgress()
-    {
-        var savedGame = _saveService.LoadProgress();
-        return savedGame.SavedDropList != null && savedGame.SavedDropList.Count > 0;
-    }
+    private bool HasSavedProgress() => _saveService.LoadProgress();
 }

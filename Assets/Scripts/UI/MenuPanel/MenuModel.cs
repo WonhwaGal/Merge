@@ -1,6 +1,6 @@
 ﻿using System;
 using Code.SaveLoad;
-using UnityEngine;
+using GamePush;
 
 namespace Code.MVC
 {
@@ -12,11 +12,11 @@ namespace Code.MVC
         {
             GameEventSystem.Subscribe<SaveEvent>(OnSaveData);
             _saveService = ServiceLocator.Container.RequestFor<SaveService>();
-            GetBestScore();
+            GetScores();
         }
 
-        public int BestScore { get; private set; }
-        public int CurrentScore { get; private set; }
+        public float BestScore { get; private set; }
+        public float CurrentScore { get; private set; }
         public GameAction LastAction { get; set; }
 
         public void OnSaveData(SaveEvent @event)
@@ -32,13 +32,18 @@ namespace Code.MVC
             _saveService.SaveData(@event.CurrentScore, @event.OnlyScore);
         }
 
-        public void GetBestScore()
+        public void GetScores()
         {
-            BestScore = _saveService.ProgressData == null ?
-                0 : _saveService.ProgressData.BestScore;
-            CurrentScore = _saveService.ProgressData == null ?
-                0 : _saveService.ProgressData.SavedScore;
+            CurrentScore = GP_Player.GetScore();
+            BestScore = GP_Player.GetInt("best_score");
         }
+        //public void GetBestScore()
+        //{
+        //    BestScore = _saveService.ProgressData == null ?
+        //        0 : _saveService.ProgressData.BestScore;
+        //    CurrentScore = _saveService.ProgressData == null ?
+        //        0 : _saveService.ProgressData.SavedScore;
+        //}
 
         public void Dispose()
         {

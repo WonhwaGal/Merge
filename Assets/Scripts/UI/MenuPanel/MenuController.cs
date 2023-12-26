@@ -12,7 +12,7 @@ namespace Code.MVC
             GameEventSystem.Subscribe<GameControlEvent>(SetUpPanel);
         }
 
-        public Func<int> OnRequestScore;
+        public Func<float> OnRequestScore;
 
 
         private void SetUpPanel(GameControlEvent @event)

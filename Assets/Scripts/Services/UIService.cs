@@ -8,7 +8,7 @@ public sealed class UIService : IService, IDisposable
         CreateControllers(data, canvasView);
     }
 
-    public event Action<int> OnContinueSavedGame;
+    public event Action OnContinueSavedGame;
 
     private void CreateControllers(DropObjectSO data, CanvasView canvasView)
     {
@@ -25,7 +25,7 @@ public sealed class UIService : IService, IDisposable
         OnContinueSavedGame += gameUIController.SetScore;
     }
 
-    public void SetCurrentScore(int savedScore) => OnContinueSavedGame?.Invoke(savedScore);
+    public void SetCurrentScore() => OnContinueSavedGame?.Invoke();
 
     public void Dispose()
     {

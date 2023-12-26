@@ -4,7 +4,7 @@ using static Code.SaveLoad.ProgressData;
 
 namespace Code.SaveLoad
 {
-    public class SaveHandler
+    public class ProgressHandler
     {
         private readonly List<DropSave> _drops = new();
 

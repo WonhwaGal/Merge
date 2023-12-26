@@ -13,22 +13,22 @@ MonoBehaviour:
   m_Name: DropObjectSO
   m_EditorClassIdentifier: 
   _dropsData:
-  - DropSprite: {fileID: 21300000, guid: 6ec84ec76e034fe43976faa96794b2f5, type: 3}
+  - DropSprite: {fileID: 21300000, guid: aac2ea50c4a190d4e829d071aced9a3b, type: 3}
     MergeRewardPoint: 1
     DropObject: {fileID: 2779943976294762712, guid: 32b2aa8d1cfd9c64aa6d52c41726a87a, type: 3}
-  - DropSprite: {fileID: 21300000, guid: a3ec4ace609b7ec40bcaa8af40e7d05b, type: 3}
+  - DropSprite: {fileID: 21300000, guid: f31d45ce433bf4f48804a7c52a35bd07, type: 3}
     MergeRewardPoint: 2
     DropObject: {fileID: 6207652797130257736, guid: 3df50819b57cea946889dbdd25550530, type: 3}
-  - DropSprite: {fileID: 21300000, guid: bf01ee5627c22b240b92e443520614f9, type: 3}
+  - DropSprite: {fileID: 21300000, guid: de5f697b8df0b544ebaed5a7e544d8ba, type: 3}
     MergeRewardPoint: 4
     DropObject: {fileID: 5937248601207907942, guid: 2cc2314b5c659244ea5a10c0b3142087, type: 3}
-  - DropSprite: {fileID: 21300000, guid: 4972c49a3efd00541bba072144d04918, type: 3}
+  - DropSprite: {fileID: 21300000, guid: 9b2c8fef3b1e8924d8cdb90bbec74d5d, type: 3}
     MergeRewardPoint: 6
     DropObject: {fileID: 7793316237533910934, guid: d011e8fed17316c488b265d0bb9a650f, type: 3}
-  - DropSprite: {fileID: 21300000, guid: da9180229da4d2f45950aa5840c14d30, type: 3}
+  - DropSprite: {fileID: 21300000, guid: 0036c7c638a7a8c4a8d1a3477164f29c, type: 3}
     MergeRewardPoint: 8
     DropObject: {fileID: 8849570271434791551, guid: c80a6c7dad6a7154f97365e81666bdc4, type: 3}
-  - DropSprite: {fileID: 21300000, guid: 07afe816a82ed7544a27a8d085cdcc92, type: 3}
+  - DropSprite: {fileID: 21300000, guid: 1a640478d41031440bed7b88b7e8c917, type: 3}
     MergeRewardPoint: 10
     DropObject: {fileID: 3892971647961013256, guid: 4493e19af86a88246836cf045f29e4ef, type: 3}
   - DropSprite: {fileID: 21300000, guid: b7e7648e04d57d54a90db7711fc047f2, type: 3}
