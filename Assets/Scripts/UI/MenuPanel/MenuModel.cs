@@ -23,7 +23,6 @@ namespace Code.MVC
         {
             if (LastAction == GameAction.Lose && !@event.OnlyScore)
             {
-                Debug.Log("request for save denied, last action is " + LastAction);
                 _saveService.ClearData();
                 return;
             }

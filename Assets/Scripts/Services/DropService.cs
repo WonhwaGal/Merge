@@ -52,6 +52,8 @@ namespace Code.DropLogic
             var middlePos = (upperOne.transform.position + lowerOne.transform.position) / 2;
             SetUpDropObject(result, middlePos, false, true);
             ReturnPairToPool(upperOne, lowerOne);
+            if (upperOne.Rank >= Constants.DropableRanksNumber)
+                GameEventSystem.Send(new MergeEvent(upperOne.Rank));
         }
 
         private DropObject SetUpDropObject(DropObject result, Vector3 position, bool queueMoved, bool shouldDrop)

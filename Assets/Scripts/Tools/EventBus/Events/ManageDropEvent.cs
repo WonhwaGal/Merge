@@ -47,3 +47,10 @@ public struct SaveEvent : IGameEvent
         OnlyScore = onlyScore;
     }
 }
+
+public struct MergeEvent: IGameEvent
+{
+    public int MergingRank;
+
+    public MergeEvent(int mergingRank) => MergingRank = mergingRank;
+}

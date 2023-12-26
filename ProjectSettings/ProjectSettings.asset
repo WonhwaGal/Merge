@@ -512,7 +512,7 @@ PlayerSettings:
     PROGRESS_BAR_BORDER_COLOR: 
     PROGRESS_BAR_FILL_COLOR: 
     PROJECT_ID: 10289
-    SHOW_PRELOADER_AD: 
+    SHOW_PRELOADER_AD: true
     TOKEN: 7AvhhvrGjk4DUjrEnNwtQSGUfonUUblQ
   mobileMTRendering:
     Android: 1
@@ -766,7 +766,7 @@ PlayerSettings:
   webGLTemplate: PROJECT:GamePush
   webGLAnalyzeBuildSize: 0
   webGLUseEmbeddedResources: 0
-  webGLCompressionFormat: 0
+  webGLCompressionFormat: 2
   webGLWasmArithmeticExceptions: 0
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0

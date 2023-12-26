@@ -97,6 +97,7 @@ namespace Code.DropLogic
 
         private void OnDisable()
         {
+            transform.rotation = Quaternion.identity;
             _fx.Stop();
             GameEventSystem.UnSubscribe<GameControlEvent>(Register);
         }
