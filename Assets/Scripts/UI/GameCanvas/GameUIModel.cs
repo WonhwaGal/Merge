@@ -20,4 +20,12 @@ public class GameUIModel : IModel
 
     public int GetAddPoints() => 
         _dropData.FindObjectData(MergedRank - 1).MergeRewardPoint;
+
+    public void ShowRewardAd() => GP_Ads.ShowRewarded(Constants.BOMB, OnRewardSuccessful);
+
+    private void OnRewardSuccessful(string key)
+    {
+        if (key == Constants.BOMB)
+            GameEventSystem.Send(new RewardEvent(Constants.BombRank));
+    }
 }

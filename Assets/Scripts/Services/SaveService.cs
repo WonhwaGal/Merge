@@ -18,7 +18,8 @@ namespace Code.SaveLoad
 
         public bool LoadProgress()
         {
-            ProgressData = JsonUtility.FromJson<ProgressData>(GP_Player.GetString("drop_progress")) ?? new(null);
+            ProgressData = JsonUtility.FromJson<ProgressData>
+                (GP_Player.GetString(Constants.DropList)) ?? new(null);
             return ProgressData.SavedDropList != null && ProgressData.SavedDropList.Count > 0;
         }
 
@@ -30,14 +31,14 @@ namespace Code.SaveLoad
 
         public void SaveData(float currentScore, bool onlyScore)
         {
-            GP_Player.Set("best_score", GetBestScore(currentScore));
+            GP_Player.Set(Constants.BestScore, GetBestScore(currentScore));
 
             if(!onlyScore)
             {
                 GP_Player.SetScore(currentScore);
                 ProgressData = new ProgressData(_handler.Drops);
                 string json = JsonUtility.ToJson(ProgressData);
-                GP_Player.Set("drop_progress", json);
+                GP_Player.Set(Constants.DropList, json);
             }
 
             GP_Player.Sync();
@@ -48,7 +49,7 @@ namespace Code.SaveLoad
 
         private float GetBestScore(float current)
         {
-            var bestScore = GP_Player.GetInt("best_score");
+            var bestScore = GP_Player.GetInt(Constants.BestScore);
             return (current > bestScore) ? current : bestScore;
         }
 

@@ -3,15 +3,15 @@ using UnityEngine;
 
 namespace Code.Pools
 {
-    public sealed class DropObjectMultipool : MultiPool<int, DropObject>
+    public sealed class DropObjectMultipool : MultiPool<int, DropBase>
     {
         private readonly DropObjectSO _dropObjectList;
 
         public DropObjectMultipool(DropObjectSO list) => _dropObjectList = list;
 
-        protected override DropObject GetPrefab(int rank) => _dropObjectList.FindObjectData(rank).DropObject;
+        protected override DropBase GetPrefab(int rank) => _dropObjectList.FindObjectData(rank).DropBase;
 
-        public override void OnSpawned(DropObject result, Vector3 targetPos)
+        public override void OnSpawned(DropBase result, Vector3 targetPos)
         {
             result.transform.position = targetPos;
         }

@@ -14,7 +14,6 @@ namespace Code.MVC
 
         public Func<float> OnRequestScore;
 
-
         private void SetUpPanel(GameControlEvent @event)
         {
             _gameAction = @event.ActionToDo;

@@ -13,14 +13,15 @@ namespace Code.DropLogic
         private Vector3 _startPosition;
         private bool _isDragging;
 
-        public DropObject CurrentDrop { get; set; }
+        public DropBase CurrentDrop { get; set; }
 
-        public event Func<Transform, DropObject> OnObjectDrop;
+        public event Func<Transform, bool, DropBase> OnObjectDrop;
 
         private void Start()
         {
             _cam = Camera.main;
             _startPosition = transform.position;
+            GameEventSystem.Subscribe<RewardEvent>(CreateBomb);
         }
 
         private void OnApplicationFocus(bool focus)
@@ -38,16 +39,23 @@ namespace Code.DropLogic
                 return;
             _isDragging = true;
             var currentMousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
-            CurrentDrop.transform.position = new Vector3(currentMousePos.x, transform.position.y, 0.0f);
+            CurrentDrop.Pos = new Vector3(currentMousePos.x, transform.position.y, 0.0f);
         }
 
         private void OnMouseUp()
         {
-            if (!_isDragging)
+            if (!_isDragging || !CurrentDrop.gameObject.activeSelf)
                 return;
-            CurrentDrop.Drop(false);
-            transform.position = _startPosition;
+            PrepairNext();
             StartCoroutine(DelayQueueMove());
+        }
+
+        private void PrepairNext()
+        {
+            CurrentDrop.Drop();
+            transform.position = _startPosition;
+            CurrentDrop = OnObjectDrop?.Invoke(transform, true);
+            CurrentDrop.gameObject.SetActive(false);
         }
 
         IEnumerator DelayQueueMove()
@@ -60,10 +68,20 @@ namespace Code.DropLogic
                 yield return null;
             }
 
-            CurrentDrop = OnObjectDrop?.Invoke(transform);
+            CurrentDrop.gameObject.SetActive(true);
             _isDragging = false;
         }
 
-        private void OnDestroy() => OnObjectDrop = null;
+        private void CreateBomb(RewardEvent @event)
+        {
+            GameEventSystem.Send(new ManageDropEvent(CurrentDrop, true, withEffects: false));
+            CurrentDrop = OnObjectDrop?.Invoke(transform, false);
+        }
+
+        private void OnDestroy()
+        {
+            OnObjectDrop = null;
+            GameEventSystem.UnSubscribe<RewardEvent>(CreateBomb);
+        }
     }
 }

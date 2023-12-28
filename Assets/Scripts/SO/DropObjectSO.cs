@@ -11,7 +11,7 @@ public class DropObjectSO : ScriptableObject
 
     public DropData FindObjectData(int rank)
     {
-        var data = _dropsData.Find(x => x.DropObject.Rank == rank);
+        var data = _dropsData.Find(x => x.DropBase.Rank == rank);
         if (data == null)
             Debug.LogError($"{name} : object with rank {rank} was not found");
 
@@ -23,6 +23,6 @@ public class DropObjectSO : ScriptableObject
     {
         public Sprite DropSprite;
         public int MergeRewardPoint;
-        public DropObject DropObject;
+        public DropBase DropBase;
     }
 }

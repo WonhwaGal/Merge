@@ -35,6 +35,7 @@ public sealed class GameUIController : Controller<GameUIView, GameUIModel>
             View.Score = 0;
     }
 
+    protected override void OnViewAdded() => View.RewardButton.onClick.AddListener(Model.ShowRewardAd);
     protected override void Hide() => View.gameObject.SetActive(false);
     protected override void Show() => View.gameObject.SetActive(true);
 

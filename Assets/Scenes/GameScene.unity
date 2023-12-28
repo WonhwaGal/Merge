@@ -969,6 +969,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _container: {fileID: 1623767387}
   _so: {fileID: 11400000, guid: dd1ff55138b91cf47af426f29e137cc9, type: 2}
+  _fxList: {fileID: 11400000, guid: 61499c12269fbff4bbd420e05304498f, type: 2}
   _canvasView: {fileID: 4969315508526725784}
   _atlas: {fileID: 4343727234628468602, guid: 324a763604bcc8542a32525436259f75, type: 2}
 --- !u!1 &1114418024
@@ -1736,6 +1737,10 @@ PrefabInstance:
       propertyPath: _scoreText
       value: 
       objectReference: {fileID: 4969315508526725785}
+    - target: {fileID: 526877246470031300, guid: 817b3148186e4624ebf7fea6b11d2139, type: 3}
+      propertyPath: _queueMoveDelay
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 526877246470031302, guid: 817b3148186e4624ebf7fea6b11d2139, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2353,10 +2358,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -105.8999
       objectReference: {fileID: 0}
+    - target: {fileID: 5136331490564007176, guid: 00b59c33c1ef2524ba8a82ac6cc9cfde, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5136331490564007176, guid: 00b59c33c1ef2524ba8a82ac6cc9cfde, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 099d8543844b30d42abfbed3907632bc, type: 3}
     - target: {fileID: 5245139412514620111, guid: 00b59c33c1ef2524ba8a82ac6cc9cfde, type: 3}
       propertyPath: _atlas
       value: 
       objectReference: {fileID: 4343727234628468602, guid: 324a763604bcc8542a32525436259f75, type: 2}
+    - target: {fileID: 6163115259529996411, guid: 00b59c33c1ef2524ba8a82ac6cc9cfde, type: 3}
+      propertyPath: _rewardButton
+      value: 
+      objectReference: {fileID: 4969315508526725786}
     - target: {fileID: 6504522333127707975, guid: 00b59c33c1ef2524ba8a82ac6cc9cfde, type: 3}
       propertyPath: m_SizeDelta.x
       value: 350
@@ -2443,6 +2460,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4969315508526725786 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 578998879149839621, guid: 00b59c33c1ef2524ba8a82ac6cc9cfde, type: 3}
+  m_PrefabInstance: {fileID: 4969315508526725783}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &5278138360895028291
@@ -2538,8 +2566,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.54859364, g: 0, b: 0.7921569, a: 1}
+  m_Sprite: {fileID: 21300000, guid: c68c88e7d4f943748992a25cf921bf6d, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

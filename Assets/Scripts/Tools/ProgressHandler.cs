@@ -10,7 +10,7 @@ namespace Code.SaveLoad
 
         public List<DropSave> Drops => _drops;
 
-        public void FillData(DropObject drop) 
+        public void FillData(DropBase drop) 
             => _drops.Add(new DropSave(drop.Rank, drop.transform.position));
 
         public void Clear() => _drops.Clear();

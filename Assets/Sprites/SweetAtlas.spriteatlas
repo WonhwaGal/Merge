@@ -35,17 +35,18 @@ SpriteAtlas:
       m_ForceMaximumCompressionQuality_BC6H_BC7: 0
     packingSettings:
       serializedVersion: 2
-      padding: 2
+      padding: 8
       blockOffset: 1
       allowAlphaSplitting: 0
       enableRotation: 1
-      enableTightPacking: 1
+      enableTightPacking: 0
       enableAlphaDilation: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: cd7c53dde25f6994c8b343b4a3b74815, type: 3}
     - {fileID: 2800000, guid: 87590517dddbedd4092271392e8edf2f, type: 3}
+    - {fileID: 2800000, guid: c68c88e7d4f943748992a25cf921bf6d, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -57,16 +58,20 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 26735c4133ea2ea42bb412b840ec849b, type: 3}
   - {fileID: 21300000, guid: f8b84e717c3123a418088339002aac86, type: 3}
   - {fileID: 21300000, guid: 1460c1a26ab3075429f4b58ca4cfc043, type: 3}
+  - {fileID: 21300000, guid: e952a7b2affa8ba4e933a58305ab8b9e, type: 3}
   - {fileID: 21300000, guid: 0036c7c638a7a8c4a8d1a3477164f29c, type: 3}
   - {fileID: 21300000, guid: 87590517dddbedd4092271392e8edf2f, type: 3}
+  - {fileID: 21300000, guid: c68c88e7d4f943748992a25cf921bf6d, type: 3}
   - {fileID: 21300000, guid: 1a640478d41031440bed7b88b7e8c917, type: 3}
   - {fileID: 21300000, guid: c8094319902b206439b3b3eade741f5c, type: 3}
+  - {fileID: 21300000, guid: 652a1c1b0fd8c3d4cb6b35decdcc88db, type: 3}
   - {fileID: 21300000, guid: de5f697b8df0b544ebaed5a7e544d8ba, type: 3}
   - {fileID: 21300000, guid: 0222c46cd3678294780b8945601ce6d4, type: 3}
   - {fileID: 21300000, guid: 408742ed48fb29944bdcab6b707044bb, type: 3}
   - {fileID: 21300000, guid: 6257be9eec78e54478f14f9c6bf1ff26, type: 3}
   - {fileID: 21300000, guid: f31d45ce433bf4f48804a7c52a35bd07, type: 3}
   - {fileID: 21300000, guid: 2e0dd44f956ff9d49929248de048d3c8, type: 3}
+  - {fileID: 21300000, guid: daf302bf8ba1beb4ca2722f5a3764914, type: 3}
   - {fileID: 21300000, guid: 9b2c8fef3b1e8924d8cdb90bbec74d5d, type: 3}
   m_PackedSpriteNamesToIndex:
   - Bezeshka_mimic
@@ -75,16 +80,20 @@ SpriteAtlas:
   - CoolDoughnut_mimic
   - Bezeshka_face
   - Doughnut_face
+  - Vrednyuchka_mimic
   - CoolDoughnut
   - caramel
+  - Static_7
   - JapaneseBun
   - Doughnut_mimic
+  - Vrednyuchka_face
   - Bezeshka
   - GirlyCookie_mimic
   - JapaneseBun_mimic
   - CoolDoughnut_face
   - GirlyCookie
   - JapaneseBun_face
+  - Vrednyuchka
   - Doughnut
   m_RenderDataMap: {}
   m_Tag: SweetAtlas

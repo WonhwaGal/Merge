@@ -12,6 +12,7 @@ namespace Code.MVC
         [SerializeField] private TextMeshProUGUI _scoreText;
         private float _scoreValue;
 
+        public Button RewardButton => _rewardButton;
         public Sprite NextSprite { get => _nextImage.sprite; set => _nextImage.sprite = value; }
 
         public float Score
@@ -30,7 +31,7 @@ namespace Code.MVC
         {
             OnDestroyView?.Invoke();
             OnDestroyView = null;
-            //_rewardButton.onClick.RemoveAllListeners();
+            RewardButton.onClick.RemoveAllListeners();
         }
     }
 }

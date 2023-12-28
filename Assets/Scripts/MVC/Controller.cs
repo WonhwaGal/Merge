@@ -24,10 +24,12 @@ namespace Code.MVC
                 Show();
             else
                 Hide();
+            OnViewAdded();
         }
 
         protected abstract void Show();
         protected abstract void Hide();
+        protected virtual void OnViewAdded() { }
 
         public virtual void Dispose()
         {

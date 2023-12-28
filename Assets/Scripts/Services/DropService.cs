@@ -7,15 +7,15 @@ namespace Code.DropLogic
 {
     public sealed class DropService : IService
     {
-        private readonly DropObjectSO _dropSO;
+        private readonly FXMultiPool _fxPool;
         private readonly DropObjectMultipool _pool;
         private readonly UIService _uiService;
 
-        public DropService(DropObjectSO dropSO)
+        public DropService(DropObjectSO dropSO, EffectList fxList)
         {
-            _dropSO = dropSO;
-            _pool = new DropObjectMultipool(_dropSO);
-            DropQueueHandler.AssignValues(_dropSO.TotalNumber(), Constants.DropableRanksNumber);
+            _pool = new (dropSO);
+            _fxPool = new(fxList);
+            DropQueueHandler.AssignValues(dropSO.TotalNumber(), Constants.DropableRanksNumber);
             _uiService = ServiceLocator.Container.RequestFor<UIService>();
             GameEventSystem.Subscribe<ManageDropEvent>(EndSession);
         }
@@ -30,13 +30,18 @@ namespace Code.DropLogic
             _uiService.SetCurrentScore();
         }
 
-        public DropObject CreateDropObject(Transform transform)
+        public DropBase CreateDropObject(Transform transform, bool random)
         {
-            var result = _pool.Spawn(DropQueueHandler.ChooseRank());
+            DropBase result;
+            if (random)
+                result = _pool.Spawn(DropQueueHandler.ChooseRank());
+            else
+                result = _pool.Spawn(Constants.BombRank);
             return SetUpDropObject(result, transform.position, true, false);
         }
 
-        public bool CheckForMerge(DropObject one, DropObject two)
+
+        public bool CheckForMerge(DropBase one, DropBase two)
         {
             var finalRank = one.Rank == DropQueueHandler.MaxRank;
             if (finalRank)
@@ -46,23 +51,31 @@ namespace Code.DropLogic
             return finalRank;
         }
 
-        public void MergeObjects(DropObject upperOne, DropObject lowerOne)
+        public void MergeObjects(DropBase upperOne, DropBase lowerOne)
         {
             var result = _pool.Spawn(upperOne.Rank + 1);
             var middlePos = (upperOne.transform.position + lowerOne.transform.position) / 2;
+            AddEffect(PrefabType.PoofEffect, result, middlePos);
             SetUpDropObject(result, middlePos, false, true);
             ReturnPairToPool(upperOne, lowerOne);
             if (upperOne.Rank >= Constants.DropableRanksNumber)
                 GameEventSystem.Send(new MergeEvent(upperOne.Rank));
         }
 
-        private DropObject SetUpDropObject(DropObject result, Vector3 position, bool queueMoved, bool shouldDrop)
+        private void AddEffect(PrefabType effectType, DropBase result, Vector3 middlePos)
+        {
+            var effect = _fxPool.Spawn(effectType);
+            _fxPool.OnSpawned(effect, middlePos);
+            effect.transform.localScale = result.transform.localScale;
+        }
+
+        private DropBase SetUpDropObject(DropBase result, Vector3 position, bool queueMoved, bool shouldDrop)
         {
             _pool.OnSpawned(result, position);
             result.OnMerge += CheckForMerge;
             GameEventSystem.Send(new CreateDropEvent(queueMoved, result.Rank));
             if (shouldDrop)
-                result.Drop(shouldDrop);
+                result.Drop();
             return result;
         }
 
@@ -70,15 +83,17 @@ namespace Code.DropLogic
         {
             if (@event.ReturnToPool)
                 ReturnToPool(@event.Drop);
+            if(@event.WithEffects)
+                AddEffect(PrefabType.PoofEffect, @event.Drop, @event.Drop.Pos);
         }
 
-        private void ReturnPairToPool(DropObject one, DropObject two)
+        private void ReturnPairToPool(DropBase one, DropBase two)
         {
             ReturnToPool(one);
             ReturnToPool(two);
         }
 
-        private void ReturnToPool(DropObject result)
+        private void ReturnToPool(DropBase result)
         {
             _pool.Despawn(result.Rank, result);
             result.OnMerge -= CheckForMerge;

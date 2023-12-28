@@ -10,4 +10,10 @@ public sealed class Constants
     public const float KnockbackMulti = 3;
     public const int MinMimicSpan = 3;
     public const int MaxMimicSpan = 11;
+
+    //GAME PUSH
+    public const string BestScore = "best_score";
+    public const string DropList = "drop_progress";
+    public const string BOMB = "BOMB";
+    public const int BombRank = -1;
 }
