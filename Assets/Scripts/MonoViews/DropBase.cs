@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using Code.Pools;
-using System.Collections;
 
 namespace Code.DropLogic
 {
@@ -52,7 +51,12 @@ namespace Code.DropLogic
             OnDrop();
         }
 
-        protected bool CheckMergeWith(DropBase pair) => OnMerge.Invoke(this, pair);
+        protected bool CheckMergeWith(DropBase pair)
+        {
+            if (OnMerge == null)
+                return false;
+            return OnMerge.Invoke(this, pair);
+        }
 
         protected virtual void OnDrop() { }
         protected virtual void ActivateSubscribtions() { }

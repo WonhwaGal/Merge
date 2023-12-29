@@ -41,11 +41,13 @@ namespace Code.MVC
         protected override void Hide() => View.gameObject.SetActive(false);
         protected override void Show()
         {
-            View.BestScore = Model.BestScore;
             View.FinalScore = OnRequestScore.Invoke();
             View.gameObject.SetActive(true);
             View.ShowResults(_gameAction == GameAction.Lose, Model.BestScore);
         }
+
+        protected override void OnViewAdded() 
+            => View.RetryButton.onClick.AddListener(Model.PressRetry);
 
         public override void Dispose()
         {

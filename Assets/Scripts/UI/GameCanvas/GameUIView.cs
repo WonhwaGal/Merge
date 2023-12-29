@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+using GamePush;
 namespace Code.MVC
 {
     public class GameUIView : MonoBehaviour, IView
@@ -10,9 +10,11 @@ namespace Code.MVC
         [SerializeField] private Image _nextImage;
         [SerializeField] private Button _rewardButton;
         [SerializeField] private TextMeshProUGUI _scoreText;
+        [SerializeField] private Button _leaderBoardButton;
         private float _scoreValue;
 
         public Button RewardButton => _rewardButton;
+        public Button LeaderBoardButton => _leaderBoardButton;
         public Sprite NextSprite { get => _nextImage.sprite; set => _nextImage.sprite = value; }
 
         public float Score
@@ -31,7 +33,8 @@ namespace Code.MVC
         {
             OnDestroyView?.Invoke();
             OnDestroyView = null;
-            RewardButton.onClick.RemoveAllListeners();
+            _rewardButton.onClick.RemoveAllListeners();
+            _leaderBoardButton.onClick.RemoveAllListeners();
         }
     }
 }

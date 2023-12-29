@@ -1,6 +1,4 @@
 
-using UnityEngine;
-
 public sealed class Constants
 {
     public const int TotalRanks = 11;
@@ -12,7 +10,7 @@ public sealed class Constants
     public const int MaxMimicSpan = 11;
 
     //GAME PUSH
-    public const string BestScore = "best_score";
+    public const string SavedScore = "saved_score";
     public const string DropList = "drop_progress";
     public const string BOMB = "BOMB";
     public const int BombRank = -1;

@@ -31,11 +31,10 @@ namespace Code.SaveLoad
 
         public void SaveData(float currentScore, bool onlyScore)
         {
-            GP_Player.Set(Constants.BestScore, GetBestScore(currentScore));
-
+            GP_Player.SetScore(GetBestScore(currentScore));
             if(!onlyScore)
             {
-                GP_Player.SetScore(currentScore);
+                GP_Player.Set(Constants.SavedScore, currentScore);
                 ProgressData = new ProgressData(_handler.Drops);
                 string json = JsonUtility.ToJson(ProgressData);
                 GP_Player.Set(Constants.DropList, json);
@@ -49,7 +48,7 @@ namespace Code.SaveLoad
 
         private float GetBestScore(float current)
         {
-            var bestScore = GP_Player.GetInt(Constants.BestScore);
+            var bestScore = GP_Player.GetScore();
             return (current > bestScore) ? current : bestScore;
         }
 

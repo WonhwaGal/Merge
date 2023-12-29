@@ -1,48 +1,61 @@
-﻿using Code.MVC;
+﻿using System;
 
-public sealed class GameUIController : Controller<GameUIView, GameUIModel>
+namespace Code.MVC
 {
-    private bool _queueWasMoved;
-
-    public GameUIController(DropObjectSO data) : base()
+    public sealed class GameUIController : Controller<GameUIView, GameUIModel>
     {
-        Model.AssignDataSource(data);
-        GameEventSystem.Subscribe<CreateDropEvent>(UpdateUIData);
-        GameEventSystem.Subscribe<GameControlEvent>(ReactToRetry);
-    }
+        private bool _queueWasMoved;
 
-    public float GetScore() => View.Score;
-    public void SetScore() => View.Score = Model.SetScore();
+        public GameUIController(DropObjectSO data) : base()
+        {
+            Model.AssignDataSource(data);
+            GameEventSystem.Subscribe<CreateDropEvent>(UpdateUIData);
+            GameEventSystem.Subscribe<GameControlEvent>(ReactToRetry);
+        }
 
-    public override void UpdateView()
-    {
-        if (_queueWasMoved)
-            View.NextSprite = Model.GetNextRank();
-        else
-            View.Score += Model.GetAddPoints();
-    }
+        public event Action OnRequestLeaderBoard;
 
-    private void UpdateUIData(CreateDropEvent @event)
-    {
-        _queueWasMoved = @event.QueueMoved;
-        Model.MergedRank = @event.CurrentRank;
-        UpdateView();
-    }
+        public float GetScore() => View.Score;
+        public void SetScore() => View.Score = Model.SetScore();
 
-    private void ReactToRetry(GameControlEvent @event)
-    {
-        if (@event.RestartWithRetry)
-            View.Score = 0;
-    }
+        public override void UpdateView()
+        {
+            if (_queueWasMoved)
+                View.NextSprite = Model.GetNextRank();
+            else
+                View.Score += Model.GetAddPoints();
+        }
 
-    protected override void OnViewAdded() => View.RewardButton.onClick.AddListener(Model.ShowRewardAd);
-    protected override void Hide() => View.gameObject.SetActive(false);
-    protected override void Show() => View.gameObject.SetActive(true);
+        private void UpdateUIData(CreateDropEvent @event)
+        {
+            _queueWasMoved = @event.QueueMoved;
+            Model.MergedRank = @event.CurrentRank;
+            UpdateView();
+        }
 
-    public override void Dispose()
-    {
-        GameEventSystem.UnSubscribe<CreateDropEvent>(UpdateUIData);
-        GameEventSystem.UnSubscribe<GameControlEvent>(ReactToRetry);
-        base.Dispose();
+        private void ReactToRetry(GameControlEvent @event)
+        {
+            if (@event.RestartWithRetry)
+                View.Score = 0;
+        }
+
+        private void GoToLeaderBoard() => OnRequestLeaderBoard?.Invoke();
+
+        protected override void OnViewAdded()
+        {
+            View.RewardButton.onClick.AddListener(Model.ShowRewardAd);
+            View.LeaderBoardButton.onClick.AddListener(GoToLeaderBoard);
+        }
+
+        protected override void Hide() => View.gameObject.SetActive(false);
+        protected override void Show() => View.gameObject.SetActive(true);
+
+        public override void Dispose()
+        {
+            GameEventSystem.UnSubscribe<CreateDropEvent>(UpdateUIData);
+            GameEventSystem.UnSubscribe<GameControlEvent>(ReactToRetry);
+            OnRequestLeaderBoard = null;
+            base.Dispose();
+        }
     }
 }

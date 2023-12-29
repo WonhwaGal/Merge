@@ -8,18 +8,15 @@ namespace Code.DropLogic
     {
         [SerializeField, Range(0, 3)]
         private float _knockbackRadius;
-        private bool _isFinalRank;
 
         public float KnockbackRadius => _knockbackRadius;
-
-        private void Start() => _isFinalRank = _rank == Constants.TotalRanks;
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (transform.position.y > Constants.LoseThreshold)
                 GameEventSystem.Send(new GameControlEvent(GameAction.Lose, false));
 
-            if (_isFinalRank || RB.gravityScale == 0 || CollisionsIgnored)
+            if (RB.gravityScale == 0 || CollisionsIgnored)
                 return;
 
             _collisionsIgnored = true;

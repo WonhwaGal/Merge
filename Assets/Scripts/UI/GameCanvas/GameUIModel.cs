@@ -16,7 +16,7 @@ public class GameUIModel : IModel
         return _dropData.FindObjectData(nextRank).DropSprite;
     }
 
-    public float SetScore() => GP_Player.GetScore();
+    public float SetScore() => GP_Player.GetInt(Constants.SavedScore);
 
     public int GetAddPoints() => 
         _dropData.FindObjectData(MergedRank - 1).MergeRewardPoint;

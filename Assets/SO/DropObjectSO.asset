@@ -34,17 +34,17 @@ MonoBehaviour:
   - DropSprite: {fileID: 21300000, guid: daf302bf8ba1beb4ca2722f5a3764914, type: 3}
     MergeRewardPoint: 14
     DropBase: {fileID: 8415479536103547407, guid: 0240864dd04ed8845a602e654cb17bce, type: 3}
-  - DropSprite: {fileID: 21300000, guid: 26c8a5f02e0edf24f893ad31de17f925, type: 3}
+  - DropSprite: {fileID: 21300000, guid: 6ada184ee750efc4d9c1042b654651c8, type: 3}
     MergeRewardPoint: 18
-    DropBase: {fileID: 6572983006432399955, guid: de7c824082b5b1849840d2834423f949, type: 3}
-  - DropSprite: {fileID: 21300000, guid: bb4f65df6b53a7042b492d085c013b1d, type: 3}
+    DropBase: {fileID: 2420623145901364568, guid: 0ae67fa9a4fc4674a9045b89c5f74bf7, type: 3}
+  - DropSprite: {fileID: 21300000, guid: c7d2d6abeac4ae64fb249e4c62572f6f, type: 3}
     MergeRewardPoint: 25
-    DropBase: {fileID: 4100642139102843889, guid: 12f94b20db80e864589c602ff251a37a, type: 3}
+    DropBase: {fileID: 5792781036840720119, guid: 66b33e534688b5d468c304ee916d9d48, type: 3}
   - DropSprite: {fileID: 21300000, guid: 2e0ff7d82bcd6ee48a232fb95e6e3e8c, type: 3}
-    MergeRewardPoint: 35
+    MergeRewardPoint: 50
     DropBase: {fileID: 5248949344037534338, guid: db91a1facfb86724fb5ff8e8159da04a, type: 3}
   - DropSprite: {fileID: 21300000, guid: f4425c74a4eb49a4cb15717aeb0d7acb, type: 3}
-    MergeRewardPoint: 50
+    MergeRewardPoint: 100
     DropBase: {fileID: 7581819376428280942, guid: a83f5bda561a79946a9a0b5f8ef86d88, type: 3}
   - DropSprite: {fileID: 21300000, guid: 099d8543844b30d42abfbed3907632bc, type: 3}
     MergeRewardPoint: 0

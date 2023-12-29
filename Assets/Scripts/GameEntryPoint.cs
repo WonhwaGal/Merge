@@ -1,8 +1,8 @@
 using UnityEngine;
+using UnityEngine.U2D;
 using Code.MVC;
 using Code.SaveLoad;
 using Code.DropLogic;
-using UnityEngine.U2D;
 
 public class GameEntryPoint : MonoBehaviour
 {
@@ -34,16 +34,6 @@ public class GameEntryPoint : MonoBehaviour
         _container.OnObjectDrop += _dropService.CreateDropObject;
         _container.CurrentDrop = _dropService.CreateDropObject(_container.transform, true);
     }
-
-
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        GameEventSystem.Send(new ManageDropEvent((DropObject)_container.CurrentDrop, true));
-    //        _container.CurrentDrop = Instantiate(_so.Bomb, _container.transform.position, Quaternion.identity);
-    //    }
-    //}
 
     private void OnDestroy()
     {

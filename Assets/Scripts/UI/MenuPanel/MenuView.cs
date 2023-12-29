@@ -15,7 +15,6 @@ namespace Code.MVC
         private float _finalScore;
         private bool _showResults;
 
-        public float BestScore { get; set; }
         public float FinalScore
         {
             get => _finalScore;
@@ -26,11 +25,13 @@ namespace Code.MVC
             }
         }
 
+        public Button RetryButton => _retryButton;
+        public Button ExitButton => _exitButton;
+
         public event Action OnDestroyView;
 
         private void Start()
         {
-            _retryButton.onClick.AddListener(PressRetry);
             _exitButton.onClick.AddListener(PressQuit);
         }
 
@@ -45,9 +46,6 @@ namespace Code.MVC
                 GameEventSystem.Send(new SaveEvent(FinalScore, onlyScore: true));
         }
 
-        private void PressRetry() 
-            => GameEventSystem.Send(new GameControlEvent(GameAction.Play, restartWithRetry: true));
-
         private void PressQuit()
         {
             if(!_showResults)
@@ -58,8 +56,8 @@ namespace Code.MVC
         private void OnDestroy()
         {
             OnDestroyView?.Invoke();
-            _retryButton.onClick.RemoveAllListeners();
-            _exitButton.onClick.RemoveAllListeners();
+            RetryButton.onClick.RemoveAllListeners();
+            ExitButton.onClick.RemoveAllListeners();
             OnDestroyView = null;
         }
     }
