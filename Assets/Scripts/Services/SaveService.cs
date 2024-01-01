@@ -32,7 +32,7 @@ namespace Code.SaveLoad
         public void SaveData(float currentScore, bool onlyScore)
         {
             GP_Player.SetScore(GetBestScore(currentScore));
-            if(!onlyScore)
+            if(!onlyScore && currentScore != 0 && _handler.Drops.Count > 0)
             {
                 GP_Player.Set(Constants.SavedScore, currentScore);
                 ProgressData = new ProgressData(_handler.Drops);

@@ -1738,8 +1738,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4969315508526725785}
     - target: {fileID: 526877246470031300, guid: 817b3148186e4624ebf7fea6b11d2139, type: 3}
+      propertyPath: _leftBorder
+      value: -5.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 526877246470031300, guid: 817b3148186e4624ebf7fea6b11d2139, type: 3}
+      propertyPath: _rightBorder
+      value: 5.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 526877246470031300, guid: 817b3148186e4624ebf7fea6b11d2139, type: 3}
       propertyPath: _queueMoveDelay
       value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 526877246470031301, guid: 817b3148186e4624ebf7fea6b11d2139, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 526877246470031301, guid: 817b3148186e4624ebf7fea6b11d2139, type: 3}
+      propertyPath: m_Size.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 526877246470031302, guid: 817b3148186e4624ebf7fea6b11d2139, type: 3}
       propertyPath: m_RootOrder

@@ -28,4 +28,9 @@ public class GameUIModel : IModel
         if (key == Constants.BOMB)
             GameEventSystem.Send(new RewardEvent(Constants.BombRank));
     }
+
+    public void OpenLeaderBoard()
+    {
+        GP_Leaderboard.Open(withMe: WithMe.first);
+    }
 }

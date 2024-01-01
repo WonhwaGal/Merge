@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace Code.MVC
 {
     public sealed class GameUIController : Controller<GameUIView, GameUIModel>
@@ -12,8 +11,6 @@ namespace Code.MVC
             GameEventSystem.Subscribe<CreateDropEvent>(UpdateUIData);
             GameEventSystem.Subscribe<GameControlEvent>(ReactToRetry);
         }
-
-        public event Action OnRequestLeaderBoard;
 
         public float GetScore() => View.Score;
         public void SetScore() => View.Score = Model.SetScore();
@@ -39,7 +36,7 @@ namespace Code.MVC
                 View.Score = 0;
         }
 
-        private void GoToLeaderBoard() => OnRequestLeaderBoard?.Invoke();
+        private void GoToLeaderBoard() => Model.OpenLeaderBoard();
 
         protected override void OnViewAdded()
         {
@@ -54,7 +51,6 @@ namespace Code.MVC
         {
             GameEventSystem.UnSubscribe<CreateDropEvent>(UpdateUIData);
             GameEventSystem.UnSubscribe<GameControlEvent>(ReactToRetry);
-            OnRequestLeaderBoard = null;
             base.Dispose();
         }
     }

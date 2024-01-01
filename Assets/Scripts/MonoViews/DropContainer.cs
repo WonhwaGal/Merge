@@ -8,7 +8,9 @@ namespace Code.DropLogic
     public sealed class DropContainer : MonoBehaviour
     {
         [SerializeField, Range(0, 1)] private float _queueMoveDelay;
-        [SerializeField] private TextMeshProUGUI _scoreText; 
+        [SerializeField] private TextMeshProUGUI _scoreText;
+        [SerializeField] private float _leftBorder;
+        [SerializeField] private float _rightBorder;
         private Camera _cam;
         private Vector3 _startPosition;
         private bool _isDragging;
@@ -39,7 +41,10 @@ namespace Code.DropLogic
                 return;
             _isDragging = true;
             var currentMousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
-            CurrentDrop.Pos = new Vector3(currentMousePos.x, transform.position.y, 0.0f);
+            if (currentMousePos.x > _leftBorder && currentMousePos.x < _rightBorder)
+                CurrentDrop.Pos = new Vector3(currentMousePos.x, transform.position.y, 0.0f);
+            else
+                Debug.Log("wrong ");
         }
 
         private void OnMouseUp()

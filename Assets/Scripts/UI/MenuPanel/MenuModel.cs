@@ -15,7 +15,12 @@ namespace Code.MVC
             BestScore = GP_Player.GetScore();
         }
 
-        public float BestScore { get; private set; }
+        public float BestScore
+        {
+            get => GP_Player.GetScore();
+            set { BestScore = value; }
+        }
+
         public GameAction LastAction { get; set; }
 
         public void OnSaveData(SaveEvent @event)
