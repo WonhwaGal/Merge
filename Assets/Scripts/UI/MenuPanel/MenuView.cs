@@ -24,9 +24,9 @@ namespace Code.MVC
                 _scoreText.text = _finalScore.ToString();
             }
         }
-
         public Button RetryButton => _retryButton;
         public Button ExitButton => _exitButton;
+
 
         public event Action OnDestroyView;
 

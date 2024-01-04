@@ -16,10 +16,9 @@ namespace Code.SaveLoad
 
         public ProgressData ProgressData { get; private set; }
 
-        public bool LoadProgress()
+        public bool LoadProgress(string data)
         {
-            ProgressData = JsonUtility.FromJson<ProgressData>
-                (GP_Player.GetString(Constants.DropList)) ?? new(null);
+            ProgressData = JsonUtility.FromJson<ProgressData>(data);
             return ProgressData.SavedDropList != null && ProgressData.SavedDropList.Count > 0;
         }
 

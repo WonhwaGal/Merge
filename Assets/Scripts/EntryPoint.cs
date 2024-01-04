@@ -1,7 +1,9 @@
-using Code.DropLogic;
-using Code.SaveLoad;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Code.DropLogic;
+using Code.SaveLoad;
+using GamePush;
 
 public class EntryPoint : MonoBehaviour
 {
@@ -10,13 +12,16 @@ public class EntryPoint : MonoBehaviour
     private SaveService _saveService;
     private DropService _dropService;
 
-    private void Start()
+    private IEnumerator Start()
     {
         _saveService = ServiceLocator.Container.RegisterAndAssign(new SaveService());
-        _startCanvas.ContinueButton.interactable = HasSavedProgress();
+        var savedData = GP_Player.GetString(Constants.DropList);
+        yield return new WaitWhile(() => string.IsNullOrEmpty(savedData));
+        _startCanvas.ContinueButton.interactable = _saveService.LoadProgress(savedData);
         _startCanvas.StartNewButton.onClick.AddListener(() => LoadNewScene(withProgress: false));
         _startCanvas.ContinueButton.onClick.AddListener(() => LoadNewScene(withProgress: true));
     }
+
 
     private void LoadNewScene(bool withProgress)
     {
@@ -32,6 +37,4 @@ public class EntryPoint : MonoBehaviour
         _dropService.RecreateProgress(_saveService.ProgressData);
         SceneManager.sceneLoaded -= OnLoadWithProgress;
     }
-
-    private bool HasSavedProgress() => _saveService.LoadProgress();
 }

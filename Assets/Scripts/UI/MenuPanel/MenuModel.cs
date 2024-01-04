@@ -12,14 +12,9 @@ namespace Code.MVC
         {
             GameEventSystem.Subscribe<SaveEvent>(OnSaveData);
             _saveService = ServiceLocator.Container.RequestFor<SaveService>();
-            BestScore = GP_Player.GetScore();
         }
 
-        public float BestScore
-        {
-            get => GP_Player.GetScore();
-            set { BestScore = value; }
-        }
+        public float BestScore => GP_Player.GetScore();
 
         public GameAction LastAction { get; set; }
 
