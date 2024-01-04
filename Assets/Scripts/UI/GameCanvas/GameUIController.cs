@@ -20,7 +20,7 @@ namespace Code.MVC
             if (_queueWasMoved)
                 View.NextSprite = Model.GetNextRank();
             else
-                View.Score += Model.GetAddPoints();
+                View.Score = Model.GetAddPoints(View.Score);
         }
 
         private void UpdateUIData(CreateDropEvent @event)
@@ -36,12 +36,11 @@ namespace Code.MVC
                 View.Score = 0;
         }
 
-        private void GoToLeaderBoard() => Model.OpenLeaderBoard();
-
         protected override void OnViewAdded()
         {
             View.RewardButton.onClick.AddListener(Model.ShowRewardAd);
-            View.LeaderBoardButton.onClick.AddListener(GoToLeaderBoard);
+            View.LeaderBoardButton.onClick.AddListener(Model.OpenLeaderBoard);
+            Model.OnActivateReward += View.ActivateRewardButton;
         }
 
         protected override void Hide() => View.gameObject.SetActive(false);

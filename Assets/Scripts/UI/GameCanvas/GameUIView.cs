@@ -16,7 +16,6 @@ namespace Code.MVC
         public Button RewardButton => _rewardButton;
         public Button LeaderBoardButton => _leaderBoardButton;
         public Sprite NextSprite { get => _nextImage.sprite; set => _nextImage.sprite = value; }
-
         public float Score
         {
             get => _scoreValue;
@@ -28,6 +27,10 @@ namespace Code.MVC
         }
 
         public event Action OnDestroyView;
+
+        private void Start() => RewardButton.interactable = false;
+
+        public void ActivateRewardButton(bool active) => RewardButton.interactable = active;
 
         private void OnDestroy()
         {

@@ -22,7 +22,7 @@ public class DropObjectSO : ScriptableObject
     public sealed class DropData
     {
         public Sprite DropSprite;
-        public int MergeRewardPoint;
+        public float MergeRewardPoint;
         public DropBase DropBase;
     }
 }
