@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using Code.Pools;
 using Code.SaveLoad;
+using GamePush;
 
 namespace Code.DropLogic
 {
@@ -10,12 +11,14 @@ namespace Code.DropLogic
         private readonly FXMultiPool _fxPool;
         private readonly DropObjectMultipool _pool;
         private readonly UIService _uiService;
+        private readonly int _dropableRanks;
 
         public DropService(DropObjectSO dropSO, EffectList fxList)
         {
             _pool = new (dropSO);
             _fxPool = new(fxList);
-            DropQueueHandler.AssignValues(dropSO.TotalNumber(), Constants.DropableRanksNumber);
+            _dropableRanks = GP_Variables.GetInt("DropableRanks");
+            DropQueueHandler.AssignValues(dropSO.TotalNumber(), _dropableRanks);
             _uiService = ServiceLocator.Container.RequestFor<UIService>();
             GameEventSystem.Subscribe<ManageDropEvent>(EndSession);
         }
@@ -58,7 +61,7 @@ namespace Code.DropLogic
             AddEffect(PrefabType.PoofEffect, result, middlePos);
             SetUpDropObject(result, middlePos, false, true);
             ReturnPairToPool(upperOne, lowerOne);
-            if (upperOne.Rank >= Constants.DropableRanksNumber)
+            if (upperOne.Rank >= _dropableRanks)
                 GameEventSystem.Send(new MergeEvent(upperOne.Rank));
         }
 

@@ -43,14 +43,13 @@ namespace Code.DropLogic
             var currentMousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
             if (currentMousePos.x > _leftBorder && currentMousePos.x < _rightBorder)
                 CurrentDrop.Pos = new Vector3(currentMousePos.x, transform.position.y, 0.0f);
-            else
-                Debug.Log("wrong ");
         }
 
         private void OnMouseUp()
         {
             if (!_isDragging || !CurrentDrop.gameObject.activeSelf)
                 return;
+            GameEventSystem.Send(new SoundEvent(SoundType.Drop, true));
             PrepairNext();
             StartCoroutine(DelayQueueMove());
         }

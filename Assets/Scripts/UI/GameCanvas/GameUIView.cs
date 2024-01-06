@@ -1,5 +1,6 @@
 using System.Collections;
 using System;
+using GamePush;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ namespace Code.MVC
         [SerializeField] private TextMeshProUGUI _ratingText;
         [SerializeField] private Button _leaderBoardButton;
         private float _scoreValue;
+        private float _highlightTime;
 
         public Button RewardButton => _rewardButton;
         public Button LeaderBoardButton => _leaderBoardButton;
@@ -31,6 +33,7 @@ namespace Code.MVC
         public event Action OnDestroyView;
 
         private void OnEnable() => _rewardButton.interactable = false;
+        private void Start() => _highlightTime = GP_Variables.GetFloat("HighlightTime");
 
         public void SetRating(int rating)
             => _ratingText.text = rating != 0 ? rating.ToString() : string.Empty;
@@ -45,7 +48,7 @@ namespace Code.MVC
         private IEnumerator ShowRewardAvailable()
         {
             float count = 0;
-            while (count < Constants.HighlightTime)
+            while (count < _highlightTime)
             {
                 if (Time.deltaTime != 0)
                 {

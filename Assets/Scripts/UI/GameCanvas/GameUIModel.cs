@@ -9,10 +9,12 @@ public class GameUIModel : IModel, IDisposable
     private float _currentScore;
     private int _playerRating;
     private bool _bombActive;
+    private int _rewardActivationSpan;
 
-    public void AssignSources(DropObjectSO dropData)
+    public void Init(DropObjectSO dropData)
     {
         _dropData = dropData;
+        _rewardActivationSpan = GP_Variables.GetInt("RewardActivationSpan");
         GP_Leaderboard.OnFetchPlayerRatingSuccess += OnFetchRating;
         GameEventSystem.Subscribe<SaveEvent>(SaveBombStatus);
         RenewRating();
@@ -40,9 +42,9 @@ public class GameUIModel : IModel, IDisposable
 
     public float GetAddPoints(float currentScore)
     {
-        int firstCheck = (int)_currentScore / Constants.RewardActivationSpan;
+        int firstCheck = (int)_currentScore / _rewardActivationSpan;
         _currentScore = currentScore + _dropData.FindObjectData(MergedRank - 1).MergeRewardPoint;
-        int secondCheck = (int)_currentScore / Constants.RewardActivationSpan;
+        int secondCheck = (int)_currentScore / _rewardActivationSpan;
 
         if (secondCheck > firstCheck && !_bombActive)
             SetBombStatus(true);
@@ -50,7 +52,7 @@ public class GameUIModel : IModel, IDisposable
     }
 
     public void ShowRewardAd() 
-        => GP_Ads.ShowRewarded(Constants.BOMB, OnRewardSuccessful);
+        => GP_Ads.ShowRewarded(Constants.BOMB, OnRewardSuccessful, OnRewardStart, OnRewardClose);
 
     public void OpenLeaderBoard() => GP_Leaderboard.Open(withMe: WithMe.first);
 
@@ -61,6 +63,11 @@ public class GameUIModel : IModel, IDisposable
         SetBombStatus(false);
         GameEventSystem.Send(new RewardEvent(Constants.BombRank));
     }
+
+    private void OnRewardStart() 
+        => GameEventSystem.Send(new SoundEvent(SoundType.BackGround, false));
+    private void OnRewardClose(bool arg1)
+        => GameEventSystem.Send(new SoundEvent(SoundType.BackGround, true));
 
     private void OnFetchRating(string category, int rating)
     {

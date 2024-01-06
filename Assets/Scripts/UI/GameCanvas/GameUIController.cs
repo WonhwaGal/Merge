@@ -7,7 +7,7 @@ namespace Code.MVC
 
         public GameUIController(DropObjectSO data) : base()
         {
-            Model.AssignSources(data);
+            Model.Init(data);
             GameEventSystem.Subscribe<CreateDropEvent>(UpdateUIData);
             GameEventSystem.Subscribe<GameControlEvent>(ReactToRetry);
         }

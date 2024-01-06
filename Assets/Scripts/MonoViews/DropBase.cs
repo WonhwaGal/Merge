@@ -55,6 +55,7 @@ namespace Code.DropLogic
         {
             if (OnMerge == null)
                 return false;
+            GameEventSystem.Send(new SoundEvent(SoundType.Poof, true));
             return OnMerge.Invoke(this, pair);
         }
 

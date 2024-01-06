@@ -3,11 +3,8 @@ public sealed class Constants
 {
     //GENERAL SETTINGS
     public const int TotalRanks = 11;
-    public const int DropableRanksNumber = 6;
     public const float LoseThreshold = 9.8f;
     public const string GameScene = "GameScene";
-    public const int RewardActivationSpan = 300;
-    public const float HighlightTime = 6;
     public const int ShowableRating = 99;
 
     //DROP SETTINGS
