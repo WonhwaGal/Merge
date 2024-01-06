@@ -7,7 +7,7 @@ namespace Code.MVC
 
         public GameUIController(DropObjectSO data) : base()
         {
-            Model.AssignDataSource(data);
+            Model.AssignSources(data);
             GameEventSystem.Subscribe<CreateDropEvent>(UpdateUIData);
             GameEventSystem.Subscribe<GameControlEvent>(ReactToRetry);
         }
@@ -32,8 +32,12 @@ namespace Code.MVC
 
         private void ReactToRetry(GameControlEvent @event)
         {
+            Model.RenewRating();
             if (@event.RestartWithRetry)
+            {
                 View.Score = 0;
+                Model.RenewRating();
+            }
         }
 
         protected override void OnViewAdded()
@@ -41,6 +45,7 @@ namespace Code.MVC
             View.RewardButton.onClick.AddListener(Model.ShowRewardAd);
             View.LeaderBoardButton.onClick.AddListener(Model.OpenLeaderBoard);
             Model.OnActivateReward += View.ActivateRewardButton;
+            Model.OnGetRating += View.SetRating;
         }
 
         protected override void Hide() => View.gameObject.SetActive(false);
@@ -50,6 +55,7 @@ namespace Code.MVC
         {
             GameEventSystem.UnSubscribe<CreateDropEvent>(UpdateUIData);
             GameEventSystem.UnSubscribe<GameControlEvent>(ReactToRetry);
+            Model.Dispose();
             base.Dispose();
         }
     }

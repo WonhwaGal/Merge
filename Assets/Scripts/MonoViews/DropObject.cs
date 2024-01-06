@@ -13,7 +13,8 @@ namespace Code.DropLogic
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (transform.position.y > Constants.LoseThreshold)
+            var overThreshold = transform.position.y > Constants.LoseThreshold;
+            if (overThreshold && collision.gameObject.GetComponent<DropObject>())
                 GameEventSystem.Send(new GameControlEvent(GameAction.Lose, false));
 
             if (RB.gravityScale == 0 || CollisionsIgnored)

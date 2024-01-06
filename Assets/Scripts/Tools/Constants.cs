@@ -1,10 +1,16 @@
 
 public sealed class Constants
 {
+    //GENERAL SETTINGS
     public const int TotalRanks = 11;
     public const int DropableRanksNumber = 6;
-    public const float LoseThreshold = 7.2f;
+    public const float LoseThreshold = 9.8f;
     public const string GameScene = "GameScene";
+    public const int RewardActivationSpan = 300;
+    public const float HighlightTime = 6;
+    public const int ShowableRating = 99;
+
+    //DROP SETTINGS
     public const float KnockbackMulti = 3;
     public const int MinMimicSpan = 3;
     public const int MaxMimicSpan = 11;
@@ -12,6 +18,7 @@ public sealed class Constants
     //GAME PUSH
     public const string SavedScore = "saved_score";
     public const string DropList = "drop_progress";
+    public const string BombAvailable= "bomb_available";
     public const string BOMB = "BOMB";
     public const int BombRank = -1;
 }

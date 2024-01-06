@@ -21,7 +21,6 @@ public sealed class UIService : IService, IDisposable
 
     private void SetConnections(GameUIController gameUIController, MenuController menuController)
     {
-        //gameUIController.OnRequestLeaderBoard += leaderBoardController.Update;
         menuController.OnRequestScore += gameUIController.GetScore;
         OnContinueSavedGame += gameUIController.SetScore;
     }
