@@ -10,13 +10,18 @@ public class GameUIModel : IModel, IDisposable
     private int _playerRating;
     private bool _bombActive;
     private int _rewardActivationSpan;
+    private AchievementService _achievementService;
 
     public void Init(DropObjectSO dropData)
     {
         _dropData = dropData;
         _rewardActivationSpan = GP_Variables.GetInt("RewardActivationSpan");
         GP_Leaderboard.OnFetchPlayerRatingSuccess += OnFetchRating;
+        GP_Ads.OnAdsClose += OnRewardClose;
+        GP_Ads.OnAdsStart += OnRewardStart;
         GameEventSystem.Subscribe<SaveEvent>(SaveBombStatus);
+        _achievementService 
+            = ServiceLocator.Container.RegisterAndAssign(new AchievementService());
         RenewRating();
     }
 
@@ -48,12 +53,12 @@ public class GameUIModel : IModel, IDisposable
 
         if (secondCheck > firstCheck && !_bombActive)
             SetBombStatus(true);
+        _achievementService.CheckForUnlock(AchievementType.Score, _currentScore);
         return _currentScore;
     }
 
-    public void ShowRewardAd() 
-        => GP_Ads.ShowRewarded(Constants.BOMB, OnRewardSuccessful, OnRewardStart, OnRewardClose);
-
+    public void OpenAchievements() => _achievementService.Open();
+    public void ShowRewardAd() => GP_Ads.ShowRewarded(Constants.BOMB, OnRewardSuccessful);
     public void OpenLeaderBoard() => GP_Leaderboard.Open(withMe: WithMe.first);
 
     private void OnRewardSuccessful(string key)
@@ -86,13 +91,18 @@ public class GameUIModel : IModel, IDisposable
 
     private void SaveBombStatus(SaveEvent @event)
     {
-        if(!@event.OnlyScore)
+        if (!@event.OnlyScore)
+        {
             GP_Player.Set(Constants.BombAvailable, _bombActive);
+            GP_Player.Sync();
+        }
     }
 
     public void Dispose()
     {
         GameEventSystem.UnSubscribe<SaveEvent>(SaveBombStatus);
+        GP_Ads.OnAdsClose -= OnRewardClose;
+        GP_Ads.OnAdsStart -= OnRewardStart;
         OnActivateReward = null;
         OnGetRating = null;
     }

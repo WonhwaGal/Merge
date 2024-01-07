@@ -1,8 +1,8 @@
 using UnityEngine;
-using UnityEngine.U2D;
 using Code.MVC;
 using Code.SaveLoad;
 using Code.DropLogic;
+using Code.Sounds;
 
 public class GameEntryPoint : MonoBehaviour
 {
@@ -10,11 +10,12 @@ public class GameEntryPoint : MonoBehaviour
     [SerializeField] private DropObjectSO _so;
     [SerializeField] private EffectList _fxList;
     [SerializeField] private CanvasView _canvasView;
-    [SerializeField] private SpriteAtlas _atlas;
-    
+    [SerializeField] private SoundSO _soundSO;
+
     private SaveService _saveService;
     private UIService _uiService;
     private DropService _dropService;
+    private SoundManager _soundManager;
 
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class GameEntryPoint : MonoBehaviour
         _saveService = ServiceLocator.Container.RequestFor<SaveService>();
         _uiService = ServiceLocator.Container.RegisterAndAssign(new UIService(_so, _canvasView));
         _dropService = ServiceLocator.Container.RegisterAndAssign(new DropService(_so, _fxList));
+        _soundManager = new SoundManager(_soundSO);
     }
 
     private void SetUpConnections()
@@ -40,5 +42,6 @@ public class GameEntryPoint : MonoBehaviour
         _container.OnObjectDrop -= _dropService.CreateDropObject;
         _uiService.Dispose();
         _saveService.Dispose();
+        _soundManager.Dispose();
     }
 }

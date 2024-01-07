@@ -44,6 +44,7 @@ namespace Code.MVC
         {
             View.RewardButton.onClick.AddListener(Model.ShowRewardAd);
             View.LeaderBoardButton.onClick.AddListener(Model.OpenLeaderBoard);
+            View.AchievementButton.onClick.AddListener(Model.OpenAchievements);
             Model.OnActivateReward += View.ActivateRewardButton;
             Model.OnGetRating += View.SetRating;
         }

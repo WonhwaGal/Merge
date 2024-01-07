@@ -27,7 +27,6 @@ namespace Code.MVC
         public Button RetryButton => _retryButton;
         public Button ExitButton => _exitButton;
 
-
         public event Action OnDestroyView;
 
         private void Start()

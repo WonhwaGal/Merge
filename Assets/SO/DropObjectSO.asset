@@ -43,9 +43,9 @@ MonoBehaviour:
   - DropSprite: {fileID: 21300000, guid: 8ee7aa1f81f0be244b1758ac8f5c46a6, type: 3}
     MergeRewardPoint: 125
     DropBase: {fileID: 8758937374691061230, guid: f038c38c92c16074da60f8d4f849a1b5, type: 3}
-  - DropSprite: {fileID: 21300000, guid: f4425c74a4eb49a4cb15717aeb0d7acb, type: 3}
+  - DropSprite: {fileID: 21300000, guid: e2798c4c966399b48bdedf8329f987db, type: 3}
     MergeRewardPoint: 250
-    DropBase: {fileID: 7581819376428280942, guid: a83f5bda561a79946a9a0b5f8ef86d88, type: 3}
+    DropBase: {fileID: 9189735990268306284, guid: f9c1c1029f90a6b4a89e4017cd76c45e, type: 3}
   - DropSprite: {fileID: 21300000, guid: 099d8543844b30d42abfbed3907632bc, type: 3}
     MergeRewardPoint: 0
     DropBase: {fileID: 203276660384828806, guid: 61ef6835d5762fd46aa64e5c8dc08873, type: 3}

@@ -1,15 +1,15 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.U2D;
 using Code.DropLogic;
 using Code.SaveLoad;
 using GamePush;
-using Code.Sounds;
 
 public class EntryPoint : MonoBehaviour
 {
     [SerializeField] private StartCanvas _startCanvas;
-    [SerializeField] private SoundSO _soundSO;
+    [SerializeField] private SpriteAtlas _atlas;
 
     private SaveService _saveService;
     private DropService _dropService;
@@ -18,13 +18,11 @@ public class EntryPoint : MonoBehaviour
     {
         _startCanvas.StartNewButton.onClick.AddListener(() => LoadNewScene(withProgress: false));
         _startCanvas.ContinueButton.onClick.AddListener(() => LoadNewScene(withProgress: true));
-        new SoundManager(_soundSO);
 
         _saveService = ServiceLocator.Container.RegisterAndAssign(new SaveService());
         var savedData = GP_Player.GetString(Constants.DropList);
         yield return new WaitWhile(() => string.IsNullOrEmpty(savedData));
         _startCanvas.ContinueButton.interactable = _saveService.LoadProgress(savedData);
-        
     }
 
 

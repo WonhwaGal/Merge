@@ -15,9 +15,9 @@ MonoBehaviour:
   AudioMixer: {fileID: 24100000, guid: 62a8a051d6ddd544f99e82c8f3886079, type: 2}
   SoundObject: {fileID: 1072677890805670503, guid: 4ca27826017f5554fa8007a354e87ea8, type: 3}
   _clips:
-  - Type: 0
-    Clip: {fileID: 8300000, guid: a0d351e7194fa8347be7a979fe0e0e54, type: 3}
-  - Type: 1
-    Clip: {fileID: 8300000, guid: c8b3e978aa5691449a1be4a2d588f612, type: 3}
   - Type: 2
+    Clip: {fileID: 8300000, guid: a0d351e7194fa8347be7a979fe0e0e54, type: 3}
+  - Type: 3
+    Clip: {fileID: 8300000, guid: c8b3e978aa5691449a1be4a2d588f612, type: 3}
+  - Type: 4
     Clip: {fileID: 8300000, guid: e26efbf661983e54dac0c3efa1bed47e, type: 3}

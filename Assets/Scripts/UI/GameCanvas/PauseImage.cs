@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Code.MVC
+namespace Code.UI
 {
     public sealed class PauseImage : MonoBehaviour, IPointerClickHandler
     {

@@ -14,11 +14,13 @@ namespace Code.MVC
         [SerializeField] private TextMeshProUGUI _scoreText;
         [SerializeField] private TextMeshProUGUI _ratingText;
         [SerializeField] private Button _leaderBoardButton;
+        [SerializeField] private Button _achievementButton;
         private float _scoreValue;
         private float _highlightTime;
 
         public Button RewardButton => _rewardButton;
         public Button LeaderBoardButton => _leaderBoardButton;
+        public Button AchievementButton => _achievementButton;
         public Sprite NextSprite { get => _nextImage.sprite; set => _nextImage.sprite = value; }
         public float Score
         {
@@ -66,6 +68,7 @@ namespace Code.MVC
             OnDestroyView = null;
             _rewardButton.onClick.RemoveAllListeners();
             _leaderBoardButton.onClick.RemoveAllListeners();
+            _achievementButton.onClick.RemoveAllListeners();
         }
     }
 }

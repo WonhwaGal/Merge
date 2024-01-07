@@ -1,37 +1,64 @@
+using System;
 using UnityEngine;
 using GamePush;
 
 namespace Code.Sounds
 {
-    public class SoundManager
+    public class SoundManager : IDisposable
     {
         private readonly SoundSO _soundSO;
-        private readonly AudioSource _musicSource;
-        private readonly AudioSource _soundSource;
+        private AudioSource _musicSource;
+        private AudioSource _soundSource;
+        private bool _totalMusicOn;
+        private bool _totalSoundOn;
 
         public SoundManager(SoundSO soundSO)
         {
             _soundSO = soundSO;
             GameEventSystem.Subscribe<SoundEvent>(PlaySound);
+            SetUPSources();
+        }
+
+        private void SetUPSources()
+        {
             var soundView = GameObject.Instantiate(_soundSO.SoundObject);
             _musicSource = soundView.MusicSource;
             _soundSource = soundView.SoundSource;
-            //_soundSO.AudioMixer.SetFloat("Music", GP_Player.GetFloat("MusicLevel"));
             _musicSource.clip = _soundSO.FindClip(SoundType.BackGround);
-            _musicSource.Play();
+            _totalMusicOn = GP_Player.GetBool("music_on");
+            _totalSoundOn = GP_Player.GetBool("sound_on");
+            HandleMusic(_totalMusicOn);
         }
 
         private void PlaySound(SoundEvent @event)
         {
-            if (@event.SoundType == SoundType.BackGround)
+            if (@event.SoundType == SoundType.TotalMusic || @event.SoundType == SoundType.TotalSound)
+                HandleVolume(@event.SoundType, @event.TurnOn);
+            else if (@event.SoundType == SoundType.BackGround)
                 HandleMusic(@event.TurnOn);
             else
                 HandleSounds(@event);
         }
 
+        private void HandleVolume(SoundType type, bool on)
+        {
+            if (type == SoundType.TotalMusic)
+            {
+                _totalMusicOn = on;
+                GP_Player.Set("music_on", on);
+                HandleMusic(on);
+            }
+            else
+            {
+                _totalSoundOn = on;
+                GP_Player.Set("sound_on", on);
+            }
+            GP_Player.Sync();
+        }
+
         private void HandleMusic(bool turnOn)
         {
-            if (turnOn)
+            if (turnOn && _totalMusicOn)
                 _musicSource.Play();
             else
                 _musicSource.Stop();
@@ -39,8 +66,10 @@ namespace Code.Sounds
 
         private void HandleSounds(SoundEvent @event)
         {
-            if (@event.TurnOn)
+            if (@event.TurnOn && _totalSoundOn)
                 _soundSource.PlayOneShot(_soundSO.FindClip(@event.SoundType));
         }
+
+        public void Dispose() => GameEventSystem.UnSubscribe<SoundEvent>(PlaySound);
     }
 }

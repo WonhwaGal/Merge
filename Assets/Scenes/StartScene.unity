@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startCanvas: {fileID: 6962589493815588457}
-  _soundSO: {fileID: 11400000, guid: fbb0d2f376b68d840a9647d7b41617a1, type: 2}
+  _atlas: {fileID: 4343727234628468602, guid: 324a763604bcc8542a32525436259f75, type: 2}
 --- !u!4 &52468231
 Transform:
   m_ObjectHideFlags: 0

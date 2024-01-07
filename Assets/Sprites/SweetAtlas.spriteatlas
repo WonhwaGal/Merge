@@ -44,8 +44,8 @@ SpriteAtlas:
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
-    - {fileID: 102900000, guid: 1de38a56f091ecc459f93df4b3fee757, type: 3}
     - {fileID: 102900000, guid: cd7c53dde25f6994c8b343b4a3b74815, type: 3}
+    - {fileID: 102900000, guid: 1de38a56f091ecc459f93df4b3fee757, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -55,11 +55,13 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 85bec9502a0e8e6499d8040d6e9372bc, type: 3}
   - {fileID: 21300000, guid: aac2ea50c4a190d4e829d071aced9a3b, type: 3}
   - {fileID: 21300000, guid: c97b9d60ba820ed4cb4b3fcc9e63600d, type: 3}
+  - {fileID: 21300000, guid: 69a55f90309d63141baa85d8b3125d30, type: 3}
   - {fileID: 21300000, guid: 26735c4133ea2ea42bb412b840ec849b, type: 3}
   - {fileID: 21300000, guid: f8b84e717c3123a418088339002aac86, type: 3}
   - {fileID: 21300000, guid: 93035ef11a7a6da4ea363fd0e1aa8186, type: 3}
   - {fileID: 21300000, guid: 1460c1a26ab3075429f4b58ca4cfc043, type: 3}
   - {fileID: 21300000, guid: e952a7b2affa8ba4e933a58305ab8b9e, type: 3}
+  - {fileID: 21300000, guid: 243fbad349b8c164c8f9e355ead17e8d, type: 3}
   - {fileID: 21300000, guid: d8273ce32afbfaa439e3d7ae87033f7a, type: 3}
   - {fileID: 21300000, guid: dacfbe254431f4f4784021dd1e367fd9, type: 3}
   - {fileID: 21300000, guid: a63fd1565a911024e90aec4884c3c1f3, type: 3}
@@ -72,6 +74,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d614f149383ad4349bdab1ee5474b7a7, type: 3}
   - {fileID: 21300000, guid: 652a1c1b0fd8c3d4cb6b35decdcc88db, type: 3}
   - {fileID: 21300000, guid: de5f697b8df0b544ebaed5a7e544d8ba, type: 3}
+  - {fileID: 21300000, guid: e2798c4c966399b48bdedf8329f987db, type: 3}
   - {fileID: 21300000, guid: 329b815cc33eadb4e90d84f8aa783460, type: 3}
   - {fileID: 21300000, guid: 0222c46cd3678294780b8945601ce6d4, type: 3}
   - {fileID: 21300000, guid: 408742ed48fb29944bdcab6b707044bb, type: 3}
@@ -80,6 +83,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f31d45ce433bf4f48804a7c52a35bd07, type: 3}
   - {fileID: 21300000, guid: 8ee7aa1f81f0be244b1758ac8f5c46a6, type: 3}
   - {fileID: 21300000, guid: 2e0dd44f956ff9d49929248de048d3c8, type: 3}
+  - {fileID: 21300000, guid: 23814cafc31bb7c4a89a9c3005db7c78, type: 3}
   - {fileID: 21300000, guid: daf302bf8ba1beb4ca2722f5a3764914, type: 3}
   - {fileID: 21300000, guid: d607babfeb4f5c349956eccbf551df69, type: 3}
   - {fileID: 21300000, guid: 9b2c8fef3b1e8924d8cdb90bbec74d5d, type: 3}
@@ -88,11 +92,13 @@ SpriteAtlas:
   - GirlyCookie_face
   - Chitryak
   - Croissant
+  - Cake_face
   - CoolDoughnut_mimic
   - Bezeshka_face
   - Static_8
   - Doughnut_face
   - Vrednyuchka_mimic
+  - Cake_mimic
   - Grumper_face
   - CherryPie_face
   - Croissant_mimic
@@ -105,6 +111,7 @@ SpriteAtlas:
   - CherryPie
   - Vrednyuchka_face
   - Bezeshka
+  - Static_11
   - Static_9
   - GirlyCookie_mimic
   - JapaneseBun_mimic
@@ -113,6 +120,7 @@ SpriteAtlas:
   - GirlyCookie
   - Static_10
   - JapaneseBun_face
+  - Cake
   - Vrednyuchka
   - Croissant_face
   - Doughnut
