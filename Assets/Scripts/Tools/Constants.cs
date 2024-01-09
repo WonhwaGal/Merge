@@ -16,6 +16,8 @@ public sealed class Constants
     public const string SavedScore = "saved_score";
     public const string DropList = "drop_progress";
     public const string BombAvailable= "bomb_available";
+    public const string TotalMusic = "music_on";
+    public const string TotalSound = "sound_on";
     public const string BOMB = "BOMB";
     public const int BombRank = -1;
 }

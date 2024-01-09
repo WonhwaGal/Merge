@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Code.UI;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,8 @@ namespace Code.MVC
         [SerializeField] private GameObject _results;
         [SerializeField] private Button _retryButton;
         [SerializeField] private Button _exitButton;
+        [SerializeField] private BoolButton _musicButton;
+        [SerializeField] private BoolButton _soundButton;
         private float _finalScore;
         private bool _showResults;
 
@@ -26,6 +29,9 @@ namespace Code.MVC
         }
         public Button RetryButton => _retryButton;
         public Button ExitButton => _exitButton;
+        public BoolButton MusicButton => _musicButton;
+        public BoolButton SoundButton => _soundButton;
+
 
         public event Action OnDestroyView;
 

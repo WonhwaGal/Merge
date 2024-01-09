@@ -46,8 +46,12 @@ namespace Code.MVC
             View.ShowResults(_gameAction == GameAction.Lose, Model.BestScore);
         }
 
-        protected override void OnViewAdded() 
-            => View.RetryButton.onClick.AddListener(Model.PressRetry);
+        protected override void OnViewAdded()
+        {
+            View.RetryButton.onClick.AddListener(Model.PressRetry);
+            View.MusicButton.SetBool(Model.GetVolume(SoundType.TotalMusic));
+            View.SoundButton.SetBool(Model.GetVolume(SoundType.TotalSound));
+        }
 
         public override void Dispose()
         {

@@ -1466,6 +1466,8 @@ MonoBehaviour:
   _results: {fileID: 7778951267813930278}
   _retryButton: {fileID: 7778951267998246135}
   _exitButton: {fileID: 7778951267809239067}
+  _musicButton: {fileID: 5140741228766314204}
+  _soundButton: {fileID: 2110289174698368908}
 --- !u!114 &7778951268334145784
 MonoBehaviour:
   m_ObjectHideFlags: 0

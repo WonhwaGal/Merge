@@ -34,6 +34,14 @@ namespace Code.MVC
         public void PressRetry() => GameEventSystem
             .Send(new GameControlEvent(GameAction.Play, restartWithRetry: true));
 
+        public bool GetVolume(SoundType type)
+        {
+            if (type == SoundType.TotalMusic)
+                return GP_Player.GetBool(Constants.TotalMusic);
+            else
+                return GP_Player.GetBool(Constants.TotalSound);
+        }
+
         public void Dispose()
         {
             GameEventSystem.UnSubscribe<SaveEvent>(OnSaveData);
