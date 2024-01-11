@@ -14,7 +14,7 @@ namespace Code.MVC
 
         public abstract void UpdateView();
 
-        void IController.AddView<T>(T view, bool defaultShow)
+        public void AddView<T>(T view, bool defaultShow) where T : class, IView
         {
             if (View != null)
                 return;

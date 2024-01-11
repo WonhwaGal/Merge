@@ -13,9 +13,9 @@ public sealed class UIService : IService, IDisposable
     private void CreateControllers(DropObjectSO data, CanvasView canvasView)
     {
         GameUIController gameUIController = new(data);
-        ((IController)gameUIController).AddView(canvasView.GameUIView, true);
+        gameUIController.AddView(canvasView.GameUIView, true);
         MenuController menuController = new();
-        ((IController)menuController).AddView(canvasView.LoseView, false);
+        menuController.AddView(canvasView.LoseView, false);
         SetConnections(gameUIController, menuController);
     }
 
