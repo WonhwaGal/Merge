@@ -16,7 +16,7 @@ namespace Code.MVC
 
         public StartModel()
         {
-            LocalizationSettings.InitializationOperation.WaitForCompletion();
+            //LocalizationSettings.InitializationOperation.WaitForCompletion();
             _saveService = ServiceLocator.Container.RequestFor<SaveService>();
         }
 
@@ -38,8 +38,6 @@ namespace Code.MVC
                         var table = handle.Result;
                         OnLanguageChanged?.Invoke(table.GetEntry("startB")?.GetLocalizedString(),
                             table.GetEntry("continueB")?.GetLocalizedString());
-                        //_startText.text = table.GetEntry("startB")?.GetLocalizedString();
-                        //_continueText.text = table.GetEntry("continueB")?.GetLocalizedString();
                     }
                     else
                     {
