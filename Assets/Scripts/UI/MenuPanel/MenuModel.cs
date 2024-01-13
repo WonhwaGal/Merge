@@ -1,6 +1,8 @@
 ﻿using System;
 using Code.SaveLoad;
 using GamePush;
+using UnityEngine.Localization.Settings;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Code.MVC
 {
@@ -15,8 +17,11 @@ namespace Code.MVC
         }
 
         public float BestScore => GP_Player.GetScore();
-
         public GameAction LastAction { get; set; }
+
+        public event Action<string, string, string> OnLanguageChanged;
+
+        public void Init() => UpdateTextAsync();
 
         public void OnSaveData(SaveEvent @event)
         {
@@ -41,6 +46,19 @@ namespace Code.MVC
             else
                 return GP_Player.GetBool(Constants.TotalSound);
         }
+
+        private void UpdateTextAsync() =>
+            LocalizationSettings.StringDatabase.GetTableAsync("TextTable").Completed +=
+                handle =>
+                {
+                    if (handle.Status == AsyncOperationStatus.Succeeded)
+                    {
+                        var table = handle.Result;
+                        OnLanguageChanged?.Invoke(table.GetEntry("loseText")?.GetLocalizedString(),
+                            table.GetEntry("bestScoreText")?.GetLocalizedString(),
+                            table.GetEntry("retryB")?.GetLocalizedString());
+                    }
+                };
 
         public void Dispose()
         {

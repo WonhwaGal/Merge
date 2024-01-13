@@ -15,6 +15,7 @@ namespace Code.MVC
         [SerializeField] private TextMeshProUGUI _ratingText;
         [SerializeField] private Button _leaderBoardButton;
         [SerializeField] private Button _achievementButton;
+        [SerializeField] private TextMeshProUGUI _nextText;
         private float _scoreValue;
         private float _highlightTime;
 
@@ -39,6 +40,8 @@ namespace Code.MVC
 
         public void SetRating(int rating)
             => _ratingText.text = rating != 0 ? rating.ToString() : string.Empty;
+
+        public void SetTexts(string text) => _nextText.text = text;
 
         public void ActivateRewardButton(bool active)
         {

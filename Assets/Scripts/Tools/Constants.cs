@@ -3,9 +3,10 @@ public sealed class Constants
 {
     //GENERAL SETTINGS
     public const int TotalRanks = 11;
-    public const float LoseThreshold = 9.8f;
+    public const float LoseThreshold = 10.0f;
     public const string GameScene = "GameScene";
     public const int ShowableRating = 99;
+    public const int DefaultLang = 5;
 
     //DROP SETTINGS
     public const float KnockbackMulti = 3;
@@ -18,6 +19,7 @@ public sealed class Constants
     public const string BombAvailable= "bomb_available";
     public const string TotalMusic = "music_on";
     public const string TotalSound = "sound_on";
+    public const string Language = "chosen_lang";
     public const string BOMB = "BOMB";
     public const int BombRank = -1;
 }

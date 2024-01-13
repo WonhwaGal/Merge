@@ -23,6 +23,22 @@ MonoBehaviour:
     m_Key: continueB
     m_Metadata:
       m_Items: []
+  - m_Id: 361607334879232
+    m_Key: nextUI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361695180382208
+    m_Key: loseText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 382558487339008
+    m_Key: bestScoreText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 383012344586240
+    m_Key: retryB
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

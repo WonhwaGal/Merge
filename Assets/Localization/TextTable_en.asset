@@ -26,6 +26,24 @@ MonoBehaviour:
     m_Localized: Continue
     m_Metadata:
       m_Items: []
+  - m_Id: 361607334879232
+    m_Localized: Next
+    m_Metadata:
+      m_Items: []
+  - m_Id: 383012344586240
+    m_Localized: Retry
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361695180382208
+    m_Localized: 'You lost :(
+
+      Your score is'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 382558487339008
+    m_Localized: Your previous best is
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

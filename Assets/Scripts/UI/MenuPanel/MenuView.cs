@@ -51,6 +51,13 @@ namespace Code.MVC
                 GameEventSystem.Send(new SaveEvent(FinalScore, onlyScore: true));
         }
 
+        public void SetTexts(string score, string best, string retry)
+        {
+            _scoreText.text = score;
+            _bestScoreText.text = best;
+            _retryButton.GetComponentInChildren<TextMeshProUGUI>().text = retry;
+        }
+
         private void PressQuit()
         {
             if(!_showResults)

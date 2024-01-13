@@ -51,12 +51,15 @@ namespace Code.MVC
             View.RetryButton.onClick.AddListener(Model.PressRetry);
             View.MusicButton.SetBool(Model.GetVolume(SoundType.TotalMusic));
             View.SoundButton.SetBool(Model.GetVolume(SoundType.TotalSound));
+            Model.OnLanguageChanged += View.SetTexts;
+            Model.Init();
         }
 
         public override void Dispose()
         {
             OnRequestScore = null;
             GameEventSystem.UnSubscribe<GameControlEvent>(SetUpPanel);
+            Model.OnLanguageChanged -= View.SetTexts;
             base.Dispose();
         }
     }

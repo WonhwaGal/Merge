@@ -47,6 +47,7 @@ namespace Code.MVC
             View.AchievementButton.onClick.AddListener(Model.OpenAchievements);
             Model.OnActivateReward += View.ActivateRewardButton;
             Model.OnGetRating += View.SetRating;
+            Model.OnLanguageChanged += View.SetTexts;
         }
 
         protected override void Hide() => View.gameObject.SetActive(false);

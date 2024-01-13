@@ -328,17 +328,37 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 969428639995579867, guid: b01195c46aaea8a4c9d0a838356aa4d8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 969428639995579867, guid: b01195c46aaea8a4c9d0a838356aa4d8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 969428639995579867, guid: b01195c46aaea8a4c9d0a838356aa4d8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -17
+      objectReference: {fileID: 0}
     - target: {fileID: 1265297604463020580, guid: b01195c46aaea8a4c9d0a838356aa4d8, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2877980700694356182, guid: b01195c46aaea8a4c9d0a838356aa4d8, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2877980700694356182, guid: b01195c46aaea8a4c9d0a838356aa4d8, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5854213339854015063, guid: b01195c46aaea8a4c9d0a838356aa4d8, type: 3}
+      propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6962589493618854000, guid: b01195c46aaea8a4c9d0a838356aa4d8, type: 3}
+      propertyPath: m_text
+      value: "\u041D\u043E\u0432\u0430\u044F \u0438\u0433\u0440\u0430"
       objectReference: {fileID: 0}
     - target: {fileID: 7308710297246941592, guid: b01195c46aaea8a4c9d0a838356aa4d8, type: 3}
       propertyPath: m_Name

@@ -9,7 +9,6 @@ namespace Code.MVC
     {
         public Button StartNewButton;
         public Button ContinueButton;
-        public TMP_Dropdown LangDropDown;
         private TextMeshProUGUI _startText;
         private TextMeshProUGUI _continueText;
 
@@ -33,7 +32,6 @@ namespace Code.MVC
             OnDestroyView = null;
             StartNewButton.onClick.RemoveAllListeners();
             ContinueButton.onClick.RemoveAllListeners();
-            LangDropDown.onValueChanged.RemoveAllListeners();
         }
     }
 }

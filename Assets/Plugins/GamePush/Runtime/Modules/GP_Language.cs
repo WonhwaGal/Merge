@@ -29,6 +29,7 @@ namespace GamePush
 
         [DllImport("__Internal")]
         private static extern string GP_Current_Language();
+
         public static Language Current()
         {
 #if !UNITY_EDITOR && UNITY_WEBGL
