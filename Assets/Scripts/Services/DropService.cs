@@ -47,7 +47,7 @@ namespace Code.DropLogic
         }
 
 
-        public bool CheckForMerge(DropBase one, DropBase two)      // RETHINK
+        public void MergeDrops(DropBase one, DropBase two)
         {
             var finalRank = one.Rank == DropQueueHandler.MaxRank;
             if (finalRank)
@@ -61,7 +61,6 @@ namespace Code.DropLogic
                 MergeObjects(one, two);
             }
             MergeCounter.ReceiveMergeInfo(one.Rank);
-            return finalRank;
         }
 
         public void MergeObjects(DropBase upperOne, DropBase lowerOne)
@@ -86,7 +85,7 @@ namespace Code.DropLogic
         private DropBase SetUpDropObject(DropBase result, Vector3 position, bool queueMoved, bool shouldDrop)
         {
             _pool.OnSpawned(result, position);
-            result.OnMerge += CheckForMerge;
+            result.OnMerge += MergeDrops;
             GameEventSystem.Send(new CreateDropEvent(queueMoved, result.Rank));
             if (shouldDrop)
                 result.Drop();
@@ -110,7 +109,7 @@ namespace Code.DropLogic
         private void ReturnToPool(DropBase result)
         {
             _pool.Despawn(result.Rank, result);
-            result.OnMerge -= CheckForMerge;
+            result.OnMerge -= MergeDrops;
         }
 
         public void Dispose()

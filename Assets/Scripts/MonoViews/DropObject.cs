@@ -30,8 +30,8 @@ namespace Code.DropLogic
             {
                 if (drop.transform.position.y <= transform.position.y) //the upper one calls for merge
                 {
-                    CollisionsIgnored = CheckMergeWith(drop);
                     drop.CollisionsIgnored = CollisionsIgnored;
+                    InitiateMergeWith(drop);
                 }
             }
             else

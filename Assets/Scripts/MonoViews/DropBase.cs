@@ -27,7 +27,7 @@ namespace Code.DropLogic
         }
         public Vector3 Pos { get => transform.position; set => transform.position = value; }
 
-        public event Func<DropBase, DropBase, bool> OnMerge;
+        public event Action<DropBase, DropBase> OnMerge;
 
         private void Awake()
         {
@@ -51,12 +51,12 @@ namespace Code.DropLogic
             OnDrop();
         }
 
-        protected bool CheckMergeWith(DropBase pair)
+        protected void InitiateMergeWith(DropBase pair)
         {
             if (OnMerge == null)
-                return false;
+                return;
             GameEventSystem.Send(new SoundEvent(SoundType.Poof, true));
-            return OnMerge.Invoke(this, pair);
+            OnMerge.Invoke(this, pair);
         }
 
         protected virtual void OnDrop() { }
