@@ -3,6 +3,7 @@ using UnityEngine;
 using Code.Pools;
 using Code.SaveLoad;
 using GamePush;
+using Code.Achievements;
 
 namespace Code.DropLogic
 {
@@ -12,6 +13,7 @@ namespace Code.DropLogic
         private readonly DropObjectMultipool _pool;
         private readonly UIService _uiService;
         private readonly int _dropableRanks;
+        private readonly AchievementService _achievService;
 
         public DropService(DropObjectSO dropSO, EffectList fxList)
         {
@@ -20,6 +22,7 @@ namespace Code.DropLogic
             _dropableRanks = GP_Variables.GetInt("DropableRanks");
             DropQueueHandler.AssignValues(dropSO.TotalNumber(), _dropableRanks);
             _uiService = ServiceLocator.Container.RequestFor<UIService>();
+            _achievService = ServiceLocator.Container.RequestFor<AchievementService>();
             GameEventSystem.Subscribe<ManageDropEvent>(EndSession);
         }
 
@@ -44,13 +47,20 @@ namespace Code.DropLogic
         }
 
 
-        public bool CheckForMerge(DropBase one, DropBase two)
+        public bool CheckForMerge(DropBase one, DropBase two)      // RETHINK
         {
             var finalRank = one.Rank == DropQueueHandler.MaxRank;
             if (finalRank)
+            {
                 ReturnPairToPool(one, two);
+                AddEffect(PrefabType.PoofEffect, one, (one.transform.position + two.transform.position) / 2);
+                _achievService.CheckAchievement(AchievType.TopMerge, one.Rank);
+            }
             else
+            {
                 MergeObjects(one, two);
+            }
+            MergeCounter.ReceiveMergeInfo(one.Rank);
             return finalRank;
         }
 
@@ -63,6 +73,7 @@ namespace Code.DropLogic
             ReturnPairToPool(upperOne, lowerOne);
             if (upperOne.Rank >= _dropableRanks)
                 GameEventSystem.Send(new MergeEvent(upperOne.Rank));
+            _achievService.CheckAchievement(AchievType.MergeByRank, lowerOne.Rank);
         }
 
         private void AddEffect(PrefabType effectType, DropBase result, Vector3 middlePos)

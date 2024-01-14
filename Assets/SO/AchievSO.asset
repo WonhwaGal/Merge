@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 350dc5ae5f4616d40bd0c77ca41da45e, type: 3}
+  m_Name: AchievSO
+  m_EditorClassIdentifier: 
+  _achievsByType:
+  - AchievementType: 0
+    Achievements:
+    - Name: First Record
+      AchievID: 5817
+      RewardType: 0
+      RewardIndex: 1
+      ReferenceValue: 300
+      Condition: 0
+      IsTotal: 0
+  - AchievementType: 1
+    Achievements:
+    - Name: Tea Party
+      AchievID: 5852
+      RewardType: 1
+      RewardIndex: 100
+      ReferenceValue: 3
+      Condition: 5
+      IsTotal: 0
+    - Name: Total Success
+      AchievID: 5924
+      RewardType: 1
+      RewardIndex: 200
+      ReferenceValue: 4
+      Condition: 100
+      IsTotal: 1
+  - AchievementType: 3
+    Achievements:
+    - Name: Full House
+      AchievID: 5919
+      RewardType: 1
+      RewardIndex: 300
+      ReferenceValue: 11
+      Condition: 0
+      IsTotal: 0
+  - AchievementType: 4
+    Achievements:
+    - Name: Top Merge
+      AchievID: 5920
+      RewardType: 1
+      RewardIndex: 800
+      ReferenceValue: 1
+      Condition: 0
+      IsTotal: 0
+  - AchievementType: 2
+    Achievements:
+    - Name: Double Threat
+      AchievID: 5921
+      RewardType: 1
+      RewardIndex: 600
+      ReferenceValue: 1
+      Condition: 0
+      IsTotal: 0
+  - AchievementType: 5
+    Achievements:
+    - Name: Drop a bomb
+      AchievID: 5922
+      RewardType: 1
+      RewardIndex: 500
+      ReferenceValue: 5
+      Condition: 0
+      IsTotal: 0
+  - AchievementType: 6
+    Achievements:
+    - Name: Snow Ball Effect
+      AchievID: 5923
+      RewardType: 1
+      RewardIndex: 400
+      ReferenceValue: 4
+      Condition: 0
+      IsTotal: 0

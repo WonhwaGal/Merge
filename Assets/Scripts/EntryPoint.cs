@@ -7,13 +7,16 @@ using Code.SaveLoad;
 using Code.MVC;
 using Code.DropLogic;
 using GamePush;
+using Code.Achievements;
 
 public class EntryPoint : MonoBehaviour
 {
     [SerializeField] private StartCanvas _startCanvas;
+    [SerializeField] private AchievSO _achievSO;
     [SerializeField] private SpriteAtlas _atlas;
 
     private SaveService _saveService;
+    private AchievementService _achievementService;
     private LanguageHandler _languageHandler;
 
     private IEnumerator Start()
@@ -33,6 +36,8 @@ public class EntryPoint : MonoBehaviour
     private void Init()
     {
         _saveService = ServiceLocator.Container.RegisterAndAssign(new SaveService());
+        _achievementService = ServiceLocator.Container.RegisterAndAssign(new AchievementService(_achievSO));
+
         _languageHandler = new LanguageHandler();
         _languageHandler.OnLanguageChanged += _startCanvas.SetTexts;
         _languageHandler.UpdateLangInfo();
@@ -43,12 +48,21 @@ public class EntryPoint : MonoBehaviour
         SceneManager.LoadSceneAsync(Constants.GameScene);
         if (withProgress)
             SceneManager.sceneLoaded += OnLoadWithProgress;
+        else
+            SceneManager.sceneLoaded += OnLoadNewGame;
     }
 
     private void OnLoadWithProgress(Scene scene, LoadSceneMode mode)
     {
         ServiceLocator.Container.RequestFor<DropService>().RecreateProgress(_saveService.ProgressData);
+        _achievementService.SetProgress(toZero: false);
         SceneManager.sceneLoaded -= OnLoadWithProgress;
+    }
+
+    private void OnLoadNewGame(Scene scene, LoadSceneMode mode)
+    {
+        _achievementService.SetProgress(toZero: true);
+        SceneManager.sceneLoaded -= OnLoadNewGame;
     }
 
     private void OnDestroy() 
