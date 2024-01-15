@@ -19,7 +19,24 @@ MonoBehaviour:
       AchievID: 5817
       RewardType: 0
       RewardIndex: 1
-      ReferenceValue: 300
+      HasProgress: 1
+      ReferenceValue: 500
+      Condition: 0
+      IsTotal: 0
+    - Name: Nice Run
+      AchievID: 5942
+      RewardType: 1
+      RewardIndex: 1000
+      HasProgress: 1
+      ReferenceValue: 15000
+      Condition: 0
+      IsTotal: 1
+    - Name: Olimpic Run
+      AchievID: 5947
+      RewardType: 1
+      RewardIndex: 900
+      HasProgress: 1
+      ReferenceValue: 5000
       Condition: 0
       IsTotal: 0
   - AchievementType: 1
@@ -28,58 +45,89 @@ MonoBehaviour:
       AchievID: 5852
       RewardType: 1
       RewardIndex: 100
+      HasProgress: 1
       ReferenceValue: 3
       Condition: 5
       IsTotal: 0
     - Name: Total Success
-      AchievID: 5924
+      AchievID: 5945
       RewardType: 1
       RewardIndex: 200
+      HasProgress: 1
       ReferenceValue: 4
       Condition: 100
+      IsTotal: 1
+    - Name: French Taste
+      AchievID: 5946
+      RewardType: 0
+      RewardIndex: 2
+      HasProgress: 1
+      ReferenceValue: 9
+      Condition: 3
+      IsTotal: 0
+    - Name: Sweet Tooth
+      AchievID: 5944
+      RewardType: 1
+      RewardIndex: 1100
+      HasProgress: 1
+      ReferenceValue: 1
+      Condition: 25
+      IsTotal: 0
+    - Name: Easy As Pie
+      AchievID: 5940
+      RewardType: 1
+      RewardIndex: 700
+      HasProgress: 1
+      ReferenceValue: 10
+      Condition: 5
       IsTotal: 1
   - AchievementType: 3
     Achievements:
     - Name: Full House
-      AchievID: 5919
+      AchievID: 5938
       RewardType: 1
       RewardIndex: 300
+      HasProgress: 0
       ReferenceValue: 11
       Condition: 0
       IsTotal: 0
   - AchievementType: 4
     Achievements:
     - Name: Top Merge
-      AchievID: 5920
+      AchievID: 5943
       RewardType: 1
       RewardIndex: 800
+      HasProgress: 0
       ReferenceValue: 1
       Condition: 0
       IsTotal: 0
   - AchievementType: 2
     Achievements:
     - Name: Double Threat
-      AchievID: 5921
+      AchievID: 5936
       RewardType: 1
       RewardIndex: 600
+      HasProgress: 0
       ReferenceValue: 1
       Condition: 0
       IsTotal: 0
   - AchievementType: 5
     Achievements:
-    - Name: Drop a bomb
-      AchievID: 5922
+    - Name: Knockout
+      AchievID: 5937
       RewardType: 1
       RewardIndex: 500
+      HasProgress: 1
       ReferenceValue: 5
       Condition: 0
       IsTotal: 0
   - AchievementType: 6
     Achievements:
     - Name: Snow Ball Effect
-      AchievID: 5923
+      AchievID: 5939
       RewardType: 1
       RewardIndex: 400
-      ReferenceValue: 4
+      HasProgress: 0
+      ReferenceValue: 5
       Condition: 0
       IsTotal: 0

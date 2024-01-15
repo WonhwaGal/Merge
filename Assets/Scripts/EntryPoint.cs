@@ -55,13 +55,13 @@ public class EntryPoint : MonoBehaviour
     private void OnLoadWithProgress(Scene scene, LoadSceneMode mode)
     {
         ServiceLocator.Container.RequestFor<DropService>().RecreateProgress(_saveService.ProgressData);
-        _achievementService.SetProgress(toZero: false);
+        _achievementService.SetInitialProgress(toZero: false);
         SceneManager.sceneLoaded -= OnLoadWithProgress;
     }
 
     private void OnLoadNewGame(Scene scene, LoadSceneMode mode)
     {
-        _achievementService.SetProgress(toZero: true);
+        _achievementService.SetInitialProgress(toZero: true);
         SceneManager.sceneLoaded -= OnLoadNewGame;
     }
 

@@ -8,6 +8,8 @@ namespace Code.Achievements
     public sealed class AchievementService : IService
     {
         private readonly AchievSO _achievSO;
+        private bool _playingNewGame;
+        private int _savedScore;
 
         public AchievementService(AchievSO so) => _achievSO = so;
 
@@ -29,8 +31,10 @@ namespace Code.Achievements
             }
         }
 
-        public void SetProgress(bool toZero)
+        public void SetInitialProgress(bool toZero)
         {
+            _playingNewGame = toZero;
+            _savedScore = GP_Player.GetInt(Constants.SavedScore);
             for (int i = 0; i < _achievSO.AchievsByType.Count; i++)
             {
                 var achievList = _achievSO.AchievsByType[i].Achievements;
@@ -41,17 +45,12 @@ namespace Code.Achievements
                         continue;
 
                     var id = achiev.AchievID.ToString();
-                    if (toZero && !achiev.IsTotal)
+                    if (toZero && !achiev.IsTotal && achiev.HasProgress)
                         GP_Achievements.SetProgress(id, 0);
                     else if (achiev.IsTotal)
-                        achiev.MergeTimes = GP_Achievements.GetProgress(id);
+                        achiev.SavedProgress = GP_Achievements.GetProgress(id);
                 }
             }
-        }
-        private void SetProgress(bool isMergeByRank, Achievement achiev, float referenceValue)
-        {
-            if (!isMergeByRank)
-                GP_Achievements.SetProgress(achiev.AchievID.ToString(), (int)referenceValue);
         }
 
         private void CheckAchievement(Achievement achiev, bool isMerge, float referenceValue)
@@ -59,20 +58,28 @@ namespace Code.Achievements
             SetProgress(isMerge, achiev, referenceValue);
 
             if (isMerge && referenceValue == achiev.ReferenceValue)
-            {
                 HandleMergeAchiev(achiev);
-                return;
-            }
             else if (!isMerge && referenceValue >= achiev.ReferenceValue)
-            {
                 UnlockAchievement(achiev);
+        }
+
+        private void SetProgress(bool isMergeByRank, Achievement achiev, float referenceValue)
+        {
+            if (isMergeByRank || !achiev.HasProgress)
                 return;
+
+            var progress = (int)referenceValue;
+            if (achiev.IsTotal)
+            {
+                progress += achiev.SavedProgress;
+                progress = _playingNewGame ? progress : progress - _savedScore;
             }
+            GP_Achievements.SetProgress(achiev.AchievID.ToString(), progress);
         }
 
         private void HandleMergeAchiev(Achievement achiev)
         {
-            var progressValue = ++achiev.MergeTimes;
+            var progressValue = ++achiev.SavedProgress;
             GP_Achievements.SetProgress(achiev.AchievID.ToString(), progressValue);
             if (progressValue >= achiev.Condition)
                 UnlockAchievement(achiev);

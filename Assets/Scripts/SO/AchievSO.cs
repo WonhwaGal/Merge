@@ -30,12 +30,13 @@ public class AchievSO : ScriptableObject
             public int AchievID;
             public RewardType RewardType;
             public int RewardIndex;
+            public bool HasProgress;
             public float ReferenceValue;
             public int Condition;
             public bool IsTotal;
 
             public bool IsUnlocked { get; set; }
-            public int MergeTimes { get; set; }
+            public int SavedProgress { get; set; }
         }
     }
 }

@@ -71,7 +71,8 @@ public class GameUIModel : IModel, IDisposable
     public float SetScore()
     {
         OnActivateReward?.Invoke(GP_Player.GetBool(Constants.BombAvailable));
-        return GP_Player.GetInt(Constants.SavedScore);
+        _currentScore = GP_Player.GetInt(Constants.SavedScore);
+        return _currentScore;
     }
 
     public float GetAddPoints(float currentScore)
