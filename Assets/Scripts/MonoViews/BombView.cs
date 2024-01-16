@@ -14,12 +14,19 @@ namespace Code.DropLogic
             if (collision.gameObject.TryGetComponent(out DropObject drop))
             {
                 GameEventSystem.Send(new BombEvent(drop.Rank));
+                GameEventSystem.Send(new SoundEvent(SoundType.Poof, true));
                 ReturnToPool();
             }
             else
             {
                 _collisionsIgnored = false;
             }
+        }
+
+        protected override void OnDrop()
+        {
+            base.OnDrop();
+            MergeCounter.BombUse();
         }
 
         private void ReturnToPool() => GameEventSystem.Send(new ManageDropEvent(this, true, withEffects: false));

@@ -1,5 +1,6 @@
 using UnityEngine;
 using GamePush;
+using Code.Achievements;
 
 namespace Code.Views
 {
@@ -12,7 +13,7 @@ namespace Code.Views
 
         private int _dropableRanks;
         private int _lastUnlockedRank;
-
+        private AchievementService _achieService;
         private void Awake()
         {
             for(int i = 0; i < _statics.Length; i++)
@@ -40,6 +41,7 @@ namespace Code.Views
 
         private void SetUp()
         {
+            _achieService = ServiceLocator.Container.RequestFor<AchievementService>();
             _lastUnlockedRank = GP_Player.GetInt("unlocked_ranks");
             _dropableRanks = GP_Variables.GetInt("DropableRanks");
             if (_lastUnlockedRank == 0)
@@ -55,6 +57,7 @@ namespace Code.Views
                 _lastUnlockedRank++;
                 GP_Player.Set("unlocked_ranks", _lastUnlockedRank);
                 GP_Player.Sync();
+                _achieService.CheckAchievement(AchievType.FullSetUnlock, _lastUnlockedRank);
             }
         }
 

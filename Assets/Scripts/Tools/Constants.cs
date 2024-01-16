@@ -3,7 +3,7 @@ public sealed class Constants
 {
     //GENERAL SETTINGS
     public const int TotalRanks = 11;
-    public const float LoseThreshold = 10.0f;
+    public const float LoseThreshold = 9.2f;
     public const string GameScene = "GameScene";
     public const int ShowableRating = 99;
     public const int DefaultLang = 5;

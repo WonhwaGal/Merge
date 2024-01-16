@@ -4,6 +4,7 @@ using UnityEngine;
 using GamePush;
 using UnityEngine.Localization.Settings;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using Code.Achievements;
 
 public class GameUIModel : IModel, IDisposable
 {
@@ -15,7 +16,6 @@ public class GameUIModel : IModel, IDisposable
     private AchievementService _achievementService;
 
     public int MergedRank { get; set; }
-    public int PlayerRating => _playerRating;
 
     public event Action<bool> OnActivateReward;
     public event Action<int> OnGetRating;
@@ -29,7 +29,7 @@ public class GameUIModel : IModel, IDisposable
         GP_Ads.OnAdsClose += OnRewardClose;
         GP_Ads.OnAdsStart += OnRewardStart;
         GameEventSystem.Subscribe<SaveEvent>(SaveBombStatus);
-        _achievementService = ServiceLocator.Container.RegisterAndAssign(new AchievementService());
+        _achievementService = ServiceLocator.Container.RequestFor<AchievementService>();
         RenewRating();
         UpdateTextAsync();
     }
@@ -71,7 +71,8 @@ public class GameUIModel : IModel, IDisposable
     public float SetScore()
     {
         OnActivateReward?.Invoke(GP_Player.GetBool(Constants.BombAvailable));
-        return GP_Player.GetInt(Constants.SavedScore);
+        _currentScore = GP_Player.GetInt(Constants.SavedScore);
+        return _currentScore;
     }
 
     public float GetAddPoints(float currentScore)
@@ -82,7 +83,7 @@ public class GameUIModel : IModel, IDisposable
 
         if (secondCheck > firstCheck && !_bombActive)
             SetBombStatus(true);
-        _achievementService.CheckForUnlock(AchievementType.Score, _currentScore);
+        _achievementService.CheckAchievement(AchievType.Score, _currentScore);
         return _currentScore;
     }
     #endregion

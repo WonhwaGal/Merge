@@ -3,6 +3,7 @@ using UnityEngine;
 using Code.Pools;
 using Code.SaveLoad;
 using GamePush;
+using Code.Achievements;
 
 namespace Code.DropLogic
 {
@@ -12,6 +13,7 @@ namespace Code.DropLogic
         private readonly DropObjectMultipool _pool;
         private readonly UIService _uiService;
         private readonly int _dropableRanks;
+        private readonly AchievementService _achievService;
 
         public DropService(DropObjectSO dropSO, EffectList fxList)
         {
@@ -20,6 +22,7 @@ namespace Code.DropLogic
             _dropableRanks = GP_Variables.GetInt("DropableRanks");
             DropQueueHandler.AssignValues(dropSO.TotalNumber(), _dropableRanks);
             _uiService = ServiceLocator.Container.RequestFor<UIService>();
+            _achievService = ServiceLocator.Container.RequestFor<AchievementService>();
             GameEventSystem.Subscribe<ManageDropEvent>(EndSession);
         }
 
@@ -44,14 +47,20 @@ namespace Code.DropLogic
         }
 
 
-        public bool CheckForMerge(DropBase one, DropBase two)
+        public void MergeDrops(DropBase one, DropBase two)
         {
             var finalRank = one.Rank == DropQueueHandler.MaxRank;
             if (finalRank)
+            {
                 ReturnPairToPool(one, two);
+                AddEffect(PrefabType.PoofEffect, one, (one.transform.position + two.transform.position) / 2);
+                _achievService.CheckAchievement(AchievType.TopMerge, one.Rank);
+            }
             else
+            {
                 MergeObjects(one, two);
-            return finalRank;
+            }
+            MergeCounter.ReceiveMergeInfo(one.Rank);
         }
 
         public void MergeObjects(DropBase upperOne, DropBase lowerOne)
@@ -63,6 +72,7 @@ namespace Code.DropLogic
             ReturnPairToPool(upperOne, lowerOne);
             if (upperOne.Rank >= _dropableRanks)
                 GameEventSystem.Send(new MergeEvent(upperOne.Rank));
+            _achievService.CheckAchievement(AchievType.MergeByRank, lowerOne.Rank);
         }
 
         private void AddEffect(PrefabType effectType, DropBase result, Vector3 middlePos)
@@ -75,7 +85,7 @@ namespace Code.DropLogic
         private DropBase SetUpDropObject(DropBase result, Vector3 position, bool queueMoved, bool shouldDrop)
         {
             _pool.OnSpawned(result, position);
-            result.OnMerge += CheckForMerge;
+            result.OnMerge += MergeDrops;
             GameEventSystem.Send(new CreateDropEvent(queueMoved, result.Rank));
             if (shouldDrop)
                 result.Drop();
@@ -99,7 +109,7 @@ namespace Code.DropLogic
         private void ReturnToPool(DropBase result)
         {
             _pool.Despawn(result.Rank, result);
-            result.OnMerge -= CheckForMerge;
+            result.OnMerge -= MergeDrops;
         }
 
         public void Dispose()

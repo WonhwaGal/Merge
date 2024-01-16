@@ -60,6 +60,7 @@ namespace Code.DropLogic
             transform.position = _startPosition;
             CurrentDrop = OnObjectDrop?.Invoke(transform, true);
             CurrentDrop.gameObject.SetActive(false);
+            MergeCounter.MergesInARow = 0;
         }
 
         IEnumerator DelayQueueMove()
