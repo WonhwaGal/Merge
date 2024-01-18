@@ -21,5 +21,6 @@ public sealed class Constants
     public const string TotalSound = "sound_on";
     public const string Language = "chosen_lang";
     public const string BOMB = "BOMB";
+    public const string REWARD = "REWARD";
     public const int BombRank = -1;
 }

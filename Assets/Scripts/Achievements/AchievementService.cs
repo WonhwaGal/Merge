@@ -5,13 +5,15 @@ using GamePush;
 
 namespace Code.Achievements
 {
-    public sealed class AchievementService : IService
+    public sealed class AchievementService : IService, IDisposable
     {
         private readonly AchievSO _achievSO;
         private bool _playingNewGame;
         private int _savedScore;
 
         public AchievementService(AchievSO so) => _achievSO = so;
+
+        public event Action<Achievement> OnUnlockAchiev;
 
         public void Open() => GP_Achievements.Open();
 
@@ -90,6 +92,9 @@ namespace Code.Achievements
             var id = achiev.AchievID.ToString();
             GP_Achievements.Unlock(id);
             achiev.IsUnlocked = true;
+            OnUnlockAchiev?.Invoke(achiev);
         }
+
+        public void Dispose() => OnUnlockAchiev = null;
     }
 }

@@ -26,7 +26,7 @@ MonoBehaviour:
     - Name: Nice Run
       AchievID: 5942
       RewardType: 1
-      RewardIndex: 1000
+      RewardIndex: 2
       HasProgress: 1
       ReferenceValue: 15000
       Condition: 0
@@ -34,7 +34,7 @@ MonoBehaviour:
     - Name: Olimpic Run
       AchievID: 5947
       RewardType: 1
-      RewardIndex: 900
+      RewardIndex: 3
       HasProgress: 1
       ReferenceValue: 5000
       Condition: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
     - Name: Tea Party
       AchievID: 5852
       RewardType: 1
-      RewardIndex: 100
+      RewardIndex: 4
       HasProgress: 1
       ReferenceValue: 3
       Condition: 5
@@ -52,7 +52,7 @@ MonoBehaviour:
     - Name: Total Success
       AchievID: 5945
       RewardType: 1
-      RewardIndex: 200
+      RewardIndex: 5
       HasProgress: 1
       ReferenceValue: 4
       Condition: 100
@@ -60,7 +60,7 @@ MonoBehaviour:
     - Name: French Taste
       AchievID: 5946
       RewardType: 0
-      RewardIndex: 2
+      RewardIndex: 6
       HasProgress: 1
       ReferenceValue: 9
       Condition: 3
@@ -68,7 +68,7 @@ MonoBehaviour:
     - Name: Sweet Tooth
       AchievID: 5944
       RewardType: 1
-      RewardIndex: 1100
+      RewardIndex: 7
       HasProgress: 1
       ReferenceValue: 1
       Condition: 25
@@ -76,7 +76,7 @@ MonoBehaviour:
     - Name: Easy As Pie
       AchievID: 5940
       RewardType: 1
-      RewardIndex: 700
+      RewardIndex: 8
       HasProgress: 1
       ReferenceValue: 10
       Condition: 5
@@ -86,7 +86,7 @@ MonoBehaviour:
     - Name: Full House
       AchievID: 5938
       RewardType: 1
-      RewardIndex: 300
+      RewardIndex: 9
       HasProgress: 0
       ReferenceValue: 11
       Condition: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
     - Name: Top Merge
       AchievID: 5943
       RewardType: 1
-      RewardIndex: 800
+      RewardIndex: 10
       HasProgress: 0
       ReferenceValue: 1
       Condition: 0
@@ -106,7 +106,7 @@ MonoBehaviour:
     - Name: Double Threat
       AchievID: 5936
       RewardType: 1
-      RewardIndex: 600
+      RewardIndex: 11
       HasProgress: 0
       ReferenceValue: 1
       Condition: 0
@@ -116,7 +116,7 @@ MonoBehaviour:
     - Name: Knockout
       AchievID: 5937
       RewardType: 1
-      RewardIndex: 500
+      RewardIndex: 12
       HasProgress: 1
       ReferenceValue: 5
       Condition: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
     - Name: Snow Ball Effect
       AchievID: 5939
       RewardType: 1
-      RewardIndex: 400
+      RewardIndex: 13
       HasProgress: 0
       ReferenceValue: 5
       Condition: 0

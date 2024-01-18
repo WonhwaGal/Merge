@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using GamePush;
 using UnityEngine;
 
@@ -11,10 +12,14 @@ namespace Code.SaveLoad
         public SaveService()
         {
             _handler = new();
+            GP_Achievements.OnAchievementsFetchPlayer += FetchAchievs;
             GameEventSystem.Subscribe<ManageDropEvent>(GatherData);
+            GP_Achievements.Fetch();
         }
 
         public ProgressData ProgressData { get; private set; }
+        public List<AchievementsFetchPlayer> FetchedAchievs { get; private set; }
+        public ActiveBackgrounds Actives { get; private set; }
 
         public bool LoadProgress(string data)
         {
@@ -44,6 +49,13 @@ namespace Code.SaveLoad
         }
 
         public void ClearData() => _handler.Clear();
+
+        private void FetchAchievs(List<AchievementsFetchPlayer> fetchedAchievs)
+        {
+            var actives = GP_Player.GetString("active_background");
+            Actives = JsonUtility.FromJson<ActiveBackgrounds>(actives);
+            FetchedAchievs = fetchedAchievs;
+        }
 
         private float GetBestScore(float current)
         {

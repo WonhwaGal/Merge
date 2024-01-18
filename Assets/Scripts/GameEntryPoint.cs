@@ -3,6 +3,8 @@ using Code.MVC;
 using Code.SaveLoad;
 using Code.DropLogic;
 using Code.Sounds;
+using Code.Achievements;
+using Code.Views;
 
 public class GameEntryPoint : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class GameEntryPoint : MonoBehaviour
     [SerializeField] private EffectList _fxList;
     [SerializeField] private CanvasView _canvasView;
     [SerializeField] private SoundSO _soundSO;
+    [SerializeField] private AchievSO _achievSO;
 
     private SaveService _saveService;
     private UIService _uiService;
@@ -26,7 +29,7 @@ public class GameEntryPoint : MonoBehaviour
     private void InitServices()
     {
         _saveService = ServiceLocator.Container.RequestFor<SaveService>();
-        _uiService = ServiceLocator.Container.RegisterAndAssign(new UIService(_so, _canvasView));
+        _uiService = ServiceLocator.Container.RegisterAndAssign(new UIService(_so, _canvasView, _achievSO));
         _dropService = ServiceLocator.Container.RegisterAndAssign(new DropService(_so, _fxList));
         _soundManager = new SoundManager(_soundSO);
     }
@@ -43,5 +46,6 @@ public class GameEntryPoint : MonoBehaviour
         _uiService.Dispose();
         _saveService.Dispose();
         _soundManager.Dispose();
+        ServiceLocator.Container.RequestFor<AchievementService>().Dispose();
     }
 }

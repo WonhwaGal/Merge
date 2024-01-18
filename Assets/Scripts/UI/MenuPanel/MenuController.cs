@@ -13,6 +13,7 @@ namespace Code.MVC
         }
 
         public Func<float> OnRequestScore;
+        public event Action OnRequestOptions;
 
         private void SetUpPanel(GameControlEvent @event)
         {
@@ -49,6 +50,7 @@ namespace Code.MVC
         protected override void OnViewAdded()
         {
             View.RetryButton.onClick.AddListener(Model.PressRetry);
+            View.OptionsButton.onClick.AddListener(() => OnRequestOptions?.Invoke());
             View.MusicButton.SetBool(Model.GetVolume(SoundType.TotalMusic));
             View.SoundButton.SetBool(Model.GetVolume(SoundType.TotalSound));
             Model.OnLanguageChanged += View.SetTexts;
@@ -58,6 +60,7 @@ namespace Code.MVC
         public override void Dispose()
         {
             OnRequestScore = null;
+            OnRequestOptions = null;
             GameEventSystem.UnSubscribe<GameControlEvent>(SetUpPanel);
             Model.OnLanguageChanged -= View.SetTexts;
             base.Dispose();

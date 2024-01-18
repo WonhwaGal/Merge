@@ -12,6 +12,7 @@ namespace Code.MVC
         [SerializeField] private TextMeshProUGUI _bestScoreText;
         [SerializeField] private GameObject _results;
         [SerializeField] private Button _retryButton;
+        [SerializeField] private Button _optionsButton;
         [SerializeField] private Button _exitButton;
         [SerializeField] private BoolButton _musicButton;
         [SerializeField] private BoolButton _soundButton;
@@ -28,10 +29,10 @@ namespace Code.MVC
             }
         }
         public Button RetryButton => _retryButton;
+        public Button OptionsButton => _optionsButton;
         public Button ExitButton => _exitButton;
         public BoolButton MusicButton => _musicButton;
         public BoolButton SoundButton => _soundButton;
-
 
         public event Action OnDestroyView;
 
@@ -70,6 +71,7 @@ namespace Code.MVC
             OnDestroyView?.Invoke();
             RetryButton.onClick.RemoveAllListeners();
             ExitButton.onClick.RemoveAllListeners();
+            OptionsButton.onClick.RemoveAllListeners();
             OnDestroyView = null;
         }
     }
