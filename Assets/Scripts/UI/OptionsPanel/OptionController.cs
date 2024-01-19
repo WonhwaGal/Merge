@@ -35,6 +35,8 @@ namespace Code.MVC
 
         private void SetUpPanel(GameControlEvent @event)
         {
+            if (!View.gameObject.activeSelf)
+                return;
             if (@event.ActionToDo == GameAction.Play)
                 UpdateView();
         }

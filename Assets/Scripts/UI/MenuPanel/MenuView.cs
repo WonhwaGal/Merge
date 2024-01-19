@@ -13,7 +13,6 @@ namespace Code.MVC
         [SerializeField] private GameObject _results;
         [SerializeField] private Button _retryButton;
         [SerializeField] private Button _optionsButton;
-        [SerializeField] private Button _exitButton;
         [SerializeField] private BoolButton _musicButton;
         [SerializeField] private BoolButton _soundButton;
         private float _finalScore;
@@ -30,16 +29,10 @@ namespace Code.MVC
         }
         public Button RetryButton => _retryButton;
         public Button OptionsButton => _optionsButton;
-        public Button ExitButton => _exitButton;
         public BoolButton MusicButton => _musicButton;
         public BoolButton SoundButton => _soundButton;
 
         public event Action OnDestroyView;
-
-        private void Start()
-        {
-            _exitButton.onClick.AddListener(PressQuit);
-        }
 
         public void ShowResults(bool toShow, float bestScore)
         {
@@ -59,18 +52,10 @@ namespace Code.MVC
             _retryButton.GetComponentInChildren<TextMeshProUGUI>().text = retry;
         }
 
-        private void PressQuit()
-        {
-            if(!_showResults)
-                GameEventSystem.Send(new SaveEvent(FinalScore, onlyScore: false));
-            Application.Quit();
-        }
-
         private void OnDestroy()
         {
             OnDestroyView?.Invoke();
             RetryButton.onClick.RemoveAllListeners();
-            ExitButton.onClick.RemoveAllListeners();
             OptionsButton.onClick.RemoveAllListeners();
             OnDestroyView = null;
         }
