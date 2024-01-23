@@ -63,13 +63,17 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 93035ef11a7a6da4ea363fd0e1aa8186, type: 3}
   - {fileID: 21300000, guid: 1460c1a26ab3075429f4b58ca4cfc043, type: 3}
   - {fileID: 21300000, guid: e952a7b2affa8ba4e933a58305ab8b9e, type: 3}
+  - {fileID: 21300000, guid: a66fbcc27731d274db0c3791b952628d, type: 3}
+  - {fileID: 21300000, guid: 958dc5334d2011943a8695500d1ffe8b, type: 3}
   - {fileID: 21300000, guid: 243fbad349b8c164c8f9e355ead17e8d, type: 3}
   - {fileID: 21300000, guid: 1bf363e364623f342843724b78d36d40, type: 3}
   - {fileID: 21300000, guid: d8273ce32afbfaa439e3d7ae87033f7a, type: 3}
   - {fileID: 21300000, guid: 1ed19234b04965a4abcb511ac6a9dfdc, type: 3}
+  - {fileID: 21300000, guid: 64e31154e97b8764f8e1ed27868aeda7, type: 3}
   - {fileID: 21300000, guid: 9c3a8f059b64fcf4bbfbd1c95850b75b, type: 3}
   - {fileID: 21300000, guid: dacfbe254431f4f4784021dd1e367fd9, type: 3}
   - {fileID: 21300000, guid: a63fd1565a911024e90aec4884c3c1f3, type: 3}
+  - {fileID: 21300000, guid: 11b5a4a64f37313429469349a4e37e5c, type: 3}
   - {fileID: 21300000, guid: 0036c7c638a7a8c4a8d1a3477164f29c, type: 3}
   - {fileID: 21300000, guid: fd477b07d05d47247b45f4c94d871556, type: 3}
   - {fileID: 21300000, guid: 87590517dddbedd4092271392e8edf2f, type: 3}
@@ -78,7 +82,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c792fd973e1c69e4085e1d9bd10e6bde, type: 3}
   - {fileID: 21300000, guid: c68c88e7d4f943748992a25cf921bf6d, type: 3}
   - {fileID: 21300000, guid: 60b5154863352f5438aac79738a8ab1b, type: 3}
-  - {fileID: 21300000, guid: 1a640478d41031440bed7b88b7e8c917, type: 3}
   - {fileID: 21300000, guid: c8094319902b206439b3b3eade741f5c, type: 3}
   - {fileID: 21300000, guid: d614f149383ad4349bdab1ee5474b7a7, type: 3}
   - {fileID: 21300000, guid: 652a1c1b0fd8c3d4cb6b35decdcc88db, type: 3}
@@ -87,13 +90,12 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 329b815cc33eadb4e90d84f8aa783460, type: 3}
   - {fileID: 21300000, guid: caf7cf5c3fc09a7488ab3d1973c07cf9, type: 3}
   - {fileID: 21300000, guid: 0222c46cd3678294780b8945601ce6d4, type: 3}
-  - {fileID: 21300000, guid: 408742ed48fb29944bdcab6b707044bb, type: 3}
+  - {fileID: 21300000, guid: 461900ed31ce96c4eb3156e21bf60cb4, type: 3}
   - {fileID: 21300000, guid: 748e900ef339c39498d7022b408b1336, type: 3}
   - {fileID: 21300000, guid: 6257be9eec78e54478f14f9c6bf1ff26, type: 3}
   - {fileID: 21300000, guid: f804d4ce5d226ae4b9e61b2dfad0245c, type: 3}
   - {fileID: 21300000, guid: f31d45ce433bf4f48804a7c52a35bd07, type: 3}
   - {fileID: 21300000, guid: 8ee7aa1f81f0be244b1758ac8f5c46a6, type: 3}
-  - {fileID: 21300000, guid: 2e0dd44f956ff9d49929248de048d3c8, type: 3}
   - {fileID: 21300000, guid: 23814cafc31bb7c4a89a9c3005db7c78, type: 3}
   - {fileID: 21300000, guid: daf302bf8ba1beb4ca2722f5a3764914, type: 3}
   - {fileID: 21300000, guid: d607babfeb4f5c349956eccbf551df69, type: 3}
@@ -110,22 +112,25 @@ SpriteAtlas:
   - Static_8
   - Doughnut_face
   - Vrednyuchka_mimic
+  - light_sphere
+  - spoonImage
   - Cake_mimic
   - noSound
   - Grumper_face
   - pause
+  - shadow
   - Board
   - CherryPie_face
   - Croissant_mimic
+  - Button
   - CoolDoughnut
-  - "\u0418\u043B\u043B\u044E\u0441\u0442\u0440\u0430\u0446\u0438\u044F_\u0431\u0435\u0437_\u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F"
+  - bombImage
   - caramel
   - Grumper_mimic
   - sound
   - Grumper
   - Static_7
   - music
-  - JapaneseBun
   - Doughnut_mimic
   - CherryPie
   - Vrednyuchka_face
@@ -134,13 +139,12 @@ SpriteAtlas:
   - Static_9
   - play
   - GirlyCookie_mimic
-  - JapaneseBun_mimic
+  - Leaders
   - CherryPie_mimic
   - CoolDoughnut_face
   - noMusic
   - GirlyCookie
   - Static_10
-  - JapaneseBun_face
   - Cake
   - Vrednyuchka
   - Croissant_face

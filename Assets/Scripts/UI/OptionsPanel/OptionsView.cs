@@ -1,5 +1,6 @@
 using GamePush;
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,8 @@ namespace Code.MVC
         [SerializeField] private Button _openRoomButton;
         [SerializeField] private GameObject _roomPanel;
         [SerializeField] private RewardOptionView[] _rewardButtons;
+        private TextMeshProUGUI _buttonText;
+        private bool _isMobile;
 
         public RewardOptionView[] RewardButtons => _rewardButtons;
 
@@ -17,11 +20,14 @@ namespace Code.MVC
 
         private void Start()
         {
-            var isMobile = GP_Device.IsMobile();
-            _openRoomButton.gameObject.SetActive(isMobile);
-            if (isMobile)
+            _isMobile = GP_Device.IsMobile();
+            if (_isMobile)
+            {
+                _buttonText = _openRoomButton.GetComponent<TextMeshProUGUI>();
+                _openRoomButton.gameObject.SetActive(true);
                 _openRoomButton.onClick.AddListener(OpenRoom);
-            _roomPanel.SetActive(false);
+                _roomPanel.SetActive(false);
+            }
         }
 
         public void UpdateOption(int index, bool isActive)
@@ -29,6 +35,12 @@ namespace Code.MVC
             if (index < _rewardButtons.Length)
                 RewardButtons[index].UpdateState(isActive);
             GameEventSystem.Send(new BackgroundEvent(index, isActive));
+        }
+
+        public void SetText(string text)
+        {
+            if (_isMobile)
+                _buttonText.text = text;
         }
 
         private void OpenRoom() => _roomPanel.SetActive(true);

@@ -5,6 +5,8 @@ using GamePush;
 using Code.Achievements;
 using Code.SaveLoad;
 using static AchievSO.AchievBlock;
+using UnityEngine.Localization.Settings;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Code.MVC
 {
@@ -17,6 +19,7 @@ namespace Code.MVC
         private bool _requestedState;
 
         public event Action<int, bool> OnUpdateReward;
+        public event Action<string> OnLanguageChanged;
 
         public void Init(AchievSO achievSO)
         {
@@ -26,6 +29,7 @@ namespace Code.MVC
             ServiceLocator.Container.RequestFor<AchievementService>().OnUnlockAchiev
                 += OnUnlockAchiev;
             UpdateSOInfo(saveService.FetchedAchievs);
+            UpdateTextAsync();
         }
 
         public void UpdateSOInfo(List<AchievementsFetchPlayer> fetchedAchievs)
@@ -89,10 +93,22 @@ namespace Code.MVC
             OnUpdateReward?.Invoke(id, isActive);
         }
 
+        private void UpdateTextAsync() =>
+            LocalizationSettings.StringDatabase.GetTableAsync("TextTable").Completed +=
+            handle =>
+            {
+                if (handle.Status == AsyncOperationStatus.Succeeded)
+                {
+                    var table = handle.Result;
+                    OnLanguageChanged?.Invoke(table.GetEntry("roomB")?.GetLocalizedString());
+                }
+            };
+
         public void Dispose()
         {
             _unlockedRewards.Clear();
             OnUpdateReward = null;
+            OnLanguageChanged = null;
         }
     }
 }

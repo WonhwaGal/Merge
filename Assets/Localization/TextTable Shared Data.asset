@@ -39,6 +39,26 @@ MonoBehaviour:
     m_Key: retryB
     m_Metadata:
       m_Items: []
+  - m_Id: 4328900767145984
+    m_Key: optionsB
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4329807437258752
+    m_Key: roomB
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4333719707869184
+    m_Key: roomExit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4333962042171392
+    m_Key: rewardApply
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4334059010285568
+    m_Key: rewardRemove
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

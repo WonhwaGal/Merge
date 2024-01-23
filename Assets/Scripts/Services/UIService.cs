@@ -23,7 +23,7 @@ public sealed class UIService : IService, IDisposable
         OptionController optionsController)
     {
         menuController.OnRequestScore += gameUIController.GetScore;
-        menuController.OnRequestOptions += optionsController.UpdateView;
+        menuController.OnRequestRewards += optionsController.UpdateView;
         OnContinueSavedGame += gameUIController.SetScore;
     }
 

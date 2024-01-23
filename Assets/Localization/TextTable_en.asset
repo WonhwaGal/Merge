@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 890865868800
-    m_Localized: Start New Game
+    m_Localized: New Game
     m_Metadata:
       m_Items: []
   - m_Id: 24040055922688
@@ -42,6 +42,26 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 382558487339008
     m_Localized: Your previous best is
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4328900767145984
+    m_Localized: My rewards
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4329807437258752
+    m_Localized: Look at Bakery
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4333719707869184
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4333962042171392
+    m_Localized: Apply
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4334059010285568
+    m_Localized: Remove
     m_Metadata:
       m_Items: []
   references:

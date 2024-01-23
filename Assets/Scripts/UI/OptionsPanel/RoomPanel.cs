@@ -1,10 +1,12 @@
 using Code.SaveLoad;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Code.Views
 {
     public class RoomPanel : MonoBehaviour
     {
+        [SerializeField] private Button _closeRoomButton;
         [SerializeField] private GameObject[] _roomObjects;
         private SaveService _saveService;
 
@@ -12,6 +14,7 @@ namespace Code.Views
         {
             _saveService = ServiceLocator.Container.RequestFor<SaveService>();
             GameEventSystem.Subscribe<GameControlEvent>(OnGameEvent);
+            _closeRoomButton.onClick.AddListener(() => gameObject.SetActive(false));
         }
 
         private void OnEnable()
@@ -27,6 +30,9 @@ namespace Code.Views
         }
 
         private void OnDestroy()
-            => GameEventSystem.Subscribe<GameControlEvent>(OnGameEvent);
+        {
+            GameEventSystem.Subscribe<GameControlEvent>(OnGameEvent);
+            _closeRoomButton.onClick.RemoveAllListeners();
+        }
     }
 }

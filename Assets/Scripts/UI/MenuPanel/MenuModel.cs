@@ -19,7 +19,7 @@ namespace Code.MVC
         public float BestScore => GP_Player.GetScore();
         public GameAction LastAction { get; set; }
 
-        public event Action<string, string, string> OnLanguageChanged;
+        public event Action<string, string, string, string> OnLanguageChanged;
 
         public void Init() => UpdateTextAsync();
 
@@ -56,7 +56,8 @@ namespace Code.MVC
                         var table = handle.Result;
                         OnLanguageChanged?.Invoke(table.GetEntry("loseText")?.GetLocalizedString(),
                             table.GetEntry("bestScoreText")?.GetLocalizedString(),
-                            table.GetEntry("retryB")?.GetLocalizedString());
+                            table.GetEntry("retryB")?.GetLocalizedString(),
+                            table.GetEntry("optionsB")?.GetLocalizedString());
                     }
                 };
 
