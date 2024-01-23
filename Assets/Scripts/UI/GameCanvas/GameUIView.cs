@@ -12,6 +12,7 @@ namespace Code.MVC
         [SerializeField] private Image _nextImage;
         [SerializeField] private Button _rewardButton;
         [SerializeField] private TextMeshProUGUI _scoreText;
+        [SerializeField] private GameObject _ratingPanel;
         [SerializeField] private TextMeshProUGUI _ratingText;
         [SerializeField] private Button _leaderBoardButton;
         [SerializeField] private Button _achievementButton;
@@ -39,7 +40,11 @@ namespace Code.MVC
         private void Start() => _highlightTime = GP_Variables.GetFloat("HighlightTime");
 
         public void SetRating(int rating)
-            => _ratingText.text = rating != 0 ? rating.ToString() : string.Empty;
+        {
+            var toShow = rating != 0;
+            _ratingPanel.SetActive(toShow);
+            _ratingText.text = toShow ? rating.ToString() : string.Empty;
+        }
 
         public void SetTexts(string text) => _nextText.text = text;
 
