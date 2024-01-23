@@ -84,12 +84,15 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 60b5154863352f5438aac79738a8ab1b, type: 3}
   - {fileID: 21300000, guid: c8094319902b206439b3b3eade741f5c, type: 3}
   - {fileID: 21300000, guid: d614f149383ad4349bdab1ee5474b7a7, type: 3}
+  - {fileID: 21300000, guid: fa42312a65f1fe8428e852e3fcfb5090, type: 3}
+  - {fileID: 21300000, guid: 37eebbba9715b594c8bc34ec6b74ec59, type: 3}
   - {fileID: 21300000, guid: 652a1c1b0fd8c3d4cb6b35decdcc88db, type: 3}
   - {fileID: 21300000, guid: de5f697b8df0b544ebaed5a7e544d8ba, type: 3}
   - {fileID: 21300000, guid: e2798c4c966399b48bdedf8329f987db, type: 3}
   - {fileID: 21300000, guid: 329b815cc33eadb4e90d84f8aa783460, type: 3}
   - {fileID: 21300000, guid: caf7cf5c3fc09a7488ab3d1973c07cf9, type: 3}
   - {fileID: 21300000, guid: 0222c46cd3678294780b8945601ce6d4, type: 3}
+  - {fileID: 21300000, guid: 267e5c6d289cad14783852f9e12a82dc, type: 3}
   - {fileID: 21300000, guid: 461900ed31ce96c4eb3156e21bf60cb4, type: 3}
   - {fileID: 21300000, guid: 748e900ef339c39498d7022b408b1336, type: 3}
   - {fileID: 21300000, guid: 6257be9eec78e54478f14f9c6bf1ff26, type: 3}
@@ -133,12 +136,15 @@ SpriteAtlas:
   - music
   - Doughnut_mimic
   - CherryPie
+  - JapaneseBun_new_mimic
+  - JapaneseBun_new
   - Vrednyuchka_face
   - Bezeshka
   - Static_11
   - Static_9
   - play
   - GirlyCookie_mimic
+  - JapaneseBun_new_face
   - Leaders
   - CherryPie_mimic
   - CoolDoughnut_face
