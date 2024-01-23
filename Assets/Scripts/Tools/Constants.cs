@@ -5,6 +5,7 @@ public sealed class Constants
     public const int TotalRanks = 11;
     public const float LoseThreshold = 9.2f;
     public const string GameScene = "GameScene";
+    public const string GameSceneMobile = "GameSceneMobile";
     public const int ShowableRating = 99;
     public const int DefaultLang = 5;
 

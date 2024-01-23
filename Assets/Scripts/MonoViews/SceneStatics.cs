@@ -7,26 +7,28 @@ namespace Code.Views
 {
     public class SceneStatics : MonoBehaviour
     {
-        [SerializeField] private StaticQueueView[] _statics;
-        [SerializeField] private int _mobileVersionIndex;
-        [SerializeField] private int _desktopVersionIndex;
-        private StaticQueueView _currentQueue;
+        [Header("Static Drops Queue")]
+        [SerializeField] private StaticQueueView _currentQueue;
 
         [Header("BackGrounds")]
         [SerializeField] private GameObject[] _backgrounds;
 
+        private bool _isMobile;
         private int _dropableRanks;
         private int _lastUnlockedRank;
         private AchievementService _achievService;
 
         private void Awake()
         {
-            for (int i = 0; i < _statics.Length; i++)
-                _statics[i].gameObject.SetActive(false);
-            for (int i = 0; i < _backgrounds.Length; i++)
-                _backgrounds[i].gameObject.SetActive(false);
-
-            Init();
+            _currentQueue.gameObject.SetActive(true);
+            _isMobile = _backgrounds.Length == 0;
+            if(!_isMobile)
+            {
+                for (int i = 0; i < _backgrounds.Length; i++)
+                    _backgrounds[i].gameObject.SetActive(false);
+                GameEventSystem.Subscribe<BackgroundEvent>(UpdateBackground);
+            }
+            GameEventSystem.Subscribe<MergeEvent>(UnlockRankView);
         }
 
         private void Start()
@@ -40,18 +42,6 @@ namespace Code.Views
             }
         }
 
-        private void Init()
-        {
-            if (GP_Device.IsMobile())
-                _currentQueue = _statics[_mobileVersionIndex];
-            else
-                _currentQueue = _statics[_desktopVersionIndex];
-            _currentQueue.gameObject.SetActive(true);
-
-            GameEventSystem.Subscribe<MergeEvent>(UnlockRankView);
-            GameEventSystem.Subscribe<BackgroundEvent>(UpdateBackground);
-        }
-
         private void SetUp()
         {
             _achievService = ServiceLocator.Container.RequestFor<AchievementService>();
@@ -59,7 +49,9 @@ namespace Code.Views
             _dropableRanks = GP_Variables.GetInt("DropableRanks");
             if (_lastUnlockedRank == 0)
                 _lastUnlockedRank = _dropableRanks;
-            SetUpBackground();
+
+            if (!_isMobile)
+                SetUpBackground();
         }
 
         private void SetUpBackground()

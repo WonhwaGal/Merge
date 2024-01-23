@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 using Code.SaveLoad;
 using Code.MVC;
 using Code.DropLogic;
-using GamePush;
 using Code.Achievements;
+using GamePush;
 
 public class EntryPoint : MonoBehaviour
 {
@@ -45,7 +45,10 @@ public class EntryPoint : MonoBehaviour
 
     public void LoadNewScene(bool withProgress)
     {
-        SceneManager.LoadSceneAsync(Constants.GameScene);
+        var nextScene = GP_Device.IsMobile() 
+            ? Constants.GameSceneMobile : Constants.GameScene;
+        SceneManager.LoadSceneAsync(nextScene);
+
         if (withProgress)
             SceneManager.sceneLoaded += OnLoadWithProgress;
         else
