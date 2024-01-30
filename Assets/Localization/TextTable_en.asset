@@ -64,6 +64,10 @@ MonoBehaviour:
     m_Localized: Remove
     m_Metadata:
       m_Items: []
+  - m_Id: 6889643584675840
+    m_Localized: My achievements
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

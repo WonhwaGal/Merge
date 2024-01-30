@@ -13,6 +13,7 @@ namespace Code.MVC
         [SerializeField] private TextMeshProUGUI _loseText;
         [SerializeField] private TextMeshProUGUI _bestScoreText;
         [SerializeField] private Button _retryButton;
+        [SerializeField] private Button _achievementButton;
         [SerializeField] private Button _rewardsButton;
         [SerializeField] private BoolButton _musicButton;
         [SerializeField] private BoolButton _soundButton;
@@ -28,6 +29,7 @@ namespace Code.MVC
             }
         }
         public Button RetryButton => _retryButton;
+        public Button AchievementButton => _achievementButton;
         public Button RewardsButton => _rewardsButton;
         public BoolButton MusicButton => _musicButton;
         public BoolButton SoundButton => _soundButton;
@@ -48,6 +50,7 @@ namespace Code.MVC
             _bestScoreText.text = texts[1];
             _retryButton.GetComponentInChildren<TextMeshProUGUI>().text = texts[2];
             _rewardsButton.GetComponentInChildren<TextMeshProUGUI>().text = texts[3];
+            _achievementButton.GetComponentInChildren<TextMeshProUGUI>().text= texts[4];
         }
 
         private void ShowContent(bool showResults)
@@ -63,6 +66,7 @@ namespace Code.MVC
             OnDestroyView?.Invoke();
             RetryButton.onClick.RemoveAllListeners();
             RewardsButton.onClick.RemoveAllListeners();
+            AchievementButton.onClick.RemoveAllListeners();
             OnDestroyView = null;
         }
     }

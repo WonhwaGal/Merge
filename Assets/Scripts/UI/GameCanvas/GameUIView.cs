@@ -10,19 +10,17 @@ namespace Code.MVC
     public class GameUIView : MonoBehaviour, IView
     {
         [SerializeField] private Image _nextImage;
-        [SerializeField] private Button _rewardButton;
+        [SerializeField] private Button _bombButton;
         [SerializeField] private TextMeshProUGUI _scoreText;
         [SerializeField] private GameObject _ratingPanel;
         [SerializeField] private TextMeshProUGUI _ratingText;
         [SerializeField] private Button _leaderBoardButton;
-        [SerializeField] private Button _achievementButton;
         [SerializeField] private TextMeshProUGUI _nextText;
         private float _scoreValue;
         private float _highlightTime;
 
-        public Button RewardButton => _rewardButton;
+        public Button BombButton => _bombButton;
         public Button LeaderBoardButton => _leaderBoardButton;
-        public Button AchievementButton => _achievementButton;
         public Sprite NextSprite { get => _nextImage.sprite; set => _nextImage.sprite = value; }
         public float Score
         {
@@ -36,7 +34,7 @@ namespace Code.MVC
 
         public event Action OnDestroyView;
 
-        private void OnEnable() => _rewardButton.interactable = false;
+        private void OnEnable() => _bombButton.interactable = false;
         private void Start() => _highlightTime = GP_Variables.GetFloat("HighlightTime");
 
         public void SetRating(int rating)
@@ -50,7 +48,7 @@ namespace Code.MVC
 
         public void ActivateRewardButton(bool active)
         {
-            RewardButton.interactable = active;
+            BombButton.interactable = active;
             if (active)
                 StartCoroutine(ShowRewardAvailable());
         }
@@ -63,20 +61,19 @@ namespace Code.MVC
                 if (Time.deltaTime != 0)
                 {
                     count += Time.deltaTime;
-                    _rewardButton.transform.localScale = Vector3.one * (Mathf.PingPong(count, 0.5f) + 1);
+                    _bombButton.transform.localScale = Vector3.one * (Mathf.PingPong(count, 0.5f) + 1);
                     yield return null;
                 }
             }
-            _rewardButton.transform.localScale = Vector3.one;
+            _bombButton.transform.localScale = Vector3.one;
         }
 
         private void OnDestroy()
         {
             OnDestroyView?.Invoke();
             OnDestroyView = null;
-            _rewardButton.onClick.RemoveAllListeners();
+            _bombButton.onClick.RemoveAllListeners();
             _leaderBoardButton.onClick.RemoveAllListeners();
-            _achievementButton.onClick.RemoveAllListeners();
         }
     }
 }

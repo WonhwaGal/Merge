@@ -51,6 +51,7 @@ namespace Code.MVC
         {
             View.RetryButton.onClick.AddListener(Model.PressRetry);
             View.RewardsButton.onClick.AddListener(() => OnRequestRewards?.Invoke());
+            View.AchievementButton.onClick.AddListener(Model.OpenAchievements);
             View.MusicButton.SetBool(Model.GetVolume(SoundType.TotalMusic));
             View.SoundButton.SetBool(Model.GetVolume(SoundType.TotalSound));
             Model.OnLanguageChanged += View.SetTexts;

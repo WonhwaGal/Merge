@@ -34,7 +34,6 @@ public class GameUIModel : IModel, IDisposable
         UpdateTextAsync();
     }
 
-    public void OpenAchievements() => _achievementService.Open();
     public void OpenLeaderBoard() => GP_Leaderboard.Open(withMe: WithMe.first);
 
     private void UpdateTextAsync() =>

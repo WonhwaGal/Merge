@@ -769,6 +769,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 502302886099453395, guid: 31063016bb37f49418250b792207af01, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 101.74072
+      objectReference: {fileID: 0}
     - target: {fileID: 1577545966413307721, guid: 31063016bb37f49418250b792207af01, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -856,6 +860,10 @@ PrefabInstance:
     - target: {fileID: 1577545966413307725, guid: 31063016bb37f49418250b792207af01, type: 3}
       propertyPath: m_Name
       value: CanvasMobile
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240468920741700354, guid: 31063016bb37f49418250b792207af01, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31063016bb37f49418250b792207af01, type: 3}

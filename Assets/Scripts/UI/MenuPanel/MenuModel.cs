@@ -1,4 +1,5 @@
 ﻿using System;
+using Code.Achievements;
 using Code.SaveLoad;
 using GamePush;
 using UnityEngine.Localization.Settings;
@@ -9,6 +10,7 @@ namespace Code.MVC
     public sealed class MenuModel : IModel
     {
         private readonly SaveService _saveService;
+        private AchievementService _achievementService;
 
         public MenuModel()
         {
@@ -21,7 +23,13 @@ namespace Code.MVC
 
         public event Action<string[]> OnLanguageChanged;
 
-        public void Init() => UpdateTextAsync();
+        public void Init()
+        {
+            UpdateTextAsync();
+            _achievementService = ServiceLocator.Container.RequestFor<AchievementService>();
+        }
+
+        public void OpenAchievements() => _achievementService.Open();
 
         public void OnSaveData(SaveEvent @event)
         {
@@ -57,7 +65,8 @@ namespace Code.MVC
                         OnLanguageChanged?.Invoke(new string[] {table.GetEntry("loseText")?.GetLocalizedString(),
                             table.GetEntry("bestScoreText")?.GetLocalizedString(),
                             table.GetEntry("retryB")?.GetLocalizedString(),
-                            table.GetEntry("optionsB")?.GetLocalizedString() });
+                            table.GetEntry("optionsB")?.GetLocalizedString(),
+                            table.GetEntry("achievsB")?.GetLocalizedString()});
                     }
                 };
 
