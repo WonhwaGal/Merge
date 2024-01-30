@@ -28,7 +28,7 @@ namespace Code.MVC
         protected override void OnViewAdded()
         {
             Model.OnUpdateReward += View.UpdateOption;
-            Model.OnLanguageChanged += View.SetText;
+            Model.OnLanguageChanged += View.SetTexts;
             for (int i = 0; i < View.RewardButtons.Length; i++)
                 View.RewardButtons[i].OnChangeState += Model.OnChangeRewardState;
         }

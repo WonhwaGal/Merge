@@ -37,10 +37,10 @@ namespace Code.MVC
             GameEventSystem.Send(new BackgroundEvent(index, isActive));
         }
 
-        public void SetText(string text)
+        public void SetTexts(string[] texts)
         {
             if (_isMobile)
-                _buttonText.text = text;
+                _buttonText.text = texts[0];
         }
 
         private void OpenRoom() => _roomPanel.SetActive(true);

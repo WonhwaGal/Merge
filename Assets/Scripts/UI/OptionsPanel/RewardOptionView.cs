@@ -9,7 +9,7 @@ namespace Code.MVC
 {
     public class RewardOptionView : MonoBehaviour
     {
-        [SerializeField] private Image _activeImage;
+        [SerializeField] private Image _rewardImage;
         [SerializeField] private Image _lockedImage;
         [SerializeField] private Button _applyButton;
         [SerializeField] private Button _cancelButton;
@@ -22,6 +22,7 @@ namespace Code.MVC
         private void Awake()
         {
             _lockedImage.gameObject.SetActive(true);
+            _rewardImage.gameObject.SetActive(false);
             _applyButton.gameObject.SetActive(false);
             _cancelButton.gameObject.SetActive(false);
             _applyButton.onClick.AddListener(() => OnChangeState?.Invoke(_index, true));
@@ -35,6 +36,7 @@ namespace Code.MVC
 
         private void UpdateView(bool toApply)
         {
+            _rewardImage.gameObject.SetActive(true);
             _applyButton.gameObject.SetActive(!toApply);
             _cancelButton.gameObject.SetActive(toApply);
             _lockedImage.gameObject.SetActive(false);

@@ -7,7 +7,7 @@ namespace Code.MVC
 {
     public class LanguageHandler
     {
-        public event Action<string, string> OnLanguageChanged;
+        public event Action<string[]> OnLanguageChanged;
 
         public void UpdateLangInfo()
         {
@@ -22,8 +22,8 @@ namespace Code.MVC
                     if (handle.Status == AsyncOperationStatus.Succeeded)
                     {
                         var table = handle.Result;
-                        OnLanguageChanged?.Invoke(table.GetEntry("startB")?.GetLocalizedString(),
-                              table.GetEntry("continueB")?.GetLocalizedString());
+                        OnLanguageChanged?.Invoke(new string[] {table.GetEntry("startB")?.GetLocalizedString(),
+                              table.GetEntry("continueB")?.GetLocalizedString() });
                     }
                 };
 

@@ -19,7 +19,7 @@ public class GameUIModel : IModel, IDisposable
 
     public event Action<bool> OnActivateReward;
     public event Action<int> OnGetRating;
-    public event Action<string> OnLanguageChanged;
+    public event Action<string[]> OnLanguageChanged;
 
     public void Init(DropObjectSO dropData)
     {
@@ -44,7 +44,7 @@ public class GameUIModel : IModel, IDisposable
                 if (handle.Status == AsyncOperationStatus.Succeeded)
                 {
                     var table = handle.Result;
-                    OnLanguageChanged?.Invoke(table.GetEntry("nextUI")?.GetLocalizedString());
+                    OnLanguageChanged?.Invoke(new string[] { table.GetEntry("nextUI")?.GetLocalizedString() });
                 }
             };
 

@@ -1,22 +1,22 @@
-﻿using Code.UI;
-using System;
-using TMPro;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using Code.UI;
 
 namespace Code.MVC
 {
     public sealed class MenuView : MonoBehaviour, IView
     {
-        [SerializeField] private TextMeshProUGUI _scoreText;
+        [SerializeField] private TextMeshProUGUI _scoreValue;
+        [SerializeField] private TextMeshProUGUI _bestScoreValue;
+        [SerializeField] private TextMeshProUGUI _loseText;
         [SerializeField] private TextMeshProUGUI _bestScoreText;
-        [SerializeField] private GameObject _results;
         [SerializeField] private Button _retryButton;
         [SerializeField] private Button _rewardsButton;
         [SerializeField] private BoolButton _musicButton;
         [SerializeField] private BoolButton _soundButton;
         private float _finalScore;
-        private bool _showResults;
 
         public float FinalScore
         {
@@ -24,7 +24,7 @@ namespace Code.MVC
             set
             {
                 _finalScore = value;
-                _scoreText.text = _finalScore.ToString();
+                _scoreValue.text = _finalScore.ToString();
             }
         }
         public Button RetryButton => _retryButton;
@@ -36,21 +36,26 @@ namespace Code.MVC
 
         public void ShowResults(bool toShow, float bestScore)
         {
-            _showResults = toShow;
-            _bestScoreText.text = bestScore.ToString();
-            _scoreText.gameObject.SetActive(_showResults);
-            _bestScoreText.gameObject.SetActive(_showResults);
-            _results.SetActive(_showResults);
-            if(_showResults)
+            _bestScoreValue.text = bestScore.ToString();
+            ShowContent(toShow);
+            if (toShow)
                 GameEventSystem.Send(new SaveEvent(FinalScore, onlyScore: true));
         }
 
-        public void SetTexts(string score, string best, string retry, string rewards)
+        public void SetTexts(string[] texts)
         {
-            _scoreText.text = score;
-            _bestScoreText.text = best;
-            _retryButton.GetComponentInChildren<TextMeshProUGUI>().text = retry;
-            _rewardsButton.GetComponentInChildren<TextMeshProUGUI>().text = rewards;
+            _loseText.text = texts[0];
+            _bestScoreText.text = texts[1];
+            _retryButton.GetComponentInChildren<TextMeshProUGUI>().text = texts[2];
+            _rewardsButton.GetComponentInChildren<TextMeshProUGUI>().text = texts[3];
+        }
+
+        private void ShowContent(bool showResults)
+        {
+            _rewardsButton.gameObject.SetActive(!showResults);
+            _loseText.gameObject.SetActive(showResults);
+            _scoreValue.gameObject.SetActive(showResults);
+            _bestScoreValue.gameObject.SetActive(showResults);
         }
 
         private void OnDestroy()

@@ -19,7 +19,7 @@ namespace Code.MVC
         private bool _requestedState;
 
         public event Action<int, bool> OnUpdateReward;
-        public event Action<string> OnLanguageChanged;
+        public event Action<string[]> OnLanguageChanged;
 
         public void Init(AchievSO achievSO)
         {
@@ -100,7 +100,7 @@ namespace Code.MVC
                 if (handle.Status == AsyncOperationStatus.Succeeded)
                 {
                     var table = handle.Result;
-                    OnLanguageChanged?.Invoke(table.GetEntry("roomB")?.GetLocalizedString());
+                    OnLanguageChanged?.Invoke(new string[] { table.GetEntry("roomB")?.GetLocalizedString() });
                 }
             };
 

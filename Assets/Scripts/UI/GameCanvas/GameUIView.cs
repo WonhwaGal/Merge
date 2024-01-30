@@ -46,7 +46,7 @@ namespace Code.MVC
             _ratingText.text = toShow ? rating.ToString() : string.Empty;
         }
 
-        public void SetTexts(string text) => _nextText.text = text;
+        public void SetTexts(string[] texts) => _nextText.text = texts[0];
 
         public void ActivateRewardButton(bool active)
         {

@@ -20,10 +20,10 @@ namespace Code.MVC
             _continueText = ContinueButton.GetComponentInChildren<TextMeshProUGUI>();
         }
 
-        public void SetTexts(string startText, string continueText)
+        public void SetTexts(string[] texts)
         {
-            _startText.text = startText;
-            _continueText.text = continueText;
+            _startText.text = texts[0];
+            _continueText.text = texts[1];
         }
 
         private void OnDestroy()
