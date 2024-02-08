@@ -7,12 +7,12 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Code.MVC
 {
-    public sealed class MenuModel : IModel
+    public sealed class PauseMenuModel : IModel
     {
         private readonly SaveService _saveService;
         private AchievementService _achievementService;
 
-        public MenuModel()
+        public PauseMenuModel()
         {
             GameEventSystem.Subscribe<SaveEvent>(OnSaveData);
             _saveService = ServiceLocator.Container.RequestFor<SaveService>();
@@ -55,18 +55,19 @@ namespace Code.MVC
                 return GP_Player.GetBool(Constants.TotalSound);
         }
 
-        private void UpdateTextAsync() =>
+        public void UpdateTextAsync() =>
             LocalizationSettings.StringDatabase.GetTableAsync("TextTable").Completed +=
                 handle =>
                 {
                     if (handle.Status == AsyncOperationStatus.Succeeded)
                     {
                         var table = handle.Result;
-                        OnLanguageChanged?.Invoke(new string[] {table.GetEntry("loseText")?.GetLocalizedString(),
+                        OnLanguageChanged?.Invoke(new string[6] {table.GetEntry("loseText")?.GetLocalizedString(),
                             table.GetEntry("bestScoreText")?.GetLocalizedString(),
                             table.GetEntry("retryB")?.GetLocalizedString(),
                             table.GetEntry("optionsB")?.GetLocalizedString(),
-                            table.GetEntry("achievsB")?.GetLocalizedString()});
+                            table.GetEntry("achievsB")?.GetLocalizedString(),
+                            table.GetEntry("roomB")?.GetLocalizedString()});
                     }
                 };
 

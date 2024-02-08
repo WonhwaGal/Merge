@@ -36,14 +36,14 @@ public class GameUIModel : IModel, IDisposable
 
     public void OpenLeaderBoard() => GP_Leaderboard.Open(withMe: WithMe.first);
 
-    private void UpdateTextAsync() =>
+    public void UpdateTextAsync() =>
         LocalizationSettings.StringDatabase.GetTableAsync("TextTable").Completed +=
             handle =>
             {
                 if (handle.Status == AsyncOperationStatus.Succeeded)
                 {
                     var table = handle.Result;
-                    OnLanguageChanged?.Invoke(new string[] { table.GetEntry("nextUI")?.GetLocalizedString() });
+                    OnLanguageChanged?.Invoke(new string[1] { table.GetEntry("nextUI")?.GetLocalizedString() });
                 }
             };
 

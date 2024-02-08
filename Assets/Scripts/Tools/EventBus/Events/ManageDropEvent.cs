@@ -1,6 +1,6 @@
 using Code.DropLogic;
 
-public struct ManageDropEvent : IGameEvent
+public readonly struct ManageDropEvent : IGameEvent
 {
     public readonly DropBase Drop;
     public readonly bool ReturnToPool;

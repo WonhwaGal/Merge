@@ -12,14 +12,14 @@ public sealed class UIService : IService, IDisposable
     {
         GameUIController gameUIController = new(data);
         gameUIController.AddView(canvasView.GameUIView, true);
-        MenuController menuController = new();
+        PauseMenuController menuController = new();
         menuController.AddView(canvasView.LoseView, false);
         OptionController optionsController = new(achievSO);
         optionsController.AddView(canvasView.OptionsView, false);
         SetConnections(gameUIController, menuController, optionsController);
     }
 
-    private void SetConnections(GameUIController gameUIController, MenuController menuController, 
+    private void SetConnections(GameUIController gameUIController, PauseMenuController menuController, 
         OptionController optionsController)
     {
         menuController.OnRequestScore += gameUIController.GetScore;

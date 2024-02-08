@@ -3,10 +3,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Code.UI;
+using GamePush;
 
 namespace Code.MVC
 {
-    public sealed class MenuView : MonoBehaviour, IView
+    public sealed class PauseMenuView : MonoBehaviour, IView
     {
         [SerializeField] private TextMeshProUGUI _scoreValue;
         [SerializeField] private TextMeshProUGUI _bestScoreValue;
@@ -15,6 +16,8 @@ namespace Code.MVC
         [SerializeField] private Button _retryButton;
         [SerializeField] private Button _achievementButton;
         [SerializeField] private Button _rewardsButton;
+        [SerializeField] private Button _bakeryButton;
+        [SerializeField] private GameObject _room;
         [SerializeField] private BoolButton _musicButton;
         [SerializeField] private BoolButton _soundButton;
         private float _finalScore;
@@ -31,8 +34,10 @@ namespace Code.MVC
         public Button RetryButton => _retryButton;
         public Button AchievementButton => _achievementButton;
         public Button RewardsButton => _rewardsButton;
+        public Button BakeryButton => _bakeryButton;
         public BoolButton MusicButton => _musicButton;
         public BoolButton SoundButton => _soundButton;
+        public GameObject Room => _room;
 
         public event Action OnDestroyView;
 
@@ -50,15 +55,19 @@ namespace Code.MVC
             _bestScoreText.text = texts[1];
             _retryButton.GetComponentInChildren<TextMeshProUGUI>().text = texts[2];
             _rewardsButton.GetComponentInChildren<TextMeshProUGUI>().text = texts[3];
-            _achievementButton.GetComponentInChildren<TextMeshProUGUI>().text= texts[4];
+            _achievementButton.GetComponentInChildren<TextMeshProUGUI>().text = texts[4];
+            _bakeryButton.GetComponentInChildren<TextMeshProUGUI>().text = texts[5];
         }
 
         private void ShowContent(bool showResults)
         {
             _rewardsButton.gameObject.SetActive(!showResults);
+            _achievementButton.gameObject.SetActive(!showResults);
             _loseText.gameObject.SetActive(showResults);
             _scoreValue.gameObject.SetActive(showResults);
             _bestScoreValue.gameObject.SetActive(showResults);
+            if (GP_Device.IsMobile())
+                _bakeryButton.gameObject.SetActive(!showResults);
         }
 
         private void OnDestroy()
@@ -67,6 +76,7 @@ namespace Code.MVC
             RetryButton.onClick.RemoveAllListeners();
             RewardsButton.onClick.RemoveAllListeners();
             AchievementButton.onClick.RemoveAllListeners();
+            BakeryButton.onClick.RemoveAllListeners();
             OnDestroyView = null;
         }
     }

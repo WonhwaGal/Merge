@@ -1,5 +1,5 @@
 
-public struct BombEvent : IGameEvent
+public readonly struct BombEvent : IGameEvent
 {
     public readonly int Rank;
 

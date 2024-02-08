@@ -29,7 +29,6 @@ namespace Code.MVC
             ServiceLocator.Container.RequestFor<AchievementService>().OnUnlockAchiev
                 += OnUnlockAchiev;
             UpdateSOInfo(saveService.FetchedAchievs);
-            UpdateTextAsync();
         }
 
         public void UpdateSOInfo(List<AchievementsFetchPlayer> fetchedAchievs)
@@ -93,14 +92,14 @@ namespace Code.MVC
             OnUpdateReward?.Invoke(id, isActive);
         }
 
-        private void UpdateTextAsync() =>
+        public void UpdateTextAsync() =>
             LocalizationSettings.StringDatabase.GetTableAsync("TextTable").Completed +=
             handle =>
             {
                 if (handle.Status == AsyncOperationStatus.Succeeded)
                 {
                     var table = handle.Result;
-                    OnLanguageChanged?.Invoke(new string[] { table.GetEntry("roomB")?.GetLocalizedString() });
+                    OnLanguageChanged?.Invoke(new string[1] { table.GetEntry("roomExit")?.GetLocalizedString() });
                 }
             };
 

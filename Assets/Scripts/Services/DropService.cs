@@ -75,10 +75,10 @@ namespace Code.DropLogic
             _achievService.CheckAchievement(AchievType.MergeByRank, lowerOne.Rank);
         }
 
-        private void AddEffect(PrefabType effectType, DropBase result, Vector3 middlePos)
+        private void AddEffect(PrefabType effectType, DropBase result, Vector3 spawnPos)
         {
             var effect = _fxPool.Spawn(effectType);
-            _fxPool.OnSpawned(effect, middlePos);
+            _fxPool.OnSpawned(effect, spawnPos);
             effect.transform.localScale = result.transform.localScale;
         }
 
@@ -94,10 +94,10 @@ namespace Code.DropLogic
 
         private void EndSession(ManageDropEvent @event)
         {
+            if (@event.WithEffects)
+                AddEffect(PrefabType.PoofEffect, @event.Drop, @event.Drop.Pos);
             if (@event.ReturnToPool)
                 ReturnToPool(@event.Drop);
-            if(@event.WithEffects)
-                AddEffect(PrefabType.PoofEffect, @event.Drop, @event.Drop.Pos);
         }
 
         private void ReturnPairToPool(DropBase one, DropBase two)

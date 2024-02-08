@@ -31,6 +31,7 @@ namespace Code.MVC
             Model.OnLanguageChanged += View.SetTexts;
             for (int i = 0; i < View.RewardButtons.Length; i++)
                 View.RewardButtons[i].OnChangeState += Model.OnChangeRewardState;
+            Model.UpdateTextAsync();
         }
 
         private void SetUpPanel(GameControlEvent @event)

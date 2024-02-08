@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using GamePush;
 
 namespace Code.MVC
 {
@@ -9,6 +10,7 @@ namespace Code.MVC
     {
         public Button StartNewButton;
         public Button ContinueButton;
+        public GameObject[] _objects;
         private TextMeshProUGUI _startText;
         private TextMeshProUGUI _continueText;
 
@@ -18,6 +20,11 @@ namespace Code.MVC
         {
             _startText = StartNewButton.GetComponentInChildren<TextMeshProUGUI>();
             _continueText = ContinueButton.GetComponentInChildren<TextMeshProUGUI>();
+            if (GP_Device.IsMobile())
+            {
+                for(int i = 0; i < _objects.Length; i++)
+                    _objects[i].gameObject.SetActive(false);
+            }
         }
 
         public void SetTexts(string[] texts)

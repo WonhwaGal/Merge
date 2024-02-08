@@ -3914,6 +3914,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3933772090328014841, guid: bb634b55276f86349bc8255dad8c4b46, type: 3}
+      propertyPath: _pauseMenuView
+      value: 
+      objectReference: {fileID: 4227583171331237794}
     - target: {fileID: 4227583169761026064, guid: bb634b55276f86349bc8255dad8c4b46, type: 3}
       propertyPath: m_Name
       value: CanvasDesktop
@@ -4196,3 +4200,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb634b55276f86349bc8255dad8c4b46, type: 3}
+--- !u!114 &4227583171331237794 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6534594711686440495, guid: bb634b55276f86349bc8255dad8c4b46, type: 3}
+  m_PrefabInstance: {fileID: 4227583171331237793}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 138916de30f23b84e985955ec34a8b89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

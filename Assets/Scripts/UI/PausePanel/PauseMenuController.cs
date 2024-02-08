@@ -1,13 +1,14 @@
 using System;
 using UnityEngine;
+using GamePush;
 
 namespace Code.MVC
 {
-    public sealed class MenuController : Controller<MenuView, MenuModel>
+    public sealed class PauseMenuController : Controller<PauseMenuView, PauseMenuModel>
     {
         private GameAction _gameAction;
 
-        public MenuController() : base()
+        public PauseMenuController() : base()
         {
             GameEventSystem.Subscribe<GameControlEvent>(SetUpPanel);
         }
@@ -55,7 +56,21 @@ namespace Code.MVC
             View.MusicButton.SetBool(Model.GetVolume(SoundType.TotalMusic));
             View.SoundButton.SetBool(Model.GetVolume(SoundType.TotalSound));
             Model.OnLanguageChanged += View.SetTexts;
+            SetUpBakeryPanel();
             Model.Init();
+        }
+
+        private void SetUpBakeryPanel()
+        {
+            if (GP_Device.IsMobile())
+            {
+                View.Room.SetActive(false);
+                View.BakeryButton.onClick.AddListener(() => View.Room.SetActive(true));
+            }
+            else
+            {
+                View.BakeryButton.gameObject.SetActive(false);
+            }
         }
 
         public override void Dispose()
