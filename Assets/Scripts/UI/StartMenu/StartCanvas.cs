@@ -10,27 +10,33 @@ namespace Code.MVC
     {
         public Button StartNewButton;
         public Button ContinueButton;
-        public GameObject[] _objects;
+        public GameObject[] _desktopObjects;
+        public GameObject[] _mobileObjects;
         private TextMeshProUGUI _startText;
         private TextMeshProUGUI _continueText;
-
+        private bool _isMobile;
         public event Action OnDestroyView;
 
         private void Start()
         {
             _startText = StartNewButton.GetComponentInChildren<TextMeshProUGUI>();
             _continueText = ContinueButton.GetComponentInChildren<TextMeshProUGUI>();
-            if (GP_Device.IsMobile())
-            {
-                for(int i = 0; i < _objects.Length; i++)
-                    _objects[i].gameObject.SetActive(false);
-            }
+            _isMobile = GP_Device.IsMobile();
+            SetView();
         }
 
         public void SetTexts(string[] texts)
         {
             _startText.text = texts[0];
             _continueText.text = texts[1];
+        }
+
+        private void SetView()
+        {
+            for (int i = 0; i < _desktopObjects.Length; i++)
+                _desktopObjects[i].SetActive(!_isMobile);
+            for (int i = 0; i < _mobileObjects.Length; i++)
+                _mobileObjects[i].SetActive(_isMobile);
         }
 
         private void OnDestroy()

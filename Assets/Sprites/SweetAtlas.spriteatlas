@@ -56,6 +56,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 16fa2a209108eed4ebcfac451a3fcf84, type: 3}
   - {fileID: 21300000, guid: 44a43930b1167ee4b9009fdda5309191, type: 3}
   - {fileID: 21300000, guid: dc4e4a30a9723814685b372130302680, type: 3}
+  - {fileID: 21300000, guid: 3ab5db30c6b4b4946b45d5ce19117ec2, type: 3}
   - {fileID: 21300000, guid: 0f810140b7f768c47abc8c130a7f5b33, type: 3}
   - {fileID: 21300000, guid: 85bec9502a0e8e6499d8040d6e9372bc, type: 3}
   - {fileID: 21300000, guid: aac2ea50c4a190d4e829d071aced9a3b, type: 3}
@@ -66,6 +67,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 425358a141eca5c438f67fcf7228921e, type: 3}
   - {fileID: 21300000, guid: bb7da5f1b7f7d8f439af88d0372a6699, type: 3}
   - {fileID: 21300000, guid: 93035ef11a7a6da4ea363fd0e1aa8186, type: 3}
+  - {fileID: 21300000, guid: 751bfa42342ffe740ad9216af0b3b1b4, type: 3}
   - {fileID: 21300000, guid: 1460c1a26ab3075429f4b58ca4cfc043, type: 3}
   - {fileID: 21300000, guid: e952a7b2affa8ba4e933a58305ab8b9e, type: 3}
   - {fileID: 21300000, guid: a66fbcc27731d274db0c3791b952628d, type: 3}
@@ -90,6 +92,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c78e0277de9e3c24b917f728ed4fa4be, type: 3}
   - {fileID: 21300000, guid: 3b3baa87cb88a8e4e8470f285c31b955, type: 3}
   - {fileID: 21300000, guid: c792fd973e1c69e4085e1d9bd10e6bde, type: 3}
+  - {fileID: 21300000, guid: 2fd5ecb76914ed4489623a05a9187309, type: 3}
   - {fileID: 21300000, guid: c68c88e7d4f943748992a25cf921bf6d, type: 3}
   - {fileID: 21300000, guid: ba840118f7a43c24a968149942255523, type: 3}
   - {fileID: 21300000, guid: 60b5154863352f5438aac79738a8ab1b, type: 3}
@@ -126,6 +129,7 @@ SpriteAtlas:
   - lock
   - table cloth
   - floor
+  - startMenuBackground
   - Bezeshka_mimic
   - GirlyCookie_face
   - Chitryak
@@ -136,6 +140,7 @@ SpriteAtlas:
   - table
   - dog
   - Static_8
+  - frame
   - Doughnut_face
   - Vrednyuchka_mimic
   - light_sphere
@@ -160,6 +165,7 @@ SpriteAtlas:
   - Grumper_mimic
   - sound
   - Grumper
+  - buttonBackground
   - Static_7
   - sweets
   - music

@@ -12,13 +12,8 @@ namespace Code.DropLogic
 
             _collisionsIgnored = true;
             if (collision.gameObject.TryGetComponent(out DropObject drop))
-            {
                 GameEventSystem.Send(new BombEvent(drop.Rank));
-            }
-            else
-            {
-                _collisionsIgnored = false;
-            }
+
             GameEventSystem.Send(new SoundEvent(SoundType.Poof, true));
             GameEventSystem.Send(new ManageDropEvent(this, true, withEffects: true));
         }
