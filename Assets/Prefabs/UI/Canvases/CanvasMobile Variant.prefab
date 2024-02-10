@@ -1644,6 +1644,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1310310752563559550, guid: 3df2141d71e47924381851355cabf503, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1310310752563559550, guid: 3df2141d71e47924381851355cabf503, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
@@ -1887,6 +1891,10 @@ PrefabInstance:
       propertyPath: _bombButton
       value: 
       objectReference: {fileID: 6420756459922044782}
+    - target: {fileID: 6360631558777888796, guid: 3df2141d71e47924381851355cabf503, type: 3}
+      propertyPath: _room
+      value: 
+      objectReference: {fileID: 4721491635426261227}
     - target: {fileID: 6677644609955387754, guid: 3df2141d71e47924381851355cabf503, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0.20000076
@@ -1895,6 +1903,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 2.6000004
       objectReference: {fileID: 0}
+    - target: {fileID: 8203040568853456111, guid: 3df2141d71e47924381851355cabf503, type: 3}
+      propertyPath: _room
+      value: 
+      objectReference: {fileID: 4721491635426261227}
     - target: {fileID: 8449217771639653359, guid: 3df2141d71e47924381851355cabf503, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -265

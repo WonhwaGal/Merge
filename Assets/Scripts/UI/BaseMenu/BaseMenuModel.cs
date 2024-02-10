@@ -1,35 +1,25 @@
 ﻿using System;
-using Code.Achievements;
-using Code.SaveLoad;
-using GamePush;
 using UnityEngine.Localization.Settings;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using Code.SaveLoad;
+using GamePush;
+using UnityEngine.Localization.Tables;
 
 namespace Code.MVC
 {
-    public sealed class PauseMenuModel : IModel
+    public class BaseMenuModel : IModel
     {
         private readonly SaveService _saveService;
-        private AchievementService _achievementService;
 
-        public PauseMenuModel()
+        public BaseMenuModel()
         {
             GameEventSystem.Subscribe<SaveEvent>(OnSaveData);
             _saveService = ServiceLocator.Container.RequestFor<SaveService>();
         }
 
-        public float BestScore => GP_Player.GetScore();
         public GameAction LastAction { get; set; }
 
         public event Action<string[]> OnLanguageChanged;
-
-        public void Init()
-        {
-            UpdateTextAsync();
-            _achievementService = ServiceLocator.Container.RequestFor<AchievementService>();
-        }
-
-        public void OpenAchievements() => _achievementService.Open();
 
         public void OnSaveData(SaveEvent @event)
         {
@@ -62,17 +52,15 @@ namespace Code.MVC
                     if (handle.Status == AsyncOperationStatus.Succeeded)
                     {
                         var table = handle.Result;
-                        OnLanguageChanged?.Invoke(new string[6] {table.GetEntry("loseText")?.GetLocalizedString(),
-                            table.GetEntry("bestScoreText")?.GetLocalizedString(),
-                            table.GetEntry("retryB")?.GetLocalizedString(),
-                            table.GetEntry("optionsB")?.GetLocalizedString(),
-                            table.GetEntry("achievsB")?.GetLocalizedString(),
-                            table.GetEntry("roomB")?.GetLocalizedString()});
+                        OnLanguageChanged?.Invoke(GetEntries(table));
                     }
                 };
 
+        protected virtual string[] GetEntries(StringTable table) => new string[] { };
+
         public void Dispose()
         {
+            OnLanguageChanged = null;
             GameEventSystem.UnSubscribe<SaveEvent>(OnSaveData);
             GC.SuppressFinalize(this);
         }

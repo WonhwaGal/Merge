@@ -1,20 +1,21 @@
 using System;
 using UnityEngine;
-using GamePush;
 
 namespace Code.MVC
 {
-    public sealed class PauseMenuController : Controller<PauseMenuView, PauseMenuModel>
+    public abstract class BaseMenuController<BaseV, BaseM> : Controller<BaseV, BaseM>
+                    where BaseV : BaseMenuView
+                    where BaseM : BaseMenuModel, new()
     {
         private GameAction _gameAction;
+        protected GameAction _triggerAction;
 
-        public PauseMenuController() : base()
+        public BaseMenuController() : base()
         {
             GameEventSystem.Subscribe<GameControlEvent>(SetUpPanel);
         }
 
         public Func<float> OnRequestScore;
-        public event Action OnRequestRewards;
 
         private void SetUpPanel(GameControlEvent @event)
         {
@@ -26,13 +27,13 @@ namespace Code.MVC
         public override void UpdateView()
         {
             UpdateTimeScale();
-            if (_gameAction == GameAction.Lose || _gameAction == GameAction.Pause)
+            if (_gameAction == _triggerAction)
                 Show();
             else if (_gameAction == GameAction.Play)
                 Hide();
         }
 
-        private void UpdateTimeScale()
+        protected void UpdateTimeScale()
         {
             if (_gameAction == GameAction.Save)
                 return;
@@ -41,44 +42,26 @@ namespace Code.MVC
         }
 
         protected override void Hide() => View.gameObject.SetActive(false);
-        protected override void Show()
-        {
-            View.FinalScore = OnRequestScore.Invoke();
-            View.gameObject.SetActive(true);
-            View.ShowResults(_gameAction == GameAction.Lose, Model.BestScore);
-        }
+        protected override void Show() { }
 
         protected override void OnViewAdded()
         {
             View.RetryButton.onClick.AddListener(Model.PressRetry);
-            View.RewardsButton.onClick.AddListener(() => OnRequestRewards?.Invoke());
-            View.AchievementButton.onClick.AddListener(Model.OpenAchievements);
             View.MusicButton.SetBool(Model.GetVolume(SoundType.TotalMusic));
             View.SoundButton.SetBool(Model.GetVolume(SoundType.TotalSound));
             Model.OnLanguageChanged += View.SetTexts;
-            SetUpBakeryPanel();
-            Model.Init();
+            InitComponents();
         }
 
-        private void SetUpBakeryPanel()
-        {
-            if (GP_Device.IsMobile())
-            {
-                View.Room.SetActive(false);
-                View.BakeryButton.onClick.AddListener(() => View.Room.SetActive(true));
-            }
-            else
-            {
-                View.BakeryButton.gameObject.SetActive(false);
-            }
-        }
-
+        protected abstract void InitComponents();
+        protected virtual void OnDispose() { }
+        
         public override void Dispose()
         {
-            OnRequestScore = null;
-            OnRequestRewards = null;
             GameEventSystem.UnSubscribe<GameControlEvent>(SetUpPanel);
             Model.OnLanguageChanged -= View.SetTexts;
+            OnRequestScore = null;
+            OnDispose();
             base.Dispose();
         }
     }

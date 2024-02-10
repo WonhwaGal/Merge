@@ -28,7 +28,7 @@ namespace Code.DropLogic
 
         private void OnApplicationFocus(bool focus)
         {
-            if (focus)
+            if (focus || Time.timeScale == 0)
                 return;
 
             if(Int32.TryParse(_scoreText.text, out int finalScore))
